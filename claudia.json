@@ -1,0 +1,7 @@
+{
+  "lambda": {
+    "role": "golf-now-skill-executor",
+    "name": "golf-now-skill",
+    "region": "us-east-1"
+  }
+}

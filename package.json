@@ -17,9 +17,6 @@
     "mocha": "^3.4.2",
     "standard": "^10.0.2"
   },
-  "dependencies": {
-    "alexa-app": "^4.0.1"
-  },
   "standard": {
     "globals": [
       "describe",
@@ -28,5 +25,8 @@
       "afterEach",
       "app"
     ]
+  },
+  "dependencies": {
+    "alexa-sdk": "^1.0.12"
   }
 }
