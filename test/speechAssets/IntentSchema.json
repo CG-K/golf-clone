@@ -1,0 +1,93 @@
+{
+  "intents": [
+    {
+      "intent": "PromptForPrice"
+    },
+    {
+      "intent": "PromptForDates"
+    },
+    {
+      "intent": "GetLocationNearMe"
+    },
+    {
+      "slots": [
+        {
+          "name": "dateToPlay",
+          "type": "AMAZON.DATE"
+        }
+      ],
+      "intent": "DatesReceived"
+    },
+    {
+      "intent": "PromptForTime"
+    },
+    {
+      "intent": "DoNotRefine"
+    },
+    {
+      "intent": "PromptForGolfers"
+    },
+    {
+      "slots": [
+        {
+          "name": "numberOfGolfers",
+          "type": "AMAZON.NUMBER"
+        }
+      ],
+      "intent": "NumGolfersReceived"
+    },
+    {
+      "slots": [
+        {
+          "name": "courseOptionNumber",
+          "type": "AMAZON.NUMBER"
+        }
+      ],
+      "intent": "CourseSelected"
+    },
+    {
+      "slots": [
+        {
+          "name": "timeToPlay",
+          "type": "AMAZON.TIME"
+        }
+      ],
+      "intent": "TimeReceived"
+    },
+    {
+      "slots": [
+        {
+          "name": "city",
+          "type": "AMAZON.US_CITY"
+        },
+        {
+          "name": "zipcode",
+          "type": "AMAZON.NUMBER"
+        },
+        {
+          "name": "nearme",
+          "type": "NEAR_ME"
+        }
+      ],
+      "intent": "GetLocation"
+    },
+    {
+      "slots": [
+        {
+          "name": "amountOfDollars",
+          "type": "AMAZON.NUMBER"
+        }
+      ],
+      "intent": "PriceReceived"
+    },
+    {
+      "intent": "AMAZON.HelpIntent"
+    },
+    {
+      "intent":"AMAZON.StopIntent"
+    },
+    {
+      "intent":"AMAZON.CancelIntent"
+    }
+  ]
+}

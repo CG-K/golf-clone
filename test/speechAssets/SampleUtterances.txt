@@ -1,0 +1,71 @@
+PromptForPrice ok
+PromptForPrice ok refine
+PromptForPrice please refine result
+PromptForPrice please refine results
+PromptForPrice refine please
+PromptForPrice refine result
+PromptForPrice refine results
+PromptForPrice yes
+PromptForPrice yes refine
+PromptForDates refine my result please
+PromptForDates refine my results please
+PromptForDates yes
+PromptForDates yes i would like to refine my result
+PromptForDates yes i would like to refine my results
+PromptForDates yes please
+GetLocationNearMe i give you permission
+GetLocationNearMe ok
+GetLocationNearMe ok that fine
+GetLocationNearMe ok thats fine
+GetLocationNearMe yes
+GetLocationNearMe yes that is ok
+GetLocationNearMe you can have permission
+DatesReceived {dateToPlay}
+DatesReceived let s do {dateToPlay}
+DatesReceived let s play {dateToPlay}
+DatesReceived maybe {dateToPlay}
+DatesReceived try {dateToPlay}
+PromptForTime ok
+PromptForTime refine my result
+PromptForTime refine my results
+PromptForTime yes
+PromptForTime yes please
+PromptForTime yes refine please
+DoNotRefine do not refine the results
+DoNotRefine don't refine the results
+DoNotRefine give me the top result
+DoNotRefine give me the top results
+DoNotRefine i am ok with not refine
+DoNotRefine i am ok with not refining
+DoNotRefine just return what you have
+DoNotRefine no
+DoNotRefine no do not refine
+DoNotRefine no do not refine results
+DoNotRefine please do not refine the results
+PromptForGolfers ok
+PromptForGolfers ok refine
+PromptForGolfers refine
+PromptForGolfers refine please
+PromptForGolfers yes
+PromptForGolfers yes please
+PromptForGolfers yes please refine
+NumGolfersReceived {numberOfGolfers}
+NumGolfersReceived {numberOfGolfers} player
+NumGolfersReceived {numberOfGolfers} players
+CourseSelected {courseOptionNumber}
+CourseSelected course {courseOptionNumber}
+CourseSelected number {courseOptionNumber}
+CourseSelected option {courseOptionNumber}
+TimeReceived {timeToPlay}
+TimeReceived let s do {timeToPlay}
+TimeReceived maybe at {timeToPlay}
+GetLocation book me a tee time near {zipcode}
+GetLocation book me a tee time in {city}
+GetLocation book me a tee time {nearme}
+PriceReceived no more than {amountOfDollars} dollars
+PriceReceived max of {amountOfDollars} dollars
+PriceReceived about {amountOfDollars} dollars
+PriceReceived {amountOfDollars} dollars
+PriceReceived {amountOfDollars} dollars
+PriceReceived {amountOfDollars} us dollars
+PriceReceived {amountOfDollars} bucks
