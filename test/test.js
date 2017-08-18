@@ -41,7 +41,7 @@ it('Launches the skill', function (done) {
       console.log(error)
       done()
     }
-    assert.equal(payload.response.outputSpeech.ssml, '<speak>Welcome to Golf Now. You can ask me to show me available tee times, book a tee time near me or find hot deals near me. What would you like to do?</speak>')
+    assert.equal(payload.response.outputSpeech.ssml, '<speak> Welcome to GolfNow.  You can book tee times at your favorite nearby courses.  You can say Alexa, ask GolfNow to book a tee time near me.  What would you like to do? </speak>')
     assert.equal(payload.response.shouldEndSession, false)
     done()
   })
@@ -53,7 +53,12 @@ it('Launches the Help intent and doesnt end session', function (done) {
       console.log(error)
       done()
     }
-    assert.equal(payload.response.outputSpeech.ssml, '<speak>Welcome to Golf Now. You can ask me to show me available tee times, book a tee time near me or find hot deals near me. What would you like to do?</speak>')
+    assert.equal(payload.response.outputSpeech.ssml, '<speak> Welcome to Golf Now.  The purpose of this skill is to book a ' +
+     'tee time at a Golf Course so you can start playing! To start using the skill, ' +
+     'say Alexa, ask GolfNow to book a tee time near me. You can also search for tee ' +
+     'times at a specific city or zip code. For city, you can say Alexa, ask GolfNow ' +
+     'to book a tee time in Orlando. For a specific zipcode, you can say Alexa ' +
+     'ask GolfNow to book a tee time near 32819. What would you like to do? </speak>')
     assert.equal(payload.response.shouldEndSession, false)
     done()
   })
@@ -65,7 +70,8 @@ it('Stops and Exits Skill upon calling StopIntent', function (done) {
       console.log(error)
       done()
     }
-    assert.equal(payload.response.outputSpeech.ssml, '<speak>Stopping your Request and Exiting Skill</speak>')
+    assert.equal(payload.response.outputSpeech.ssml, '<speak> Stopping your Request and Exiting Skill </speak>')
+    assert.equal(payload.response.shouldEndSession, true)
     done()
   })
 })
@@ -76,11 +82,14 @@ it('Cancels and Exits Skill upon calling CancelIntent', function (done) {
       console.log(error)
       done()
     }
-    assert.equal(payload.response.outputSpeech.ssml, '<speak>Canceling your Request and Exiting Skill</speak>')
+    assert.equal(payload.response.outputSpeech.ssml, '<speak> Canceling your Request and Exiting Skill </speak>')
+    assert.equal(payload.response.shouldEndSession, true)
     done()
   })
 })
 
+
+/*
 it('Launches GetLocation with Utterance', function (done) {
   alexa.spoken('book me a tee time near {32819}', function (error, response, request) {
     if (error) {
@@ -103,14 +112,14 @@ it('Launches GetLocation with Utterance', function (done) {
   done()
 })
 
-/*
-it('Says Hi there with SampleIntent', function (done) {
-  alexa.intended('SampleIntent', null, function (error, payload) {
+it('Response for GetLocation is Correct', function (done) {
+  alexa.intended('GetLocation', null, function (error, payload) {
     if (error) {
       console.log(error)
       done()
     }
-    assert.equal(payload.response.outputSpeech.ssml, '<speak>Hi there</speak>')
+    assert.equal(payload.response.outputSpeech.ssml, '<speak>What day would you like to play? </speak>')
+    assert.equal(payload.response.shouldEndSession, false)
     done()
   })
 })
