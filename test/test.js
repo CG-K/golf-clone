@@ -88,21 +88,27 @@ it('Cancels and Exits Skill upon calling CancelIntent', function (done) {
   })
 })
 
-
-/*
-it('Launches GetLocation with Utterance', function (done) {
+it('Launches GetLocation with Utterance with ZipCode', function (done) {
   alexa.spoken('book me a tee time near {32819}', function (error, response, request) {
     if (error) {
       console.log(error)
     }
     assert.equal(request.request.intent.name, 'GetLocation')
   })
+  done()
+})
+
+it('Launches GetLocation with Utterance with City', function (done) {
   alexa.spoken('book me a tee time in {Orlando}', function (error, response, request) {
     if (error) {
       console.log(error)
     }
     assert.equal(request.request.intent.name, 'GetLocation')
   })
+  done()
+})
+
+it('Launches GetLocation with Utterance with Near Me', function (done) {
   alexa.spoken('book me a tee time {near me}', function (error, response, request) {
     if (error) {
       console.log(error)
@@ -112,15 +118,38 @@ it('Launches GetLocation with Utterance', function (done) {
   done()
 })
 
-it('Response for GetLocation is Correct', function (done) {
-  alexa.intended('GetLocation', null, function (error, payload) {
+it('Response for GetLocation is Correct for near me is correct', function (done) {
+  alexa.intended('GetLocation', { 'nearme': 'near me' }, function (error, payload) {
     if (error) {
       console.log(error)
       done()
     }
-    assert.equal(payload.response.outputSpeech.ssml, '<speak>What day would you like to play? </speak>')
+    assert.equal(payload.response.outputSpeech.ssml, '<speak> We need to find you device location </speak>')
+    assert.equal(payload.response.shouldEndSession, true)
+    done()
+  })
+})
+
+it('Response for GetLocation is Correct for zipcode is correct', function (done) {
+  alexa.intended('GetLocation', { 'zipcode': '32819' }, function (error, payload) {
+    if (error) {
+      console.log(error)
+      done()
+    }
+    assert.equal(payload.response.outputSpeech.ssml, '<speak> What day would you like to play? </speak>')
     assert.equal(payload.response.shouldEndSession, false)
     done()
   })
 })
-*/
+
+it('Response for GetLocation is Correct for city is correct', function (done) {
+  alexa.intended('GetLocation', { 'city': 'Orlando' }, function (error, payload) {
+    if (error) {
+      console.log(error)
+      done()
+    }
+    assert.equal(payload.response.outputSpeech.ssml, '<speak> What day would you like to play? </speak>')
+    assert.equal(payload.response.shouldEndSession, false)
+    done()
+  })
+})

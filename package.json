@@ -27,6 +27,9 @@
     ]
   },
   "dependencies": {
-    "alexa-sdk": "^1.0.12"
+    "alexa-sdk": "^1.0.12",
+    "dotenv": "^4.0.0",
+    "got": "^7.1.0",
+    "node-geocoder": "^3.19.0"
   }
 }

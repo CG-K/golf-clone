@@ -1,0 +1,10 @@
+{
+  "latitude": null,
+  "longitude": null,
+  "date": null,
+  "time": null,
+  "numGolfers": null,
+  "price": null,
+  "doNotRefine": false,
+  "courseID": null
+}
