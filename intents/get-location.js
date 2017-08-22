@@ -30,13 +30,12 @@ function GetLocation () {
       emit(':tellWithPermissionCard', askForPermissions, PERMISSIONS)
     } else {
       var url = formatDeviceAddressRequest(deviceId)
-      emit(':tell', ' ' + url)
-      /*getDeviceAddress(url, consentToken, function (err, res) {
+      getDeviceAddress(url, consentToken, function (err, res) {
          if (err) {
            emit(':tell', err)
          }
         emit(':ask', res)
-      })*/
+      })
     }
   } else if (zipCodeSlot.value !== undefined) {
     // we have zipcode convert it to lat and long

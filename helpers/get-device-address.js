@@ -13,13 +13,12 @@ function getDeviceAddress(url, consentToken, callback) {
   got(url, urlOptions)
     .then(response => {
       var parsedResponse = JSON.parse(response.body)
-      var output = ' ' + parsedResponse
-      /*formatDeviceAddressResponse(parsedResponse, function (err, res) {
+      formatDeviceAddressResponse(parsedResponse, function (err, res) {
         if (err) {
           callback(err)
         }
         callback(null, res)
-      })*/
+      })
     })
     .catch(error => {
       var failedToGetDeviceAddress = 'We failed to get your device address, please try again!'
