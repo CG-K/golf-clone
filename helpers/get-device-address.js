@@ -3,7 +3,7 @@ module.exports = getDeviceAddress
 const got = require('got')
 var formatDeviceAddressResponse = require('./format-device-address-response.js')
 
-function getDeviceAddress(url, consentToken, callback) {
+function getDeviceAddress (url, consentToken, callback) {
   var urlOptions = {
     headers: {
       Authorization: 'Bearer ' + consentToken
@@ -21,6 +21,7 @@ function getDeviceAddress(url, consentToken, callback) {
       })
     })
     .catch(error => {
+      console.log(error)
       var failedToGetDeviceAddress = 'We failed to get your device address, please try again!'
       callback(failedToGetDeviceAddress)
     })

@@ -3,8 +3,6 @@
 
 module.exports = getLatLong
 
-// var getCourseSummaries = require('./get-course-summaries.js')
-
 // set path to the .env file for env variables
 require('dotenv').config({path: '../'})
 var courseSummaryOptions = require('./course-summary-options.json')
@@ -14,6 +12,7 @@ var courseSummaryOptions = require('./course-summary-options.json')
 // param(out): callback: returns the data or error message to GetLocation()
 // calledBy: GetLocation()
 function getLatLong (location, callback) {
+  console.log(location)
   var NodeGeocoder = require('node-geocoder')
   var options = {
     provider: 'google',
@@ -24,7 +23,9 @@ function getLatLong (location, callback) {
   var geocoder = NodeGeocoder(options)
 
   geocoder.geocode(location, function (err, res) {
+    console.log('we are in the geocoding')
     if (err) {
+      callback(null, 'hi we are in the error')
       console.log(err)
       var failGeocode = 'We have failed to get the latitude and longitude from ' +
       'the given location, can you try again?'
@@ -36,14 +37,5 @@ function getLatLong (location, callback) {
     courseSummaryOptions.longitude = longitude
     var latLongOutput = 'What day would you like to play?'
     callback(null, latLongOutput)
-    /* getCourseSummaries(courseSummaryOptions, function (err, courses) {
-      if (err) {
-        var failCourseSum = 'we have failed to get the course summaries, can \
-         you try again?'
-        callback(failCourseSum)
-      }
-      console.log('courses: ' + courses)
-      callback(null, courses)
-    }) */
   })
 }
