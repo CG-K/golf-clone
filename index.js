@@ -4,6 +4,8 @@ var StopIntent = require('./intents/stop-intent.js')
 var CancelIntent = require('./intents/cancel-intent.js')
 var GetLocationIntent = require('./intents/get-location.js')
 var DatesReceivedIntent = require('./intents/dates-received-intent.js')
+var TimeReceivedIntent = require('./intents/time-received-intent.js')
+var NumGolfersReceivedIntent = require('./intents/num-golfers-received-intent.js')
 
 require('dotenv').config()
 const APP_ID = process.env.APP_ID
@@ -26,5 +28,7 @@ var handlers = {
   'AMAZON.StopIntent': StopIntent,
   'AMAZON.CancelIntent': CancelIntent,
   'GetLocation': GetLocationIntent,
-  'DatesReceived': DatesReceivedIntent
+  'DatesReceived': DatesReceivedIntent,
+  'TimeReceived': TimeReceivedIntent,
+  'NumGolfersReceived': NumGolfersReceivedIntent
 }

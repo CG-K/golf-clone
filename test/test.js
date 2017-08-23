@@ -161,3 +161,59 @@ it('Launches DatesReceived with Utterance of Date', function (done) {
   })
   done()
 })
+
+it('Response for DatesReceived is correct', function (done) {
+  alexa.intended('DatesReceived', { 'dateToPlay': 'September 4' }, function (error, payload) {
+    if (error) {
+      console.log(error)
+      done()
+    }
+    assert.equal(payload.response.outputSpeech.ssml, '<speak> What time would you like to play? </speak>')
+    assert.equal(payload.response.shouldEndSession, false)
+    done()
+  })
+})
+
+it('Launches TimeReceived with Utterance of 4 pm', function (done) {
+  alexa.spoken('maybe at {4 pm}', function (error, response, request) {
+    if (error) {
+      console.log(error)
+    }
+    assert.equal(request.request.intent.name, 'TimeReceived')
+  })
+  done()
+})
+
+it('Response for TimeReceived is correct', function (done) {
+  alexa.intended('TimeReceived', { 'timeToPlay': '4' }, function (error, payload) {
+    if (error) {
+      console.log(error)
+      done()
+    }
+    assert.equal(payload.response.outputSpeech.ssml, '<speak> How many players would you like to golf with? </speak>')
+    assert.equal(payload.response.shouldEndSession, false)
+    done()
+  })
+})
+
+it('Launches NumGolfersReceived with Utterance of 4 pm', function (done) {
+  alexa.spoken('{4} players', function (error, response, request) {
+    if (error) {
+      console.log(error)
+    }
+    assert.equal(request.request.intent.name, 'NumGolfersReceived')
+  })
+  done()
+})
+
+it('Response for NumGolfersReceived is correct', function (done) {
+  alexa.intended('NumGolfersReceived', { 'numberOfGolfers': '2' }, function (error, payload) {
+    if (error) {
+      console.log(error)
+      done()
+    }
+    assert.equal(payload.response.outputSpeech.ssml, '<speak> What is the most you would like to spend per player? </speak>')
+    assert.equal(payload.response.shouldEndSession, false)
+    done()
+  })
+})
