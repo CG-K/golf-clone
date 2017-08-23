@@ -6,6 +6,7 @@ var GetLocationIntent = require('./intents/get-location.js')
 var DatesReceivedIntent = require('./intents/dates-received-intent.js')
 var TimeReceivedIntent = require('./intents/time-received-intent.js')
 var NumGolfersReceivedIntent = require('./intents/num-golfers-received-intent.js')
+var PriceReceivedIntent = require('./intents/price-received-intent.js')
 
 require('dotenv').config()
 const APP_ID = process.env.APP_ID
@@ -30,5 +31,6 @@ var handlers = {
   'GetLocation': GetLocationIntent,
   'DatesReceived': DatesReceivedIntent,
   'TimeReceived': TimeReceivedIntent,
-  'NumGolfersReceived': NumGolfersReceivedIntent
+  'NumGolfersReceived': NumGolfersReceivedIntent,
+  'PriceReceived': PriceReceivedIntent
 }

@@ -5,6 +5,9 @@ var server = null
 var alexa = null
 
 beforeEach(function (done) {
+  var path = require('path')
+  var dotEnvPath = path.resolve('../.env')
+  require('dotenv').config({path: dotEnvPath})
   // first param - the location of lambda file to be return
   // second - port
   // third - verbose mode res/req sent to console
@@ -14,7 +17,7 @@ beforeEach(function (done) {
   // utterances
   alexa = new bst.BSTAlexa('http://localhost:10000',
                 './speechAssets/IntentSchema.json',
-                './speechAssets/SampleUtterances.txt')
+                './speechAssets/SampleUtterances.txt', process.env.APP_ID)
   server.start(function () {
     alexa.start(function (error) {
       if (error !== undefined) {
@@ -163,7 +166,7 @@ it('Launches DatesReceived with Utterance of Date', function (done) {
 })
 
 it('Response for DatesReceived is correct', function (done) {
-  alexa.intended('DatesReceived', { 'dateToPlay': 'September 4' }, function (error, payload) {
+  alexa.intended('DatesReceived', { 'dateToPlay': '2017-09-04' }, function (error, payload) {
     if (error) {
       console.log(error)
       done()
@@ -185,7 +188,7 @@ it('Launches TimeReceived with Utterance of 4 pm', function (done) {
 })
 
 it('Response for TimeReceived is correct', function (done) {
-  alexa.intended('TimeReceived', { 'timeToPlay': '4' }, function (error, payload) {
+  alexa.intended('TimeReceived', { 'timeToPlay': '4:00' }, function (error, payload) {
     if (error) {
       console.log(error)
       done()
@@ -213,6 +216,28 @@ it('Response for NumGolfersReceived is correct', function (done) {
       done()
     }
     assert.equal(payload.response.outputSpeech.ssml, '<speak> What is the most you would like to spend per player? </speak>')
+    assert.equal(payload.response.shouldEndSession, false)
+    done()
+  })
+})
+
+it('Launches PriceReceived with Utterance of 40 dollars', function (done) {
+  alexa.spoken('{40} dollars', function (error, response, request) {
+    if (error) {
+      console.log(error)
+    }
+    assert.equal(request.request.intent.name, 'PriceReceived')
+  })
+  done()
+})
+
+it('Response for PriceReceived is correct', function (done) {
+  alexa.intended('PriceReceived', { 'amountOfDollars': '50' }, function (error, payload) {
+    if (error) {
+      console.log(error)
+      done()
+    }
+    // assert.include(payload.response.outputSpeech.ssml, '<speak> Here are your course options: </speak>')
     assert.equal(payload.response.shouldEndSession, false)
     done()
   })
