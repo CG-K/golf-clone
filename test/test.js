@@ -118,18 +118,6 @@ it('Launches GetLocation with Utterance with Near Me', function (done) {
   done()
 })
 
-it('Response for GetLocation is Correct for near me is correct', function (done) {
-  alexa.intended('GetLocation', { 'nearme': 'near me' }, function (error, payload) {
-    if (error) {
-      console.log(error)
-      done()
-    }
-    assert.equal(payload.response.outputSpeech.ssml, '<speak> We need to find you device location </speak>')
-    assert.equal(payload.response.shouldEndSession, true)
-    done()
-  })
-})
-
 it('Response for GetLocation is Correct for zipcode is correct', function (done) {
   alexa.intended('GetLocation', { 'zipcode': '32819' }, function (error, payload) {
     if (error) {
@@ -152,4 +140,24 @@ it('Response for GetLocation is Correct for city is correct', function (done) {
     assert.equal(payload.response.shouldEndSession, false)
     done()
   })
+})
+
+it('Launches DatesReceived with Utterance of tomorrow', function (done) {
+  alexa.spoken('try {tomorrow}', function (error, response, request) {
+    if (error) {
+      console.log(error)
+    }
+    assert.equal(request.request.intent.name, 'DatesReceived')
+  })
+  done()
+})
+
+it('Launches DatesReceived with Utterance of Date', function (done) {
+  alexa.spoken('{September 3}', function (error, response, request) {
+    if (error) {
+      console.log(error)
+    }
+    assert.equal(request.request.intent.name, 'DatesReceived')
+  })
+  done()
 })

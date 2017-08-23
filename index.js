@@ -3,6 +3,7 @@ var HelpIntent = require('./intents/help-intent.js')
 var StopIntent = require('./intents/stop-intent.js')
 var CancelIntent = require('./intents/cancel-intent.js')
 var GetLocationIntent = require('./intents/get-location.js')
+var DatesReceivedIntent = require('./intents/dates-received-intent.js')
 
 require('dotenv').config()
 const APP_ID = process.env.APP_ID
@@ -24,5 +25,6 @@ var handlers = {
   'AMAZON.HelpIntent': HelpIntent,
   'AMAZON.StopIntent': StopIntent,
   'AMAZON.CancelIntent': CancelIntent,
-  'GetLocation': GetLocationIntent
+  'GetLocation': GetLocationIntent,
+  'DatesReceived': DatesReceivedIntent
 }

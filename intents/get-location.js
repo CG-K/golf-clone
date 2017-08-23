@@ -32,9 +32,9 @@ function GetLocation () {
     } else {
       var url = formatDeviceAddressRequest(deviceId)
       getDeviceAddress(url, consentToken, function (err, res) {
-         if (err) {
-           emit(':tell', err)
-         }
+        if (err) {
+          emit(':tell', err)
+        }
         emit(':ask', res)
       })
     }
