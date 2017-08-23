@@ -8,10 +8,9 @@ const TOO_MANY_COURSES = 5
 
 var date = require('date-and-time')
 // Purpose: To format the course summaries output for a user to give the top 5 results
-// param(in): response: ApiAiApp object that will prompt the user upon invoking this intent
-// param(in): doNotRefine: a Boolean to specify if the user does or does not want to refine results
+// param(in): response: the string that will prompt the user upon invoking this intent
 // param(out): callback: returns the data or error message to getCourseSummaries()
-// calledBy: getCourseSummaries()
+// calledBy: handleCourseSummariesResponse()
 function formatCourseSummaries (response, callback) {
   var maxResponseLength = NO_COURSES
   if (response.items.length >= TOO_MANY_COURSES) {

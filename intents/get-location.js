@@ -1,3 +1,7 @@
+// get-location.js
+// Purpose: a function that a user starts when they say 'book a tee time {location}'
+//  it is meant to ultimately get course summaries from your location
+//  depending on which form of location you give it, it will take you down a different route
 module.exports = GetLocation
 
 var getLatLong = require('../helpers/get-lat-long.js')

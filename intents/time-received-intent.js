@@ -1,7 +1,10 @@
+// time-received-intent.js
+// Purpose: a function that handles the time recevied intent
 module.exports = TimeReceivedIntent
 
 var options = require('../helpers/course-summary-options.json')
 
+// Purpose: saves the time given by the user and reprompts for more info
 function TimeReceivedIntent () {
   options.time = this.event.request.intent.slots.timeToPlay.value
   var timePrompt = 'How many players would you like to golf with?'

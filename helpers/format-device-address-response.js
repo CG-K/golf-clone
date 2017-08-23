@@ -1,7 +1,14 @@
+// format-device-address-response.js
+// Purpose: To create a response from the format device address request
 module.exports = formatDeviceAddressResponse
+
 
 var getLatLong = require('./get-lat-long.js')
 
+// Purpose: To create a URL to get Device Address from the user
+// param(in): parsedResponse: the parsed response from the Device Address API
+// param(out): callback: returns the formatted response or error to the previous function
+// calledBy: getCourseSummaries()
 function formatDeviceAddressResponse (parsedResponse, callback) {
   var stateOrRegion = parsedResponse.stateOrRegion
   if (stateOrRegion === '') {
@@ -10,7 +17,6 @@ function formatDeviceAddressResponse (parsedResponse, callback) {
       'a tee time by saying Alexa, ask Golf Now to book a tee time in Orlando.'
     callback(addressNotInUS)
   }
-  // var city = parsedResponse.city
   var output = JSON.stringify(parsedResponse)
   console.log(output)
   var location = {

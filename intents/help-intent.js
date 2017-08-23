@@ -1,3 +1,5 @@
+// help-intent.js
+// Purpose: a function that handles the help intent
 module.exports = helpIntent
 
 function helpIntent () {
