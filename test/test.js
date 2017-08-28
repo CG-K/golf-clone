@@ -121,7 +121,7 @@ it('Launches GetLocation with Utterance with Near Me', function (done) {
   done()
 })
 
-it('Response for GetLocation is Correct for zipcode is correct', function (done) {
+it('Response for GetLocation is Correct with zipcode', function (done) {
   alexa.intended('GetLocation', { 'zipcode': '32819' }, function (error, payload) {
     if (error) {
       console.log(error)
@@ -149,6 +149,7 @@ it('Launches DatesReceived with Utterance of tomorrow', function (done) {
   alexa.spoken('try {tomorrow}', function (error, response, request) {
     if (error) {
       console.log(error)
+      done()
     }
     assert.equal(request.request.intent.name, 'DatesReceived')
   })
@@ -225,6 +226,7 @@ it('Launches PriceReceived with Utterance of 40 dollars', function (done) {
   alexa.spoken('{40} dollars', function (error, response, request) {
     if (error) {
       console.log(error)
+      done()
     }
     assert.equal(request.request.intent.name, 'PriceReceived')
   })

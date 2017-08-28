@@ -56,3 +56,6 @@ typings/
 
 # Env for dotenv
 .env
+
+# Compresed File for S3/Lamnda
+Archive.zip
