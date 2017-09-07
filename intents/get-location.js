@@ -7,12 +7,16 @@ module.exports = GetLocation
 var getLatLong = require('../helpers/get-lat-long.js')
 var formatDeviceAddressRequest = require('../helpers/format-device-address-request.js')
 var getDeviceAddress = require('../helpers/get-device-address.js')
+var states = require('../helpers/states.json')
 
 const ALL_ADDRESS_PERMISSION = 'read::alexa:device:all:address'
 const PERMISSIONS = [ALL_ADDRESS_PERMISSION]
 
 function GetLocation () {
-  console.log('this is the intent we are in: ' + this.event.request.intent.name)
+  console.log('WE ARE IN THIS INTENT: ' +  this.event.request)
+
+  this.handler.state = states.LOCATIONMODE
+  console.log(this.event.request.intent.name)
   var citySlot = this.event.request.intent.slots.city
   var nearMeSlot = this.event.request.intent.slots.nearme
   var zipCodeSlot = this.event.request.intent.slots.zipcode

@@ -4,10 +4,14 @@ module.exports = PriceReceivedIntent
 
 var options = require('../helpers/course-summary-options.json')
 var getCourseSummaries = require('../helpers/get-course-summaries.js')
+var states = require('../helpers/states.json')
 
 // Purpose: saves the price given by the user and returns course summaries
 function PriceReceivedIntent () {
+  console.log(this.event.request)
+  this.handler.state = states.PRICEMODE
   options.price = this.event.request.intent.slots.amountOfDollars.value
+  console.log(options.price)
   var emit = this.emit
   getCourseSummaries(options, function (err, res) {
     if (err) {
