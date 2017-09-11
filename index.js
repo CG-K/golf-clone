@@ -8,6 +8,7 @@ var TimeReceivedIntent = require('./intents/time-received-intent.js')
 var NumGolfersReceivedIntent = require('./intents/num-golfers-received-intent.js')
 var PriceReceivedIntent = require('./intents/price-received-intent.js')
 var UnhandledIntent = require('./intents/unhandled-intent.js')
+var SessionEndedRequest = require('./intents/session-ended-request.js')
 var states = require('./helpers/states.json')
 
 require('dotenv').config()
@@ -20,7 +21,7 @@ exports.handler = function (event, context, callback) {
   var alexa = Alexa.handler(event, context, callback)
   alexa.appId = APP_ID
   // register our event handlers
-  alexa.registerHandlers(launchHandlers, locationHandlers, dateHandlers, timeHandlers, numGolfersHandlers, handlers)
+  alexa.registerHandlers(handlers, locationHandlers, dateHandlers, timeHandlers, numGolfersHandlers, priceHandlers)
   // run the app logic
   alexa.execute()
 }
@@ -30,30 +31,19 @@ var handlers = {
   'AMAZON.HelpIntent': HelpIntent,
   'AMAZON.StopIntent': StopIntent,
   'AMAZON.CancelIntent': CancelIntent,
-  'Unhandled': UnhandledIntent,
   'GetLocation': GetLocationIntent,
-  'DatesReceived': DatesReceivedIntent,
-  'TimeReceived': TimeReceivedIntent,
-  'NumGolfersReceived': NumGolfersReceivedIntent,
-  'PriceReceived': PriceReceivedIntent
-}
-
-var launchHandlers = Alexa.CreateStateHandler(states.LAUNCHMODE, {
-  'LaunchRequest': LaunchRequest,
-  'AMAZON.HelpIntent': HelpIntent,
-  'AMAZON.StopIntent': StopIntent,
-  'AMAZON.CancelIntent': CancelIntent,
   'Unhandled': UnhandledIntent,
-  'GetLocation': GetLocationIntent
-})
+  'SessionEndedRequest': SessionEndedRequest
+}
 
 var locationHandlers = Alexa.CreateStateHandler(states.LOCATIONMODE, {
   'LaunchRequest': LaunchRequest,
   'AMAZON.HelpIntent': HelpIntent,
   'AMAZON.StopIntent': StopIntent,
   'AMAZON.CancelIntent': CancelIntent,
+  'DatesReceived': DatesReceivedIntent,
   'Unhandled': UnhandledIntent,
-  'DatesReceived': DatesReceivedIntent
+  'SessionEndedRequest': SessionEndedRequest
 })
 
 var dateHandlers = Alexa.CreateStateHandler(states.DATESMODE, {
@@ -61,8 +51,9 @@ var dateHandlers = Alexa.CreateStateHandler(states.DATESMODE, {
   'AMAZON.HelpIntent': HelpIntent,
   'AMAZON.StopIntent': StopIntent,
   'AMAZON.CancelIntent': CancelIntent,
+  'TimeReceived': TimeReceivedIntent,
   'Unhandled': UnhandledIntent,
-  'TimeReceived': TimeReceivedIntent
+  'SessionEndedRequest': SessionEndedRequest
 })
 
 var timeHandlers = Alexa.CreateStateHandler(states.TIMEMODE, {
@@ -70,8 +61,9 @@ var timeHandlers = Alexa.CreateStateHandler(states.TIMEMODE, {
   'AMAZON.HelpIntent': HelpIntent,
   'AMAZON.StopIntent': StopIntent,
   'AMAZON.CancelIntent': CancelIntent,
+  'NumGolfersReceived': NumGolfersReceivedIntent,
   'Unhandled': UnhandledIntent,
-  'NumGolfersReceived': NumGolfersReceivedIntent
+  'SessionEndedRequest': SessionEndedRequest
 })
 
 var numGolfersHandlers = Alexa.CreateStateHandler(states.NUMGOLFERSMODE, {
@@ -79,6 +71,17 @@ var numGolfersHandlers = Alexa.CreateStateHandler(states.NUMGOLFERSMODE, {
   'AMAZON.HelpIntent': HelpIntent,
   'AMAZON.StopIntent': StopIntent,
   'AMAZON.CancelIntent': CancelIntent,
+  'PriceReceived': PriceReceivedIntent,
   'Unhandled': UnhandledIntent,
-  'PriceReceived': PriceReceivedIntent
+  'SessionEndedRequest': SessionEndedRequest
+})
+
+var priceHandlers = Alexa.CreateStateHandler(states.PRICEMODE, {
+  'LaunchRequest': LaunchRequest,
+  'AMAZON.HelpIntent': HelpIntent,
+  'AMAZON.StopIntent': StopIntent,
+  'AMAZON.CancelIntent': CancelIntent,
+  'PriceReceived': PriceReceivedIntent,
+  'Unhandled': UnhandledIntent,
+  'SessionEndedRequest': SessionEndedRequest
 })

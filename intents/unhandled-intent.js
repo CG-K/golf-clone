@@ -6,50 +6,34 @@ var states = require('../helpers/states.json')
 var responses = require('../helpers/responses.json')
 
 function UnhandledIntent () {
-  console.log(this.event.request)
+  console.log(this.event.request.intent.name)
+  console.log('THE CURRENT STATE:' + this.handler.state)
   var unhandledOutput
   var repromptUnhandled
   switch (this.handler.state) {
-    case states.HELPMODE:
-      this.emitWithState('HelpIntent')
-      unhandledOutput = responses.help.output
-      repromptUnhandled = responses.help.reprompt
-      break
-    case states.LAUNCHMODE:
-      this.emitWithState('LaunchRequest')
-      unhandledOutput = responses.launch.output
-      repromptUnhandled = responses.launch.reprompt
-      break
     case states.LOCATIONMODE:
-      this.emitWithState('GetLocation')
-      unhandledOutput = responses.location.output
-      repromptUnhandled = responses.location.reprompt
-      break
-    case states.DATESMODE:
-      this.emitWithState('DatesReceived')
       unhandledOutput = responses.dates.output
       repromptUnhandled = responses.dates.reprompt
       break
-    case states.TIMEMODE:
-      this.emitWithState('TimeReceived')
+    case states.DATESMODE:
       unhandledOutput = responses.time.output
       repromptUnhandled = responses.time.reprompt
       break
-    case states.NUMGOLFERSMODE:
-      this.emitWithState('NumGolfersReceived')
+    case states.TIMEMODE:
       unhandledOutput = responses.numGolfers.output
       repromptUnhandled = responses.numGolfers.reprompt
       break
-    case states.PRICEMODE:
-      this.emitWithState('PriceReceived')
+    case states.NUMGOLFERSMODE:
       unhandledOutput = responses.price.output
       repromptUnhandled = responses.price.reprompt
       break
+    // case states.PRICEMODE:
+      // unhandledOutput = responses.price.output
+      // repromptUnhandled = responses.price.reprompt
+      break
     default:
-      unhandledOutput = 'You can ask Alexa to do things such as book a hot deal near me, or book a tee time near me.'
-      repromptUnhandled = 'Do you want to book a tee time near you? If you do, say, ' +
-        'Alexa ask GolfNow to book a hot deal near me.'
-      this.emit(':ask', unhandledOutput, repromptUnhandled)
-
+      unhandledOutput = responses.location.output
+      repromptUnhandled = responses.location.reprompt
   }
+  this.emit(':ask', unhandledOutput, repromptUnhandled)
 }

@@ -35,7 +35,12 @@ function getLatLong (location, callback) {
     var longitude = res[0].longitude
     courseSummaryOptions.latitude = latitude
     courseSummaryOptions.longitude = longitude
-    var latLongOutput = 'What day would you like to play?'
-    callback(null, latLongOutput)
+    var response = {
+      latLongOutput: '',
+      latLongReprompt: ''
+    }
+    response.latLongOutput = 'What day would you like to play?'
+    response.latLongReprompt = 'Tell me what day you would like to play, you can say things like today, tomorrow, Next Tuesday.'
+    callback(null, response)
   })
 }

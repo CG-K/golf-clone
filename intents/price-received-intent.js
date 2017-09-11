@@ -8,10 +8,11 @@ var states = require('../helpers/states.json')
 
 // Purpose: saves the price given by the user and returns course summaries
 function PriceReceivedIntent () {
-  console.log(this.event.request)
+  console.log(this.event.request.intent.name)
   this.handler.state = states.PRICEMODE
   options.price = this.event.request.intent.slots.amountOfDollars.value
-  console.log(options.price)
+  console.log('The Current State is: ' + this.event.session.attributes.STATE)
+  console.log(this.event.request.intent.slots.amountOfDollars.value)
   var emit = this.emit
   getCourseSummaries(options, function (err, res) {
     if (err) {

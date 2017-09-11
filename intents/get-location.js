@@ -13,10 +13,9 @@ const ALL_ADDRESS_PERMISSION = 'read::alexa:device:all:address'
 const PERMISSIONS = [ALL_ADDRESS_PERMISSION]
 
 function GetLocation () {
-  console.log('WE ARE IN THIS INTENT: ' +  this.event.request)
-
-  this.handler.state = states.LOCATIONMODE
+  console.log('WE ARE IN THIS INTENT: ' + this.event.request.intent.name)
   console.log(this.event.request.intent.name)
+  this.handler.state = states.LOCATIONMODE
   var citySlot = this.event.request.intent.slots.city
   var nearMeSlot = this.event.request.intent.slots.nearme
   var zipCodeSlot = this.event.request.intent.slots.zipcode
@@ -28,7 +27,7 @@ function GetLocation () {
       if (err) {
         emit(':tell', err)
       }
-      emit(':ask', res)
+      emit(':ask', res.latLongOutput, res.latLongReprompt)
     })
   } else if (nearMeSlot.value !== undefined) {
     // we have to get device location
@@ -43,7 +42,7 @@ function GetLocation () {
         if (err) {
           emit(':tell', err)
         }
-        emit(':ask', res)
+        emit(':ask', res.latLongOutput, res.latLongReprompt)
       })
     }
   } else if (zipCodeSlot.value !== undefined) {
@@ -53,7 +52,7 @@ function GetLocation () {
       if (err) {
         emit(':tell', err)
       }
-      emit(':ask', res)
+      emit(':ask', res.latLongOutput, res.latLongReprompt)
     })
   } else {
     // there was no input slot
