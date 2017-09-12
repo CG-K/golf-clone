@@ -82,6 +82,7 @@ var priceHandlers = Alexa.CreateStateHandler(states.PRICEMODE, {
   'AMAZON.StopIntent': StopIntent,
   'AMAZON.CancelIntent': CancelIntent,
   'PriceReceived': PriceReceivedIntent,
+  'GetLocation': GetLocationIntent,
   'Unhandled': UnhandledIntent,
   'SessionEndedRequest': SessionEndedRequest
 })

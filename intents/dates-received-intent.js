@@ -11,6 +11,12 @@ function DatesReceivedIntent () {
   this.handler.state = states.DATESMODE
   console.log('The Current State is: ' + this.event.session.attributes.STATE)
   options.date = this.event.request.intent.slots.dateToPlay.value
+  if (options.date === undefined) {
+    // date did not make sense, and unhandled did not catch it
+    var didNotUnderstandDate = 'I did not understand that date you said.  You can say something like tomorrow, today, or Next Tuesday.'
+    var didNotUnderstandReprompt = 'You can say something like tomorrow, today, or Next Tuesday.'
+    this.emit(':ask', didNotUnderstandDate, didNotUnderstandReprompt)
+  }
   console.log(this.event.request.intent.slots.dateToPlay.value)
   var datesPrompt = 'What time would you like to play?'
   var datesReprompt = 'What time would you like to golf?'

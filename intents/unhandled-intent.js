@@ -27,10 +27,11 @@ function UnhandledIntent () {
       unhandledOutput = responses.price.output
       repromptUnhandled = responses.price.reprompt
       break
+      // This case will be updated with a new API
     // case states.PRICEMODE:
       // unhandledOutput = responses.price.output
       // repromptUnhandled = responses.price.reprompt
-      break
+      // break
     default:
       unhandledOutput = responses.location.output
       repromptUnhandled = responses.location.reprompt
