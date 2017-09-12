@@ -13,8 +13,6 @@ const ALL_ADDRESS_PERMISSION = 'read::alexa:device:all:address'
 const PERMISSIONS = [ALL_ADDRESS_PERMISSION]
 
 function GetLocation () {
-  console.log('WE ARE IN THIS INTENT: ' + this.event.request.intent.name)
-  console.log(this.event.request.intent.name)
   this.handler.state = states.LOCATIONMODE
   var citySlot = this.event.request.intent.slots.city
   var nearMeSlot = this.event.request.intent.slots.nearme

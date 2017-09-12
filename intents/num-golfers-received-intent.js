@@ -9,7 +9,6 @@ const NO_GOLFERS = 0
 
 // Purpose: saves the number of Golfers given by the user and prompts for more information
 function NumGolfersReceivedIntent () {
-  console.log(this.event.request.intent.name)
   this.handler.state = states.NUMGOLFERSMODE
   if (this.event.request.intent.slots.numberOfGolfers.value !== undefined) {
     if (this.event.request.intent.slots.numberOfGolfers.value > MAX_GOLFERS || this.event.request.intent.slots.numberOfGolfers.value < NO_GOLFERS) {
@@ -22,8 +21,6 @@ function NumGolfersReceivedIntent () {
       options.numGolfers = this.event.request.intent.slots.numberOfGolfers.value
     }
   }
-  console.log('The Current State is: ' + this.event.session.attributes.STATE)
-  console.log(this.event.request.intent.slots.numberOfGolfers.value)
   var numGolfersPrompt = 'What is the most you would like to spend per player?'
   var numGolfersRerompt = 'How much money are you willing to spend per player?'
   this.emit(':ask', numGolfersPrompt, numGolfersRerompt)

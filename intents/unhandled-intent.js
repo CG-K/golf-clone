@@ -6,8 +6,6 @@ var states = require('../helpers/states.json')
 var responses = require('../helpers/responses.json')
 
 function UnhandledIntent () {
-  console.log(this.event.request.intent.name)
-  console.log('THE CURRENT STATE:' + this.handler.state)
   var unhandledOutput
   var repromptUnhandled
   switch (this.handler.state) {
@@ -27,11 +25,6 @@ function UnhandledIntent () {
       unhandledOutput = responses.price.output
       repromptUnhandled = responses.price.reprompt
       break
-      // This case will be updated with a new API
-    // case states.PRICEMODE:
-      // unhandledOutput = responses.price.output
-      // repromptUnhandled = responses.price.reprompt
-      // break
     default:
       unhandledOutput = responses.location.output
       repromptUnhandled = responses.location.reprompt
