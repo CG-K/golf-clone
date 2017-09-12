@@ -7,12 +7,13 @@ module.exports = GetLocation
 var getLatLong = require('../helpers/get-lat-long.js')
 var formatDeviceAddressRequest = require('../helpers/format-device-address-request.js')
 var getDeviceAddress = require('../helpers/get-device-address.js')
+var states = require('../helpers/states.json')
 
 const ALL_ADDRESS_PERMISSION = 'read::alexa:device:all:address'
 const PERMISSIONS = [ALL_ADDRESS_PERMISSION]
 
 function GetLocation () {
-  console.log('this is the intent we are in: ' + this.event.request.intent.name)
+  this.handler.state = states.LOCATIONMODE
   var citySlot = this.event.request.intent.slots.city
   var nearMeSlot = this.event.request.intent.slots.nearme
   var zipCodeSlot = this.event.request.intent.slots.zipcode
@@ -24,7 +25,7 @@ function GetLocation () {
       if (err) {
         emit(':tell', err)
       }
-      emit(':ask', res)
+      emit(':ask', res.latLongOutput, res.latLongReprompt)
     })
   } else if (nearMeSlot.value !== undefined) {
     // we have to get device location
@@ -39,7 +40,7 @@ function GetLocation () {
         if (err) {
           emit(':tell', err)
         }
-        emit(':ask', res)
+        emit(':ask', res.latLongOutput, res.latLongReprompt)
       })
     }
   } else if (zipCodeSlot.value !== undefined) {
@@ -49,7 +50,7 @@ function GetLocation () {
       if (err) {
         emit(':tell', err)
       }
-      emit(':ask', res)
+      emit(':ask', res.latLongOutput, res.latLongReprompt)
     })
   } else {
     // there was no input slot

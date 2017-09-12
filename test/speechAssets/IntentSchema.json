@@ -1,40 +1,13 @@
 {
   "intents": [
     {
-      "intent": "PromptForPrice"
+      "intent": "AMAZON.CancelIntent"
     },
     {
-      "intent": "PromptForDates"
+      "intent": "AMAZON.HelpIntent"
     },
     {
-      "intent": "GetLocationNearMe"
-    },
-    {
-      "slots": [
-        {
-          "name": "dateToPlay",
-          "type": "AMAZON.DATE"
-        }
-      ],
-      "intent": "DatesReceived"
-    },
-    {
-      "intent": "PromptForTime"
-    },
-    {
-      "intent": "DoNotRefine"
-    },
-    {
-      "intent": "PromptForGolfers"
-    },
-    {
-      "slots": [
-        {
-          "name": "numberOfGolfers",
-          "type": "AMAZON.NUMBER"
-        }
-      ],
-      "intent": "NumGolfersReceived"
+      "intent": "AMAZON.StopIntent"
     },
     {
       "slots": [
@@ -48,11 +21,11 @@
     {
       "slots": [
         {
-          "name": "timeToPlay",
-          "type": "AMAZON.TIME"
+          "name": "dateToPlay",
+          "type": "AMAZON.DATE"
         }
       ],
-      "intent": "TimeReceived"
+      "intent": "DatesReceived"
     },
     {
       "slots": [
@@ -74,6 +47,15 @@
     {
       "slots": [
         {
+          "name": "numberOfGolfers",
+          "type": "AMAZON.NUMBER"
+        }
+      ],
+      "intent": "NumGolfersReceived"
+    },
+    {
+      "slots": [
+        {
           "name": "amountOfDollars",
           "type": "AMAZON.NUMBER"
         }
@@ -81,13 +63,13 @@
       "intent": "PriceReceived"
     },
     {
-      "intent": "AMAZON.HelpIntent"
-    },
-    {
-      "intent":"AMAZON.StopIntent"
-    },
-    {
-      "intent":"AMAZON.CancelIntent"
+      "slots": [
+        {
+          "name": "timeToPlay",
+          "type": "AMAZON.TIME"
+        }
+      ],
+      "intent": "TimeReceived"
     }
   ]
 }

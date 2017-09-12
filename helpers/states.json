@@ -1,0 +1,7 @@
+{
+  "LOCATIONMODE": "location",
+  "DATESMODE": "dates",
+  "TIMEMODE": "time",
+  "NUMGOLFERSMODE": "numGolfers",
+  "PRICEMODE": "price"
+}
