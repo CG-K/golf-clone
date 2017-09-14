@@ -14,25 +14,22 @@ var createCourseSummariesURL = require('./create-course-summaries-url.js')
 // calledBy:  priceReceivedIntent
 function getCourseSummaries (options, callback) {
   var url = createCourseSummariesURL(options)
-  var token = createAuthToken()
-  token = 'Basic ' + token
-  var urlOptions = {
-    headers: {
-      Authorization: token
-    }
-  }
-  console.log(urlOptions)
+  var urlOptions = createAuthToken()
+  console.log('urlOptions is: ' + JSON.stringify(urlOptions))
   // send request
   got(url, urlOptions)
     .then(response => {
       var parsedCourseResponse = JSON.parse(response.body)
+      console.log(response.body)
+      callback(null, 'we got the data')
       // take parsed response and generate a response for the user
+      /*
       handleCourseSummariesResponse(parsedCourseResponse, options.doNotRefine, function (err, output) {
         if (err) {
           callback(err)
         }
         callback(null, output)
-      })
+      })*/
     })
     .catch(error => {
       console.log(' we have an error' + error)
