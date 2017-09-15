@@ -141,6 +141,7 @@ it('Response for GetLocation is Correct for city is correct', function (done) {
 })
 
 it('Launches DatesReceived with Utterance of tomorrow', function (done) {
+  alexa._alexa._context._session.updateAttributes({'STATE': 'location'})
   alexa.spoken('try {tomorrow}', function (error, response, request) {
     if (error) {
       console.log(error)
@@ -152,6 +153,7 @@ it('Launches DatesReceived with Utterance of tomorrow', function (done) {
 })
 
 it('Launches DatesReceived with Utterance of Date', function (done) {
+  alexa._alexa._context._session.updateAttributes({'STATE': 'location'})
   alexa.spoken('{September 3}', function (error, response, request) {
     if (error) {
       console.log(error)
@@ -162,6 +164,7 @@ it('Launches DatesReceived with Utterance of Date', function (done) {
 })
 
 it('Response for DatesReceived is correct', function (done) {
+  alexa._alexa._context._session.updateAttributes({'STATE': 'location'})
   alexa.intended('DatesReceived', { 'dateToPlay': '2017-09-04' }, function (error, payload) {
     if (error) {
       console.log(error)
@@ -174,6 +177,7 @@ it('Response for DatesReceived is correct', function (done) {
 })
 
 it('Launches TimeReceived with Utterance of 4 pm', function (done) {
+  alexa._alexa._context._session.updateAttributes({'STATE': 'dates'})
   alexa.spoken('maybe at {4 pm}', function (error, response, request) {
     if (error) {
       console.log(error)
@@ -184,6 +188,7 @@ it('Launches TimeReceived with Utterance of 4 pm', function (done) {
 })
 
 it('Response for TimeReceived is correct', function (done) {
+  alexa._alexa._context._session.updateAttributes({'STATE': 'dates'})
   alexa.intended('TimeReceived', { 'timeToPlay': '4:00' }, function (error, payload) {
     if (error) {
       console.log(error)
@@ -196,6 +201,7 @@ it('Response for TimeReceived is correct', function (done) {
 })
 
 it('Launches NumGolfersReceived with Utterance of 4 pm', function (done) {
+  alexa._alexa._context._session.updateAttributes({'STATE': 'time'})
   alexa.spoken('{4} players', function (error, response, request) {
     if (error) {
       console.log(error)
@@ -206,6 +212,7 @@ it('Launches NumGolfersReceived with Utterance of 4 pm', function (done) {
 })
 
 it('Response for NumGolfersReceived is correct', function (done) {
+  alexa._alexa._context._session.updateAttributes({'STATE': 'time'})
   alexa.intended('NumGolfersReceived', { 'numberOfGolfers': '2' }, function (error, payload) {
     if (error) {
       console.log(error)
@@ -218,6 +225,7 @@ it('Response for NumGolfersReceived is correct', function (done) {
 })
 
 it('Launches PriceReceived with Utterance of 40 dollars', function (done) {
+  alexa._alexa._context._session.updateAttributes({'STATE': 'numGolfers'})
   alexa.spoken('{40} dollars', function (error, response, request) {
     if (error) {
       console.log(error)
@@ -229,6 +237,7 @@ it('Launches PriceReceived with Utterance of 40 dollars', function (done) {
 })
 
 it('Response for PriceReceived is correct', function (done) {
+  alexa._alexa._context._session.updateAttributes({'STATE': 'numGolfers'})
   alexa.intended('PriceReceived', { 'amountOfDollars': '50' }, function (error, payload) {
     if (error) {
       console.log(error)
