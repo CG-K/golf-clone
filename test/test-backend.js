@@ -60,14 +60,14 @@ describe('createAuthToken Tests', function () {
 
 describe('formatDeviceAddressResponse Tests', function () {
   var deviceAdddressResponse = {
-    stateOrRegion : 'WA',
-    city : 'Seattle',
-    countryCode : 'US',
-    postalCode : '98109',
-    addressLine1 : '410 Terry Ave North',
-    addressLine2 : '',
-    addressLine3 : 'aeiou',
-    districtOrCounty : ''
+    stateOrRegion: 'WA',
+    city: 'Seattle',
+    countryCode: 'US',
+    postalCode: '98109',
+    addressLine1: '410 Terry Ave North',
+    addressLine2: '',
+    addressLine3: 'aeiou',
+    districtOrCounty: ''
   }
 
   it('Tests with a full address given', function () {

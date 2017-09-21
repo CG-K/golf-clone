@@ -17,7 +17,7 @@ function handleCourseSummariesResponse (response, doNotRefine, callback) {
   if (response.items.length <= NO_COURSES) {
     // When there are no courses, you need to broaden your search range
     var noCoursesResponse = 'Your Search results did not return any courses. ' +
-    'Perhaps look in a different location!'
+    'Perhaps look on a different day, in another location, or at another time!'
     callback(null, noCoursesResponse)
   } else {
     // Give the user the course options
