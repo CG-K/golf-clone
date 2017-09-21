@@ -13,7 +13,8 @@ https://sandbox.api.gnsvc.com/GolfNowAPI.svc/rest/channel/{CHANNELID}/facilities
 */
 
 function createCourseSummariesURL (options) {
-  var baseURL = 'https://sandbox.api.gnsvc.com/GolfNowAPI.svc/rest/channel/7886/facilities/tee-times?q=geo-location&latitude=' + options.latitude + '&longitude=' + options.longitude + '&proximity=25'
+  var baseURL = 'https://2-1-17-sandbox.api.gnsvc.com/GolfNowAPI.svc/rest/channel/7886/facilities/tee-times?q=geo-location&latitude=' + options.latitude + '&longitude=' + options.longitude + '&proximity=25'
+  // var baseURL = 'https://sandbox.api.gnsvc.com/GolfNowAPI.svc/rest/channel/7886/facilities/tee-times?q=geo-location&latitude=' + options.latitude + '&longitude=' + options.longitude + '&proximity=25'
   if (options.date === null || options.date === undefined) {
     options.date = getCurrentDate()
   }

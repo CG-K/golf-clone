@@ -27,6 +27,7 @@ function createAuthToken () {
   var seconds = date.getSeconds()
   var timeStamp = Date.UTC(year, month, day, hours, minutes, seconds)
   var authHeader = username + encodedPassword + timeStamp
+  console.log(typeof authHeader)
   authHeader = hmac256(authHeader, clientSecret)
   var headers = {
     Authorization: authHeader,

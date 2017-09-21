@@ -10,10 +10,9 @@ var crypto = require('crypto')
 // param(in): clientSecret: the client application secret
 // calledBy: createAuthToken()
 function hmac256(authHeader, clientSecret) {
-  var Buffer = require('safe-buffer').Buffer
   console.log(authHeader)
   console.log('client secret in hmac256: ' + clientSecret)
-  var hmac = crypto.createHmac('sha256', clientSecret)
+  /*var hmac = crypto.createHmac('sha256', clientSecret)
   console.log(hmac)
   var updatedHeader = hmac.update(authHeader)
   console.log(updatedHeader)
@@ -23,4 +22,8 @@ function hmac256(authHeader, clientSecret) {
   // authHeader = Buffer.from(authHeader).toString('base64')
   console.log(outputHeader)
   return outputHeader
+  */
+  authHeader = crypto.createHmac('sha256', clientSecret).update(authHeader).digest('base64')
+  console.log(authHeader)
+  return authHeader
 }

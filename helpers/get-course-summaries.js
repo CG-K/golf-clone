@@ -3,7 +3,7 @@
 module.exports = getCourseSummaries
 
 const got = require('got')
-
+require('dotenv').config({path: '../'})
 var createAuthToken = require('../create-auth-token.js')
 var handleCourseSummariesResponse = require('./handle-course-summaries-response.js')
 var createCourseSummariesURL = require('./create-course-summaries-url.js')
@@ -15,6 +15,10 @@ var createCourseSummariesURL = require('./create-course-summaries-url.js')
 function getCourseSummaries (options, callback) {
   var url = createCourseSummariesURL(options)
   var urlOptions = createAuthToken()
+  /*var urlOptions = {
+    UserName: process.env.USERNAME,
+    Password: process.env.PASSWORD
+  }*/
   console.log('urlOptions is: ' + JSON.stringify(urlOptions))
   // send request
   got(url, urlOptions)
