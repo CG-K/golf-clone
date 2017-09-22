@@ -1,0 +1,231 @@
+{
+  "intents": [
+    {
+      "name": "AMAZON.CancelIntent",
+      "samples": []
+    },
+    {
+      "name": "AMAZON.HelpIntent",
+      "samples": []
+    },
+    {
+      "name": "AMAZON.StopIntent",
+      "samples": []
+    },
+    {
+      "name": "CourseSelected",
+      "samples": [
+        "{courseOptionNumber}",
+        "course {courseOptionNumber}",
+        "number {courseOptionNumber}",
+        "option {courseOptionNumber}"
+      ],
+      "slots": [
+        {
+          "name": "courseOptionNumber",
+          "type": "AMAZON.NUMBER",
+          "samples": []
+        }
+      ]
+    },
+    {
+      "name": "DatesReceived",
+      "samples": [
+        "{dateToPlay}",
+        "let's do {dateToPlay}",
+        "let's play {dateToPlay}",
+        "maybe {dateToPlay}",
+        "try {dateToPlay}"
+      ],
+      "slots": [
+        {
+          "name": "dateToPlay",
+          "type": "AMAZON.DATE",
+          "samples": []
+        }
+      ]
+    },
+    {
+      "name": "GetLocation",
+      "samples": [
+        "book a tee time close to {zipcode}",
+        "book a tee time in {city}",
+        "book a tee time {nearme}"
+      ],
+      "slots": [
+        {
+          "name": "city",
+          "type": "AMAZON.US_CITY",
+          "samples": []
+        },
+        {
+          "name": "zipcode",
+          "type": "AMAZON.NUMBER",
+          "samples": []
+        },
+        {
+          "name": "nearme",
+          "type": "NEAR_ME",
+          "samples": []
+        }
+      ]
+    },
+    {
+      "name": "NumGolfersReceived",
+      "samples": [
+        "{numberOfGolfers}",
+        "{numberOfGolfers} player",
+        "{numberOfGolfers} players",
+        "{numberOfGolfers} golfer",
+        "{numberOfGolfers} golfers",
+        "{anyAmountOfGolfers}"
+      ],
+      "slots": [
+        {
+          "name": "numberOfGolfers",
+          "type": "AMAZON.NUMBER",
+          "samples": []
+        },
+        {
+          "name": "anyAmountOfGolfers",
+          "type": "ANY_NUM_GOLFERS",
+          "samples": []
+        }
+      ]
+    },
+    {
+      "name": "PriceReceived",
+      "samples": [
+        "no more than {amountOfDollars} dollars",
+        "max of {amountOfDollars} dollars",
+        "about {amountOfDollars} dollars",
+        "{amountOfDollars} dollars",
+        "{amountOfDollars} us dollars",
+        "{amountOfDollars} bucks"
+      ],
+      "slots": [
+        {
+          "name": "amountOfDollars",
+          "type": "AMAZON.NUMBER",
+          "samples": []
+        }
+      ]
+    },
+    {
+      "name": "TimeReceived",
+      "samples": [
+        "{timeToPlay}",
+        "let s do {timeToPlay}",
+        "maybe at {timeToPlay}"
+      ],
+      "slots": [
+        {
+          "name": "timeToPlay",
+          "type": "AMAZON.TIME",
+          "samples": []
+        }
+      ]
+    },
+    {
+      "name": "Unhandled",
+      "samples": [],
+      "slots": []
+    }
+  ],
+  "types": [
+    {
+      "name": "ANY_NUM_GOLFERS",
+      "values": [
+        {
+          "id": null,
+          "name": {
+            "value": "I do not care",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "any amount",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "any golfers",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "any",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "it does not matter",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "I dont care",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "It doesnt matter to me",
+            "synonyms": []
+          }
+        }
+      ]
+    },
+    {
+      "name": "NEAR_ME",
+      "values": [
+        {
+          "id": null,
+          "name": {
+            "value": "near me",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "closeby",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "nearby",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "near my location",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "close to me",
+            "synonyms": []
+          }
+        }
+      ]
+    }
+  ]
+}
