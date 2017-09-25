@@ -14,7 +14,13 @@ const ALL_ADDRESS_PERMISSION = 'read::alexa:device:all:address'
 const PERMISSIONS = [ALL_ADDRESS_PERMISSION]
 
 function BookTime () {
-  if (this.event.request.dialogState === 'STARTED' || this.event.request.dialogState === 'IN_PROGRESS') {
+  console.log('dialogState: ' + this.event.request.dialogState)
+  console.log('citySlot: ' + this.event.request.intent.slots.city.value)
+  console.log('nearMeSlot: ' + this.event.request.intent.slots.nearme.value)
+  console.log('zipCodeSlot: ' + this.event.request.intent.slots.zipcode.value)
+  if (this.event.request.dialogState === 'STARTED') {
+    this.emit(':delegate')
+  } else if (this.event.request.dialogState === 'IN_PROGRESS' && this.event.request.intent.slots.city.value !== undefined && this.event.request.intent.slots.zipcode.value !== undefined && this.event.request.intent.slots.nearme.value !== undefined) {
     this.emit(':delegate')
   } else {
     this.handler.state = states.LOCATIONMODE
@@ -22,6 +28,9 @@ function BookTime () {
     var nearMeSlot = this.event.request.intent.slots.nearme
     var zipCodeSlot = this.event.request.intent.slots.zipcode
     var dealTypeSlot = this.event.request.intent.slots.dealType
+    console.log('citySlot: ' + citySlot.value)
+    console.log('nearMeSlot: ' + nearMeSlot.value)
+    console.log('zipCodeSlot: ' + zipCodeSlot.value)
 
     var emit = this.emit
     if (citySlot.value !== undefined) {
