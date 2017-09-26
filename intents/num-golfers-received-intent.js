@@ -9,7 +9,9 @@ const NO_GOLFERS = 0
 
 // Purpose: saves the number of Golfers given by the user and prompts for more information
 function NumGolfersReceivedIntent () {
-  if (this.event.request.dialogState !== 'COMPLETED') {
+  if (this.event.request.dialogState === 'STARTED') {
+    this.emit(':delegate')
+  }  else if (this.event.request.dialogState === 'IN_PROGRESS' && this.event.request.intent.slots.numberOfGolfers.value === undefined)  {
     this.emit(':delegate')
   } else {
     this.handler.state = states.NUMGOLFERSMODE
@@ -24,8 +26,8 @@ function NumGolfersReceivedIntent () {
         options.numGolfers = this.event.request.intent.slots.numberOfGolfers.value
       }
     }
-    var numGolfersPrompt = 'What is the most you would like to spend per player?'
-    var numGolfersRerompt = 'How much money are you willing to spend per player?'
+    var numGolfersPrompt = 'What is the most you would like to spend per golfer?'
+    var numGolfersRerompt = 'How much money are you willing to spend per golfer?'
     this.emit(':ask', numGolfersPrompt, numGolfersRerompt)
   }
 }

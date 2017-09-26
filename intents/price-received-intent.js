@@ -8,7 +8,9 @@ var states = require('../helpers/states.json')
 
 // Purpose: saves the price given by the user and returns course summaries
 function PriceReceivedIntent () {
-  if (this.event.request.dialogState !== 'COMPLETED') {
+  if (this.event.request.dialogState === 'STARTED') {
+    this.emit(':delegate')
+  }  else if (this.event.request.dialogState === 'IN_PROGRESS' && this.event.request.intent.slots.amountOfDollars.value === undefined)  {
     this.emit(':delegate')
   } else {
     this.handler.state = states.PRICEMODE

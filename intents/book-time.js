@@ -18,9 +18,7 @@ function BookTime () {
   console.log('citySlot: ' + this.event.request.intent.slots.city.value)
   console.log('nearMeSlot: ' + this.event.request.intent.slots.nearme.value)
   console.log('zipCodeSlot: ' + this.event.request.intent.slots.zipcode.value)
-  if (this.event.request.dialogState === 'STARTED') {
-    this.emit(':delegate')
-  } else if (this.event.request.dialogState === 'IN_PROGRESS' && this.event.request.intent.slots.city.value !== undefined && this.event.request.intent.slots.zipcode.value !== undefined && this.event.request.intent.slots.nearme.value !== undefined) {
+  if ((this.event.request.dialogState === 'IN_PROGRESS' || this.event.request.dialogState === 'STARTED') && this.event.request.intent.slots.city.value !== undefined && this.event.request.intent.slots.zipcode.value !== undefined && this.event.request.intent.slots.nearme.value !== undefined) {
     this.emit(':delegate')
   } else {
     this.handler.state = states.LOCATIONMODE
