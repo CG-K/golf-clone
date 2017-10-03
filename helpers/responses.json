@@ -12,19 +12,19 @@
     "reprompt": "You could also ask to book a tee time or hot deal in a City or at a zipcode"
   },
   "dates": {
-    "output": "On What day would you like to golf?",
-    "reprompt": "You can say something like today tomorrow, next monday, or Decemeber 12"
+    "output": "What day would you like to golf?",
+    "reprompt": "What day would you like to golf?  You can say something like maybe today, maybe tomorrow, let's do next monday, or  on Decemeber 12"
   },
   "time": {
-    "output": "At What Time would you like to golf?",
-    "reprompt": "You can say something like: 4 pm, 5 oclock, 12 30."
+    "output": "What time would you like to golf?",
+    "reprompt": "What time would you like to play golf?  You can say something like: at 4 pm, or at 12 30."
   },
   "numGolfers": {
     "output": "How many golfers would you like to golf with?",
-    "reprompt": "You can say 1, 2, 3, or 4 golfers.  Or If you do not care say any or do not care."
+    "reprompt": "How many golfers would you like to golf with? You can say 1, 2, 3, or 4 golfers.  Or If you do not care say any or do not care."
   },
   "price": {
-    "output": "How much money would you like to spend when playing?",
-    "reprompt": "You can say things like 10 dollars or 100 bucks"
+    "output": "What is the most you would like to spend per golfer?",
+    "reprompt": "How much money are you willing to spend per golfer?  You can say things like 10 dollars or 100 bucks"
   }
 }

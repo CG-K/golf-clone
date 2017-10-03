@@ -7,6 +7,7 @@ module.exports = createCourseSummariesURL
 // param(out): baseURL: returns the formatted URL with all the data for the request
 // calledBy: getCourseSummaries()
 function createCourseSummariesURL (options) {
+  console.log('options:' + options )
   var baseURL = 'https://affiliate.gnsvc.com/api/v1/channels/7886/course-summaries?latitude=' + options.latitude + '&longitude=' + options.longitude
   if (options.date !== null && options.date !== undefined) {
     baseURL = baseURL + '&search-date=' + options.date

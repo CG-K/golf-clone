@@ -13,9 +13,74 @@
       "samples": []
     },
     {
+      "name": "BookTime",
+      "samples": [
+        "book a {dealType} near {zipcode}",
+        "book a {dealType} in {city}",
+        "book a {dealType} {nearme}",
+        "book a {dealType} {nearme} on {dateToPlay} at {timeToPlay} with {numOfGolfers} for {amountOfDollars}",
+        "book a {dealType} in {city} on {dateToPlay} at {timeToPlay} with {numOfGolfers} for {amountOfDollars}",
+        "book a {dealType} near {zipcode} on {dateToPlay} at {timeToPlay} with {numOfGolfers} for {amountOfDollars}"
+      ],
+      "slots": [
+        {
+          "name": "city",
+          "type": "AMAZON.US_CITY",
+          "samples": [
+            "in {city}",
+            "how about {city}",
+            "lets do {city}"
+          ]
+        },
+        {
+          "name": "zipcode",
+          "type": "AMAZON.NUMBER",
+          "samples": [
+            "near {zipcode}",
+            "in {zipcode}"
+          ]
+        },
+        {
+          "name": "nearme",
+          "type": "NEAR_ME",
+          "samples": [
+            "lets look {nearme}",
+            "find something {nearme}"
+          ]
+        },
+        {
+          "name": "dealType",
+          "type": "DEAL_TYPE",
+          "samples": [
+            "book me a {dealType}",
+            "search for a {dealType}"
+          ]
+        },
+        {
+          "name": "dateToPlay",
+          "type": "AMAZON.DATE",
+          "samples": []
+        },
+        {
+          "name": "timeToPlay",
+          "type": "AMAZON.TIME",
+          "samples": []
+        },
+        {
+          "name": "numOfGolfers",
+          "type": "AMAZON.NUMBER",
+          "samples": []
+        },
+        {
+          "name": "amountOfDollars",
+          "type": "AMAZON.NUMBER",
+          "samples": []
+        }
+      ]
+    },
+    {
       "name": "CourseSelected",
       "samples": [
-        "{courseOptionNumber}",
         "course {courseOptionNumber}",
         "number {courseOptionNumber}",
         "option {courseOptionNumber}"
@@ -31,7 +96,7 @@
     {
       "name": "DatesReceived",
       "samples": [
-        "{dateToPlay}",
+        "on {dateToPlay}",
         "let's do {dateToPlay}",
         "let's play {dateToPlay}",
         "maybe {dateToPlay}",
@@ -46,39 +111,14 @@
       ]
     },
     {
-      "name": "GetLocation",
-      "samples": [
-        "book a tee time close to {zipcode}",
-        "book a tee time in {city}",
-        "book a tee time {nearme}"
-      ],
-      "slots": [
-        {
-          "name": "city",
-          "type": "AMAZON.US_CITY",
-          "samples": []
-        },
-        {
-          "name": "zipcode",
-          "type": "AMAZON.NUMBER",
-          "samples": []
-        },
-        {
-          "name": "nearme",
-          "type": "NEAR_ME",
-          "samples": []
-        }
-      ]
-    },
-    {
       "name": "NumGolfersReceived",
       "samples": [
-        "{numberOfGolfers}",
         "{numberOfGolfers} player",
         "{numberOfGolfers} players",
         "{numberOfGolfers} golfer",
         "{numberOfGolfers} golfers",
-        "{anyAmountOfGolfers}"
+        "{anyAmountOfGolfers} golfers",
+        "{anyAmountOfGolfers} about the number of golfers"
       ],
       "slots": [
         {
@@ -114,7 +154,7 @@
     {
       "name": "TimeReceived",
       "samples": [
-        "{timeToPlay}",
+        "at {timeToPlay}",
         "let s do {timeToPlay}",
         "maybe at {timeToPlay}"
       ],
@@ -188,6 +228,33 @@
       ]
     },
     {
+      "name": "DEAL_TYPE",
+      "values": [
+        {
+          "id": null,
+          "name": {
+            "value": "hot deal",
+            "synonyms": [
+              "hot deals",
+              "hots deals",
+              "hots deal"
+            ]
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "tee time",
+            "synonyms": [
+              "tee times",
+              "tees times",
+              "tees time"
+            ]
+          }
+        }
+      ]
+    },
+    {
       "name": "NEAR_ME",
       "values": [
         {
@@ -227,5 +294,143 @@
         }
       ]
     }
-  ]
+  ],
+  "prompts": [
+    {
+      "id": "Elicit.Intent-BookTime.IntentSlot-city",
+      "promptVersion": "1.0",
+      "definitionVersion": "1.0",
+      "variations": [
+        {
+          "type": "PlainText",
+          "value": "What city would you like to look in?"
+        },
+        {
+          "type": "PlainText",
+          "value": "What city would you like to golf in?"
+        }
+      ]
+    },
+    {
+      "id": "Elicit.Intent-BookTime.IntentSlot-zipcode",
+      "promptVersion": "1.0",
+      "definitionVersion": "1.0",
+      "variations": [
+        {
+          "type": "PlainText",
+          "value": "What zip code would you like me to search in ?"
+        },
+        {
+          "type": "PlainText",
+          "value": "What zip code would you like to play golf near?"
+        }
+      ]
+    },
+    {
+      "id": "Elicit.Intent-BookTime.IntentSlot-nearme",
+      "promptVersion": "1.0",
+      "definitionVersion": "1.0",
+      "variations": [
+        {
+          "type": "PlainText",
+          "value": "Do you want to search locations near you.  If yes, say search near me."
+        },
+        {
+          "type": "PlainText",
+          "value": "Where would you like to search near?"
+        }
+      ]
+    },
+    {
+      "id": "Elicit.Intent-BookTime.IntentSlot-dealType",
+      "promptVersion": "1.0",
+      "definitionVersion": "1.0",
+      "variations": [
+        {
+          "type": "PlainText",
+          "value": "What would you like me to look for a hot deal or a tee time?"
+        },
+        {
+          "type": "PlainText",
+          "value": "I need a deal type, is it a hot deal or a tee time?"
+        }
+      ]
+    }
+  ],
+  "dialog": {
+    "version": "1.0",
+    "intents": [
+      {
+        "name": "BookTime",
+        "confirmationRequired": false,
+        "prompts": {},
+        "slots": [
+          {
+            "name": "city",
+            "type": "AMAZON.US_CITY",
+            "elicitationRequired": true,
+            "confirmationRequired": false,
+            "prompts": {
+              "elicit": "Elicit.Intent-BookTime.IntentSlot-city"
+            }
+          },
+          {
+            "name": "zipcode",
+            "type": "AMAZON.NUMBER",
+            "elicitationRequired": true,
+            "confirmationRequired": false,
+            "prompts": {
+              "elicit": "Elicit.Intent-BookTime.IntentSlot-zipcode"
+            }
+          },
+          {
+            "name": "nearme",
+            "type": "NEAR_ME",
+            "elicitationRequired": true,
+            "confirmationRequired": false,
+            "prompts": {
+              "elicit": "Elicit.Intent-BookTime.IntentSlot-nearme"
+            }
+          },
+          {
+            "name": "dealType",
+            "type": "DEAL_TYPE",
+            "elicitationRequired": true,
+            "confirmationRequired": false,
+            "prompts": {
+              "elicit": "Elicit.Intent-BookTime.IntentSlot-dealType"
+            }
+          },
+          {
+            "name": "dateToPlay",
+            "type": "AMAZON.DATE",
+            "elicitationRequired": false,
+            "confirmationRequired": false,
+            "prompts": {}
+          },
+          {
+            "name": "timeToPlay",
+            "type": "AMAZON.TIME",
+            "elicitationRequired": false,
+            "confirmationRequired": false,
+            "prompts": {}
+          },
+          {
+            "name": "numOfGolfers",
+            "type": "AMAZON.NUMBER",
+            "elicitationRequired": false,
+            "confirmationRequired": false,
+            "prompts": {}
+          },
+          {
+            "name": "amountOfDollars",
+            "type": "AMAZON.NUMBER",
+            "elicitationRequired": false,
+            "confirmationRequired": false,
+            "prompts": {}
+          }
+        ]
+      }
+    ]
+  }
 }

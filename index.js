@@ -2,7 +2,7 @@ var LaunchRequest = require('./intents/launch-request.js')
 var HelpIntent = require('./intents/help-intent.js')
 var StopIntent = require('./intents/stop-intent.js')
 var CancelIntent = require('./intents/cancel-intent.js')
-var GetLocationIntent = require('./intents/get-location.js')
+var BookTimeIntent = require('./intents/book-time.js')
 var DatesReceivedIntent = require('./intents/dates-received-intent.js')
 var TimeReceivedIntent = require('./intents/time-received-intent.js')
 var NumGolfersReceivedIntent = require('./intents/num-golfers-received-intent.js')
@@ -31,7 +31,7 @@ var handlers = {
   'AMAZON.HelpIntent': HelpIntent,
   'AMAZON.StopIntent': StopIntent,
   'AMAZON.CancelIntent': CancelIntent,
-  'GetLocation': GetLocationIntent,
+  'BookTime': BookTimeIntent,
   'Unhandled': UnhandledIntent,
   'SessionEndedRequest': SessionEndedRequest
 }
@@ -82,7 +82,7 @@ var priceHandlers = Alexa.CreateStateHandler(states.PRICEMODE, {
   'AMAZON.StopIntent': StopIntent,
   'AMAZON.CancelIntent': CancelIntent,
   'PriceReceived': PriceReceivedIntent,
-  'GetLocation': GetLocationIntent,
+  'BookTime': BookTimeIntent,
   'Unhandled': UnhandledIntent,
   'SessionEndedRequest': SessionEndedRequest
 })
