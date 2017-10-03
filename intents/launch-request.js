@@ -3,6 +3,13 @@
 module.exports = LaunchRequest
 
 function LaunchRequest () {
+  var options = require('../helpers/course-summary-options.json')
   var responses = require('../helpers/responses.json')
+  var keys = Object.keys(options)
+  for (var i = 0; i < keys.length; i++) {
+    console.log(options[keys[i]])
+    options[keys[i]] = null
+    console.log(options[keys[i]])
+  }
   this.emit(':ask', responses.launch.output, responses.launch.reprompt)
 }

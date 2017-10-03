@@ -8,12 +8,13 @@ var getLatLong = require('../helpers/get-lat-long.js')
 var formatDeviceAddressRequest = require('../helpers/format-device-address-request.js')
 var getDeviceAddress = require('../helpers/get-device-address.js')
 var states = require('../helpers/states.json')
-var options = require('../helpers/course-summary-options.json')
+var getNewState = require('../helpers/get-new-state.js')
 
 const ALL_ADDRESS_PERMISSION = 'read::alexa:device:all:address'
 const PERMISSIONS = [ALL_ADDRESS_PERMISSION]
 
 function BookTime () {
+  var options = require('../helpers/course-summary-options.json')
   console.log('dialogState: ' + this.event.request.dialogState)
   console.log('citySlot: ' + this.event.request.intent.slots.city.value)
   console.log('nearMeSlot: ' + this.event.request.intent.slots.nearme.value)
@@ -22,14 +23,31 @@ function BookTime () {
     this.emit(':delegate')
   } else {
     this.handler.state = states.LOCATIONMODE
+    var handler = this.handler
     var citySlot = this.event.request.intent.slots.city
     var nearMeSlot = this.event.request.intent.slots.nearme
     var zipCodeSlot = this.event.request.intent.slots.zipcode
     var dealTypeSlot = this.event.request.intent.slots.dealType
+    if (this.event.request.intent.slots.dateToPlay.value !== undefined) {
+      var dateToPlay = this.event.request.intent.slots.dateToPlay.value
+      options.date = dateToPlay
+    }
+    if (this.event.request.intent.slots.timeToPlay.value !== undefined) {
+      var timeToPlay = this.event.request.intent.slots.timeToPlay.value
+      options.time = timeToPlay
+    }
+    if (this.event.request.intent.slots.numberOfGolfers.value !== undefined) {
+      var numberOfGolfers = this.event.request.intent.slots.numberOfGolfers.value
+      options.numGolfers = numberOfGolfers
+    }
+    if (this.event.request.intent.slots.amountOfDollars.value !== undefined) {
+      var amountOfDollars = this.event.request.intent.slots.amountOfDollars.value
+      options.price = amountOfDollars
+    }
     console.log('citySlot: ' + citySlot.value)
     console.log('nearMeSlot: ' + nearMeSlot.value)
     console.log('zipCodeSlot: ' + zipCodeSlot.value)
-
+    options.dealType = dealTypeSlot.value
     var emit = this.emit
     if (citySlot.value !== undefined) {
       // we have a city convert it to lat and long
@@ -38,6 +56,8 @@ function BookTime () {
         if (err) {
           emit(':tell', err)
         }
+        handler.state = res.state
+        console.log(res.state)
         emit(':ask', res.latLongOutput, res.latLongReprompt)
       })
     } else if (nearMeSlot.value !== undefined) {
@@ -53,6 +73,8 @@ function BookTime () {
           if (err) {
             emit(':tell', err)
           }
+          handler.state = res.state
+          console.log(res.state)
           emit(':ask', res.latLongOutput, res.latLongReprompt)
         })
       }
@@ -63,6 +85,8 @@ function BookTime () {
         if (err) {
           emit(':tell', err)
         }
+        handler.state = res.state
+        console.log(res.state)
         emit(':ask', res.latLongOutput, res.latLongReprompt)
       })
     } else {
