@@ -18,9 +18,90 @@
         "book a {dealType} near {zipcode}",
         "book a {dealType} in {city}",
         "book a {dealType} {nearme}",
-        "book a {dealType} {nearme} on {dateToPlay} at {timeToPlay} with {numOfGolfers} for {amountOfDollars}",
-        "book a {dealType} in {city} on {dateToPlay} at {timeToPlay} with {numOfGolfers} for {amountOfDollars}",
-        "book a {dealType} near {zipcode} on {dateToPlay} at {timeToPlay} with {numOfGolfers} for {amountOfDollars}"
+        "book a {dealType} {nearme} on {dateToPlay} at {timeToPlay} with {numberOfGolfers} for {amountOfDollars}",
+        "book a {dealType} in {city} on {dateToPlay} at {timeToPlay} with {numberOfGolfers} for {amountOfDollars}",
+        "book a {dealType} near {zipcode} on {dateToPlay} at {timeToPlay} with {numberOfGolfers} for {amountOfDollars}",
+        "book a {dealType} in {zipcode}",
+        "book a {dealType} near {city}",
+        "book a {dealType} near {city} on {dateToPlay}",
+        "book a {dealType} near {zipcode} on {dateToPlay}",
+        "book a {dealType} {nearme} on {dateToPlay}",
+        "book a {dealType} in {zipcode} on {dateToPlay}",
+        "book a {dealType} in {city} on {dateToPlay}",
+        "book a {dealType} near {city} for {dateToPlay}",
+        "book a {dealType} near {zipcode} for {dateToPlay}",
+        "book a {dealType} {nearme} for {dateToPlay}",
+        "book a {dealType} in {zipcode} for {dateToPlay}",
+        "book a {dealType} in {city} for {dateToPlay}",
+        "book a {dealType} near {city} on {dateToPlay} at {timeToPlay}",
+        "book a {dealType} near {zipcode} on {dateToPlay} at {timeToPlay}",
+        "book a {dealType} {nearme} on {dateToPlay} at {timeToPlay}",
+        "book a {dealType} in {zipcode} on {dateToPlay} at {timeToPlay}",
+        "book a {dealType} in {city} on {dateToPlay} at {timeToPlay}",
+        "book a {dealType} near {city} for {dateToPlay} at {timeToPlay}",
+        "book a {dealType} near {zipcode} for {dateToPlay} at {timeToPlay}",
+        "book a {dealType} {nearme} for {dateToPlay} at {timeToPlay}",
+        "book a {dealType} in {zipcode} for {dateToPlay} at {timeToPlay}",
+        "book a {dealType} in {city} for {dateToPlay} at {timeToPlay}",
+        "book a {dealType} in {city} at {timeToPlay}",
+        "book a {dealType} near {city} at {timeToPlay}",
+        "book a {dealType} near {zipcode} at {timeToPlay}",
+        "book a {dealType} {nearme} at {timeToPlay}",
+        "book a {dealType} in {city} with {numberOfGolfers} golfers",
+        "book a {dealType} near {city} with {numberOfGolfers} golfers",
+        "book a {dealType} near {zipcode} with {numberOfGolfers} golfers",
+        "book a {dealType} {nearme} with {numberOfGolfers} golfers",
+        "book a {dealType} in {zipcode} with {numberOfGolfers} golfers",
+        "book a {dealType} in {zipcode} at {timeToPlay} with {numberOfGolfers} golfers",
+        "book a {dealType} in {city} at {timeToPlay} with {numberOfGolfers} golfers",
+        "book a {dealType} near {city} at {timeToPlay} with {numberOfGolfers} golfers",
+        "book a {dealType} near {zipcode} at {timeToPlay} with {numberOfGolfers} golfers",
+        "book a {dealType} {nearme} at {timeToPlay} with {numberOfGolfers} golfers",
+        "book a {dealType} in {zipcode} on {dateToPlay} with {numberOfGolfers} golfers",
+        "book a {dealType} in {city} on {dateToPlay}  with {numberOfGolfers} golfers",
+        "book a {dealType} near {city} on {dateToPlay} with {numberOfGolfers} golfers",
+        "book a {dealType} near {zipcode} on {dateToPlay} with {numberOfGolfers} golfers",
+        "book a {dealType} {nearme} on {dateToPlay} with {numberOfGolfers} golfers",
+        "book a {dealType} in {zipcode} for {amountOfDollars} dollars\n",
+        "book a {dealType} {nearme} for {amountOfDollars} dollars\n",
+        "book a {dealType} near {zipcode} for {amountOfDollars} dollars\n",
+        "book a {dealType} near {city} for {amountOfDollars} dollars\n",
+        "book a {dealType} in {city} for {amountOfDollars} dollars\n",
+        "book a {dealType} in {zipcode} at {timeToPlay} for {amountOfDollars} dollars",
+        "book a {dealType} {nearme} at {timeToPlay} for {amountOfDollars} dollars",
+        "book a {dealType} near {zipcode} at {timeToPlay} for {amountOfDollars} dollars",
+        "book a {dealType} near {city} at {timeToPlay} for {amountOfDollars} dollars",
+        "book a {dealType} in {city} at {timeToPlay} for {amountOfDollars} dollars",
+        "book a {dealType} in {zipcode} with {numberOfGolfers} golfers for {amountOfDollars} dollars",
+        "book a {dealType} {nearme} with {numberOfGolfers} golfers for {amountOfDollars} dollars",
+        "book a {dealType} near {zipcode} with {numberOfGolfers} golfers for {amountOfDollars} dollars",
+        "book a {dealType} near {city} with {numberOfGolfers}  golfers for {amountOfDollars} dollars",
+        "book a {dealType} in {city} with {numberOfGolfers} golfers for {amountOfDollars} dollars",
+        "book a {dealType} in {zipcode} at {timeToPlay} with {numberOfGolfers} golfers for {amountOfDollars} dollars",
+        "book a {dealType} {nearme} at {timeToPlay} with {numberOfGolfers} golfers for {amountOfDollars} dollars",
+        "book a {dealType} near {zipcode} at {timeToPlay} with {numberOfGolfers} golfers for {amountOfDollars} dollars",
+        "book a {dealType} near {city} at {timeToPlay} with {numberOfGolfers}  golfers for {amountOfDollars} dollars",
+        "book a {dealType} in {city} at {timeToPlay} with {numberOfGolfers} golfers for {amountOfDollars} dollars",
+        "book a {dealType} in {zipcode} on {dateToPlay} at {timeToPlay} with {numberOfGolfers} golfers for {amountOfDollars} dollars",
+        "book a {dealType} {nearme} on {dateToPlay} at {timeToPlay} with {numberOfGolfers} golfers for {amountOfDollars} dollars",
+        "book a {dealType} near {zipcode} on {dateToPlay} at {timeToPlay} with {numberOfGolfers} golfers for {amountOfDollars} dollars",
+        "book a {dealType} near {city} on {dateToPlay} at {timeToPlay} with {numberOfGolfers}  golfers for {amountOfDollars} dollars",
+        "book a {dealType} in {city} on {dateToPlay} at {timeToPlay} with {numberOfGolfers} golfers for {amountOfDollars} dollars",
+        "book a {dealType} in {zipcode} on {dateToPlay} with {numberOfGolfers} golfers for {amountOfDollars} dollars",
+        "book a {dealType} {nearme} on {dateToPlay} with {numberOfGolfers} golfers for {amountOfDollars} dollars",
+        "book a {dealType} near {zipcode} on {dateToPlay} with {numberOfGolfers} golfers for {amountOfDollars} dollars",
+        "book a {dealType} near {city} on {dateToPlay} with {numberOfGolfers}  golfers for {amountOfDollars} dollars",
+        "book a {dealType} in {city} on {dateToPlay} with {numberOfGolfers} golfers for {amountOfDollars} dollars",
+        "book a {dealType} in {zipcode} on {dateToPlay} at {timeToPlay} for {amountOfDollars} dollars",
+        "book a {dealType} {nearme} on {dateToPlay} at {timeToPlay} for {amountOfDollars} dollars",
+        "book a {dealType} near {zipcode} on {dateToPlay} at {timeToPlay} for {amountOfDollars} dollars",
+        "book a {dealType} near {city} on {dateToPlay} at {timeToPlay} for {amountOfDollars} dollars",
+        "book a {dealType} in {city} on {dateToPlay} at {timeToPlay} for {amountOfDollars} dollars",
+        "book a {dealType} in {zipcode} on {dateToPlay} for {amountOfDollars} dollars",
+        "book a {dealType} {nearme} on {dateToPlay} for {amountOfDollars} dollars",
+        "book a {dealType} near {zipcode} on {dateToPlay} for {amountOfDollars} dollars",
+        "book a {dealType} near {city} on {dateToPlay} for {amountOfDollars} dollars",
+        "book a {dealType} in {city} on {dateToPlay} for {amountOfDollars} dollars"
       ],
       "slots": [
         {
@@ -67,7 +148,7 @@
           "samples": []
         },
         {
-          "name": "numOfGolfers",
+          "name": "numberOfGolfers",
           "type": "AMAZON.NUMBER",
           "samples": []
         },
@@ -106,7 +187,12 @@
         {
           "name": "dateToPlay",
           "type": "AMAZON.DATE",
-          "samples": []
+          "samples": [
+            "try {dateToPlay}",
+            "on {dateToPlay}",
+            "let's do {dateToPlay}",
+            "how about {dateToPlay}"
+          ]
         }
       ]
     },
@@ -116,20 +202,18 @@
         "{numberOfGolfers} player",
         "{numberOfGolfers} players",
         "{numberOfGolfers} golfer",
-        "{numberOfGolfers} golfers",
-        "{anyAmountOfGolfers} golfers",
-        "{anyAmountOfGolfers} about the number of golfers"
+        "{numberOfGolfers} golfers"
       ],
       "slots": [
         {
           "name": "numberOfGolfers",
           "type": "AMAZON.NUMBER",
-          "samples": []
-        },
-        {
-          "name": "anyAmountOfGolfers",
-          "type": "ANY_NUM_GOLFERS",
-          "samples": []
+          "samples": [
+            "{numberOfGolfers} players",
+            "{numberOfGolfers} golfers",
+            "{numberOfGolfers} player",
+            "{numberOfGolfers} golfer"
+          ]
         }
       ]
     },
@@ -147,7 +231,12 @@
         {
           "name": "amountOfDollars",
           "type": "AMAZON.NUMBER",
-          "samples": []
+          "samples": [
+            "{amountOfDollars} dollars",
+            "no more than {amountOfDollars}",
+            "max of {amountOfDollars}",
+            "{amountOfDollars} bucks"
+          ]
         }
       ]
     },
@@ -156,13 +245,19 @@
       "samples": [
         "at {timeToPlay}",
         "let s do {timeToPlay}",
-        "maybe at {timeToPlay}"
+        "maybe at {timeToPlay}",
+        "around {timeToPlay}",
+        "about {timeToPlay}"
       ],
       "slots": [
         {
           "name": "timeToPlay",
           "type": "AMAZON.TIME",
-          "samples": []
+          "samples": [
+            "at {timeToPlay}",
+            "around {timeToPlay}",
+            "about {timeToPlay}"
+          ]
         }
       ]
     },
@@ -355,6 +450,66 @@
           "value": "I need a deal type, is it a hot deal or a tee time?"
         }
       ]
+    },
+    {
+      "id": "Elicit.Intent-DatesReceived.IntentSlot-dateToPlay",
+      "promptVersion": "1.0",
+      "definitionVersion": "1.0",
+      "variations": [
+        {
+          "type": "PlainText",
+          "value": "Please tell me the day you would like to golf"
+        },
+        {
+          "type": "PlainText",
+          "value": "What day would like to schedule a tee time for?"
+        }
+      ]
+    },
+    {
+      "id": "Elicit.Intent-NumGolfersReceived.IntentSlot-numberOfGolfers",
+      "promptVersion": "1.0",
+      "definitionVersion": "1.0",
+      "variations": [
+        {
+          "type": "PlainText",
+          "value": "Please say how many golfers you would like to golf with"
+        },
+        {
+          "type": "PlainText",
+          "value": "How many golfers do you want to golf with for this tee time?"
+        }
+      ]
+    },
+    {
+      "id": "Elicit.Intent-PriceReceived.IntentSlot-amountOfDollars",
+      "promptVersion": "1.0",
+      "definitionVersion": "1.0",
+      "variations": [
+        {
+          "type": "PlainText",
+          "value": "please tell me how much money you would like to spend golfing?"
+        },
+        {
+          "type": "PlainText",
+          "value": "How much money are you thinking of spending?"
+        }
+      ]
+    },
+    {
+      "id": "Elicit.Intent-TimeReceived.IntentSlot-timeToPlay",
+      "promptVersion": "1.0",
+      "definitionVersion": "1.0",
+      "variations": [
+        {
+          "type": "PlainText",
+          "value": "What is the time of day you would like to play?"
+        },
+        {
+          "type": "PlainText",
+          "value": "What is the time you want to golf?"
+        }
+      ]
     }
   ],
   "dialog": {
@@ -416,7 +571,7 @@
             "prompts": {}
           },
           {
-            "name": "numOfGolfers",
+            "name": "numberOfGolfers",
             "type": "AMAZON.NUMBER",
             "elicitationRequired": false,
             "confirmationRequired": false,
@@ -428,6 +583,70 @@
             "elicitationRequired": false,
             "confirmationRequired": false,
             "prompts": {}
+          }
+        ]
+      },
+      {
+        "name": "DatesReceived",
+        "confirmationRequired": false,
+        "prompts": {},
+        "slots": [
+          {
+            "name": "dateToPlay",
+            "type": "AMAZON.DATE",
+            "elicitationRequired": true,
+            "confirmationRequired": false,
+            "prompts": {
+              "elicit": "Elicit.Intent-DatesReceived.IntentSlot-dateToPlay"
+            }
+          }
+        ]
+      },
+      {
+        "name": "NumGolfersReceived",
+        "confirmationRequired": false,
+        "prompts": {},
+        "slots": [
+          {
+            "name": "numberOfGolfers",
+            "type": "AMAZON.NUMBER",
+            "elicitationRequired": true,
+            "confirmationRequired": false,
+            "prompts": {
+              "elicit": "Elicit.Intent-NumGolfersReceived.IntentSlot-numberOfGolfers"
+            }
+          }
+        ]
+      },
+      {
+        "name": "PriceReceived",
+        "confirmationRequired": false,
+        "prompts": {},
+        "slots": [
+          {
+            "name": "amountOfDollars",
+            "type": "AMAZON.NUMBER",
+            "elicitationRequired": true,
+            "confirmationRequired": false,
+            "prompts": {
+              "elicit": "Elicit.Intent-PriceReceived.IntentSlot-amountOfDollars"
+            }
+          }
+        ]
+      },
+      {
+        "name": "TimeReceived",
+        "confirmationRequired": false,
+        "prompts": {},
+        "slots": [
+          {
+            "name": "timeToPlay",
+            "type": "AMAZON.TIME",
+            "elicitationRequired": true,
+            "confirmationRequired": false,
+            "prompts": {
+              "elicit": "Elicit.Intent-TimeReceived.IntentSlot-timeToPlay"
+            }
           }
         ]
       }
