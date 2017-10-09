@@ -7,6 +7,7 @@ const NO_COURSES = 0
 const TOO_MANY_COURSES = 5
 
 var getFacilityInfoFromTeeTime = require('./get-facility-info-from-tee-time.js')
+var formatPrice = require('./format-price.js')
 
 var date = require('date-and-time')
 // Purpose: To format the course summaries output for a user to give the top 5 results
@@ -41,13 +42,14 @@ function formatCourseSummaries (response, callback) {
     // var endTime = endTimeInfo[3] + ' ' + endTimeInfo[4]
 
     var nameAndCity = getFacilityInfoFromTeeTime(response.TeeTimes[i].FacilityID, response.Facilities)
+    var price = formatPrice(response.TeeTimes[i].DisplayRate.SinglePlayerPrice.TotalDue.Value)
     // Output to User
     courseOutput = courseOutput + ' Course option ' + (i + 1) + ' ' + nameAndCity.name
     courseOutput = courseOutput + ' in ' + nameAndCity.city
     courseOutput = courseOutput + ' with available tee times on ' + startDate
-    courseOutput = courseOutput + ' from ' + startTime + ' that cost from '
+    courseOutput = courseOutput + ' from ' + startTime + ' that costs '
     // courseOutput = courseOutput + response.items[i].minRate.amount + ' to '
-    // courseOutput = courseOutput + response.items[i].maxRate.amount + ' dollars.    '
+    courseOutput = courseOutput + price[0] + ' dollars and ' + price[1] + ' cents.  '
   }
   callback(null, courseOutput)
 }
