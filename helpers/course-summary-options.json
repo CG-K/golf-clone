@@ -6,5 +6,7 @@
   "time": null,
   "numGolfers": null,
   "price": null,
+  "courses": null,
+  "coursesCount": null,
   "courseID": null
 }

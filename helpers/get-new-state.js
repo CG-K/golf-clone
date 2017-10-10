@@ -39,8 +39,11 @@ function getNewState() {
     res.response = responses.price.output
     res.reprompt = responses.price.reprompt
     return res
-  } else {
+  } else if (options.courses === null) {
     res.state = states.PRICEMODE
+    return res
+  } else {
+    res.state = states.HEARCOURSESMODE
     return res
   }
 }

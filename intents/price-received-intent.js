@@ -20,6 +20,8 @@ function PriceReceivedIntent () {
     console.log('state: ' + this.handler.state )
     var emit = this.emit
     if (this.handler.state === states.PRICEMODE) {
+      nextState = getNewState()
+      this.handler.state = nextState.state
       getCourseSummaries(options, function (err, res) {
         if (err) {
           console.log(err)

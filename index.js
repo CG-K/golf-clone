@@ -7,6 +7,7 @@ var DatesReceivedIntent = require('./intents/dates-received-intent.js')
 var TimeReceivedIntent = require('./intents/time-received-intent.js')
 var NumGolfersReceivedIntent = require('./intents/num-golfers-received-intent.js')
 var PriceReceivedIntent = require('./intents/price-received-intent.js')
+var HearCoursesIntent = require('./intents/hear-courses-intent.js')
 var UnhandledIntent = require('./intents/unhandled-intent.js')
 var SessionEndedRequest = require('./intents/session-ended-request.js')
 var states = require('./helpers/states.json')
@@ -21,7 +22,7 @@ exports.handler = function (event, context, callback) {
   var alexa = Alexa.handler(event, context, callback)
   alexa.appId = APP_ID
   // register our event handlers
-  alexa.registerHandlers(handlers, locationHandlers, dateHandlers, timeHandlers, numGolfersHandlers, priceHandlers)
+  alexa.registerHandlers(handlers, locationHandlers, dateHandlers, timeHandlers, numGolfersHandlers, priceHandlers, hearCoursesHandlers)
   // run the app logic
   alexa.execute()
 }
@@ -81,7 +82,18 @@ var priceHandlers = Alexa.CreateStateHandler(states.PRICEMODE, {
   'AMAZON.HelpIntent': HelpIntent,
   'AMAZON.StopIntent': StopIntent,
   'AMAZON.CancelIntent': CancelIntent,
-  'PriceReceived': PriceReceivedIntent,
+  'HearCourses': HearCoursesIntent,
+  'BookTime': BookTimeIntent,
+  'Unhandled': UnhandledIntent,
+  'SessionEndedRequest': SessionEndedRequest
+})
+
+var hearCoursesHandlers = Alexa.CreateStateHandler(states.HEARCOURSESMODE, {
+  'LaunchRequest': LaunchRequest,
+  'AMAZON.HelpIntent': HelpIntent,
+  'AMAZON.StopIntent': StopIntent,
+  'AMAZON.CancelIntent': CancelIntent,
+  'HearCourses': HearCoursesIntent,
   'BookTime': BookTimeIntent,
   'Unhandled': UnhandledIntent,
   'SessionEndedRequest': SessionEndedRequest

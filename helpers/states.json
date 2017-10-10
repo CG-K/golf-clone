@@ -3,5 +3,6 @@
   "DATESMODE": "dates",
   "TIMEMODE": "time",
   "NUMGOLFERSMODE": "numGolfers",
-  "PRICEMODE": "price"
+  "PRICEMODE": "price",
+  "HEARCOURSESMODE": "hearcourses"
 }

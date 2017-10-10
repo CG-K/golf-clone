@@ -15,6 +15,7 @@ var date = require('date-and-time')
 // param(out): callback: returns the data or error message to getCourseSummaries()
 // calledBy: handleCourseSummariesResponse()
 function formatCourseSummaries (response, callback) {
+  var options = require('./course-summary-options.json')
   var maxResponseLength = NO_COURSES
   if (response.TeeTimes.length >= TOO_MANY_COURSES) {
     // Only want to return top 5 results if more than 5
@@ -22,7 +23,8 @@ function formatCourseSummaries (response, callback) {
   } else if (response.TeeTimes.length < TOO_MANY_COURSES && response.TeeTimes.length > NO_COURSES) {
     maxResponseLength = response.TeeTimes.length
   }
-  var courseOutput = 'Here are your course options: '
+  // var courseOutput = 'Here are your course options: '
+  options.courses = []
   for (var i = 0; i < maxResponseLength; i++) {
     // Convert the dates into date objects
     var startDateAndTime = new Date(response.TeeTimes[i].Time)
@@ -44,12 +46,22 @@ function formatCourseSummaries (response, callback) {
     var nameAndCity = getFacilityInfoFromTeeTime(response.TeeTimes[i].FacilityID, response.Facilities)
     var price = formatPrice(response.TeeTimes[i].DisplayRate.SinglePlayerPrice.TotalDue.Value)
     // Output to User
-    courseOutput = courseOutput + ' Course option ' + (i + 1) + ' ' + nameAndCity.name
+    var courseOutput = ' Course option ' + (i + 1) + ' ' + nameAndCity.name
     courseOutput = courseOutput + ' in ' + nameAndCity.city
     courseOutput = courseOutput + ' with available tee times on ' + startDate
     courseOutput = courseOutput + ' from ' + startTime + ' that costs '
     // courseOutput = courseOutput + response.items[i].minRate.amount + ' to '
     courseOutput = courseOutput + price[0] + ' dollars and ' + price[1] + ' cents.  '
+
+    console.log(i)
+    console.log(maxResponseLength)
+    if (i === (maxResponseLength - 1)) {
+      courseOutput = courseOutput + 'Those are all your options, which option would you like to book?'
+    } else {
+      courseOutput = courseOutput + 'Do you want to book a tee time here or would you like to here the next one?'
+    }
+
+    options.courses.push(courseOutput)
   }
-  callback(null, courseOutput)
+  callback(null, options.courses[0])
 }
