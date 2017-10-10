@@ -4,7 +4,7 @@
 module.exports = handleCourseSummariesResponse
 
 const NO_COURSES = 0
-// const TOO_MANY_COURSES = 5
+const TOO_MANY_COURSES = 5
 
 var formatCourseSummaries = require('./format-course-summaries.js')
 
@@ -13,8 +13,10 @@ var formatCourseSummaries = require('./format-course-summaries.js')
 // param(in): doNotRefine: a Boolean to specify if the user does or does not want to refine results
 // param(out): callback: returns the data or error message to getCourseSummaries()
 // calledBy: getCourseSummaries()
-function handleCourseSummariesResponse (response, doNotRefine, callback) {
-  if (response.items.length <= NO_COURSES) {
+function handleCourseSummariesResponse (response, callback) {
+  var maxResponseLength = 0
+  console.log(response)
+  if (response.TeeTimes.length <= NO_COURSES) {
     // When there are no courses, you need to broaden your search range
     var noCoursesResponse = 'Your Search results did not return any courses. ' +
     'Perhaps look on a different day, in another location, or at another time!'
@@ -29,10 +31,3 @@ function handleCourseSummariesResponse (response, doNotRefine, callback) {
     })
   }
 }
-
-/* else if (response.items.length > TOO_MANY_COURSES && doNotRefine !== true) {
-  // When there are more than 5 we want to refine our results
-  var tooManyCoursesResponse = 'There are ' + response.items.length + ' courses' +
-  'in your search area with available tee times. Would you like to refine your results?'
-  callback(null, tooManyCoursesResponse)
-} */
