@@ -26,5 +26,9 @@
   "price": {
     "output": "What is the most you would like to spend per golfer?",
     "reprompt": "How much money are you willing to spend per golfer?  You can say things like 10 dollars or 100 bucks"
+  },
+  "hearCourses": {
+    "output": "Would you like to hear the next option by saying next one, or select an option by saying 'option 1'",
+    "reprmopt":  "Please tell me if you would like to hear the next option by saying next one, or select an option by saying 'option 1' for option 1"
   }
 }

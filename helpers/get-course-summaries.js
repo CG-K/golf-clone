@@ -14,13 +14,6 @@ var createCourseSummariesURL = require('./create-course-summaries-url.js')
 // calledBy:  priceReceivedIntent
 function getCourseSummaries (options, callback) {
   var url = createCourseSummariesURL(options)
-  /*var token = createAuthToken()
-  token = 'Basic ' + token
-  var urlOptions = {
-    headers: {
-      Authorization: token
-    }
-  }*/
   var urlOptions = {
     headers: {
       UserName: process.env.USERNAME,
@@ -37,6 +30,11 @@ function getCourseSummaries (options, callback) {
       handleCourseSummariesResponse(parsedCourseResponse, function (err, output) {
         if (err) {
           callback(err)
+        }
+        if (options.maxCoursesLength > 1){
+          output = output + 'Do you want to book a tee time here or would you like to hear the next one?'
+        } else {
+          output = output + 'Those are all your options, which option would you like to book?'
         }
         callback(null, output)
       })

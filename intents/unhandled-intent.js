@@ -25,6 +25,10 @@ function UnhandledIntent () {
       unhandledOutput = responses.price.output
       repromptUnhandled = responses.price.reprompt
       break
+    case (states.PRICEMODE || states.HEARCOURSESMODE):
+      unhandledOutput = responses.hearCourses.output
+      repromptUnhandled = responses.hearCourses.reprompt
+      break
     default:
       unhandledOutput = responses.location.output
       repromptUnhandled = responses.location.reprompt

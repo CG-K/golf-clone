@@ -55,12 +55,7 @@ function formatCourseSummaries (response, callback) {
 
     console.log(i)
     console.log(maxResponseLength)
-    if (i === (maxResponseLength - 1)) {
-      courseOutput = courseOutput + 'Those are all your options, which option would you like to book?'
-    } else {
-      courseOutput = courseOutput + 'Do you want to book a tee time here or would you like to here the next one?'
-    }
-
+    options.maxCoursesLength = maxResponseLength
     options.courses.push(courseOutput)
   }
   callback(null, options.courses[0])

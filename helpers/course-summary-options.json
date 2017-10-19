@@ -8,5 +8,6 @@
   "price": null,
   "courses": null,
   "coursesCount": null,
-  "courseID": null
+  "courseID": null,
+  "maxCoursesLength": null
 }
