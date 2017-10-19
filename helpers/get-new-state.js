@@ -42,8 +42,11 @@ function getNewState() {
   } else if (options.courses === null) {
     res.state = states.PRICEMODE
     return res
-  } else {
+  } else if (options.courseID === null) {
     res.state = states.HEARCOURSESMODE
+    return res
+  } else {
+    res.state = states.SELECTCOURSEMODE
     return res
   }
 }

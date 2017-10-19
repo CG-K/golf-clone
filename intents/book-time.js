@@ -9,18 +9,20 @@ var formatDeviceAddressRequest = require('../helpers/format-device-address-reque
 var getDeviceAddress = require('../helpers/get-device-address.js')
 var states = require('../helpers/states.json')
 var getNewState = require('../helpers/get-new-state.js')
+var clearOptions = require('../helpers/clear-options.js')
 
 const ALL_ADDRESS_PERMISSION = 'read::alexa:device:all:address'
 const PERMISSIONS = [ALL_ADDRESS_PERMISSION]
 
 function BookTime () {
   var options = require('../helpers/course-summary-options.json')
-  console.log('dialogState: ' + this.event.request.dialogState)
-  console.log('citySlot: ' + this.event.request.intent.slots.city.value)
-  console.log('nearMeSlot: ' + this.event.request.intent.slots.nearme.value)
-  console.log('zipCodeSlot: ' + this.event.request.intent.slots.zipcode.value)
-  if ((this.event.request.dialogState === 'IN_PROGRESS' || this.event.request.dialogState === 'STARTED') && this.event.request.intent.slots.city.value !== undefined && this.event.request.intent.slots.zipcode.value !== undefined && this.event.request.intent.slots.nearme.value !== undefined) {
-    this.emit(':delegate')
+  clearOptions()
+  if (this.event.request.intent.slots.city.value !== undefined && this.event.request.intent.slots.zipcode.value !== undefined && this.event.request.intent.slots.nearme.value !== undefined) {
+    var nextState = getNextState()
+    console.log(this.event.request.intent.name)
+    console.log('date to play is undefined.  the next state is: ' + nextState.state)
+    this.handler.state = nextState.state
+    this.emit(':ask', nextState.response, nextState.reprompt)
   } else {
     this.handler.state = states.LOCATIONMODE
     var handler = this.handler
@@ -44,9 +46,6 @@ function BookTime () {
       var amountOfDollars = this.event.request.intent.slots.amountOfDollars.value
       options.price = amountOfDollars
     }
-    console.log('citySlot: ' + citySlot.value)
-    console.log('nearMeSlot: ' + nearMeSlot.value)
-    console.log('zipCodeSlot: ' + zipCodeSlot.value)
     options.dealType = dealTypeSlot.value
     var emit = this.emit
     if (citySlot.value !== undefined) {

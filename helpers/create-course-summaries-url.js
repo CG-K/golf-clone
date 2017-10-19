@@ -13,11 +13,14 @@ var getCurrentDate = require('./get-current-date.js')
 function createCourseSummariesURL (options) {
   var baseURL = 'https://2-1-17-sandbox.api.gnsvc.com/rest/channel/7886/facilities/tee-times?q=geo-location&latitude=' + options.latitude + '&longitude=' + options.longitude + '&proximity=25'
   if (options.date !== null && options.date !== undefined) {
+    baseURL = baseURL + '&date-min=' + options.date + 'T00%3a00%3a00'
+    baseURL = baseURL + '&date-max=' + options.date + 'T23%3a59%3a59'
+    /*
     options.date = getCurrentDate()
     baseURL = baseURL + '&search-date=' + options.date
+    */
   }
-  baseURL = baseURL + '&date-min=' + options.date + 'T00%3a00%3a00'
-  baseURL = baseURL + '&date-max=' + options.date + 'T23%3a59%3a59'
+
   baseURL = baseURL + '&expand=Facilities'
   // input default maximum number of records to return = 100
   baseURL = baseURL + '&take=100'
