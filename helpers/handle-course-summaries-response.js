@@ -16,7 +16,7 @@ var formatCourseSummaries = require('./format-course-summaries.js')
 function handleCourseSummariesResponse (response, callback) {
   var maxResponseLength = 0
   console.log(response)
-  if (response.TeeTimes.length <= NO_COURSES) {
+  if (response.Items.length <= NO_COURSES) {
     // When there are no courses, you need to broaden your search range
     var noCoursesResponse = 'Your Search results did not return any courses. ' +
     'Perhaps look on a different day, in another location, or at another time!'

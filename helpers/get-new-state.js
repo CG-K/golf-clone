@@ -45,8 +45,14 @@ function getNewState() {
   } else if (options.courseID === null) {
     res.state = states.HEARCOURSESMODE
     return res
-  } else {
+  } else if (options.teeTimes === null) {
     res.state = states.SELECTCOURSEMODE
+    return res
+  } else if (options.teeTimeRateID === null) {
+    res.state = states.HEARTEETIMESMODE
+    return res
+  } else {
+    res.state = states.SELECTTEETIMEMODE
     return res
   }
 }

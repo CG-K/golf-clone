@@ -28,6 +28,7 @@ function DatesReceivedIntent () {
     this.handler.state = nextState.state
     console.log('state: ' + this.handler.state )
     var emit = this.emit
+    var handler = this.handler
     if (this.handler.state === states.PRICEMODE) {
       getCourseSummaries(options, function (err, res) {
         if (err) {
@@ -35,6 +36,8 @@ function DatesReceivedIntent () {
           emit(':tell', err)
         }
         console.log(res)
+        nextState = getNewState()
+        handler.state = nextState.state
         emit(':ask', res)
       })
     } else {

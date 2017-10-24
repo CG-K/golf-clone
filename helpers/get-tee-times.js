@@ -1,19 +1,20 @@
 // get-course-summaries.js
 // Purpose: To hit Golf Now API for course summaries with a given location
-module.exports = getCourseSummaries
+module.exports = getTeeTimes
 
 const got = require('got')
 
 // var createAuthToken = require('../create-auth-token.js')
-var handleCourseSummariesResponse = require('./handle-course-summaries-response.js')
-var createCourseSummariesURL = require('./create-course-summaries-url.js')
+// var handleCourseSummariesResponse = require('./handle-course-summaries-response.js')
+var createTeeTimesURL = require('./create-tee-times-url.js')
+var handleTeeTimesResponse = require('./handle-tee-times-response.js')
 var options = require('./course-summary-options.json')
 // Purpose: To hit Golf Now API for course summaries with a given location
 // param(in): options: course-summary-options.json file containing the options the user has selected
 // param(out): callback: returns the data or error message to who called it
 // calledBy:  priceReceivedIntent
-function getCourseSummaries (options, callback) {
-  var url = createCourseSummariesURL(options)
+function getTeeTimes (options, callback) {
+  var url = createTeeTimesURL(options)
   var urlOptions = {
     headers: {
       UserName: process.env.USERNAME,
@@ -24,16 +25,16 @@ function getCourseSummaries (options, callback) {
   // send request
   got(url, urlOptions)
     .then(response => {
-      var parsedCourseResponse = JSON.parse(response.body)
-      options.CoursesResponse = parsedCourseResponse
-      // callback(null, 'we got the data')
+      var parsedTeeTimeResponse = JSON.parse(response.body)
+      options.TeeTimesResponse = parsedTeeTimeResponse
+      console.log(parsedTeeTimeResponse)
       // take parsed response and generate a response for the user
-      handleCourseSummariesResponse(parsedCourseResponse, function (err, output) {
+      handleTeeTimesResponse(parsedTeeTimeResponse, function (err, output) {
         if (err) {
           callback(err)
         }
-        if (options.maxCoursesLength > 1) {
-          output = output + 'Do you want to book a tee time here or would you like to hear the next one?'
+        if (options.maxTeeTimeLength > 1) {
+          output = output + 'Do you want to book this tee time or would you like to hear the next one?'
         } else {
           output = output + 'Those are all your options, which option would you like to book?'
         }
@@ -42,7 +43,7 @@ function getCourseSummaries (options, callback) {
     })
     .catch(error => {
       console.log(' we have an error' + error)
-      var failGetCourseSum = 'We failed to get course summaries'
-      callback(failGetCourseSum)
+      var failGetTeeTimes = 'We failed to get tee times for this course'
+      callback(failGetTeeTimes)
     })
 }

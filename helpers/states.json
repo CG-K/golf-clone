@@ -5,5 +5,7 @@
   "NUMGOLFERSMODE": "numGolfers",
   "PRICEMODE": "price",
   "HEARCOURSESMODE": "hearcourses",
-  "SELECTCOURSEMODE": "selectcourse"
+  "SELECTCOURSEMODE": "selectcourse",
+  "HEARTEETIMESMODE": "hearteetimes",
+  "SELECTTEETIMEMODE": "selectteetime"
 }

@@ -28,19 +28,22 @@ function PriceReceivedIntent () {
     this.handler.state = nextState.state
     console.log('state: ' + this.handler.state )
     var emit = this.emit
+    var handler = this.handler
     if (this.handler.state === states.PRICEMODE) {
-      nextState = getNewState()
-      this.handler.state = nextState.state
       getCourseSummaries(options, function (err, res) {
         if (err) {
           console.log(err)
           emit(':tell', err)
         }
         console.log(res)
+        nextState = getNewState()
+        handler.state = nextState.state
+        console.log('we responded and now we have a new state: ' + nextState.state)
         emit(':ask', res)
       })
     }
     else {
+      console.log('We hit that else statement!')
       this.emit(':ask', nextState.response, nextState.reprompt)
     }
   }

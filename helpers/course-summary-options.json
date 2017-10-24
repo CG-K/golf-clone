@@ -9,5 +9,13 @@
   "courses": null,
   "coursesCount": null,
   "courseID": null,
-  "maxCoursesLength": null
+  "maxCoursesLength": null,
+  "CoursesResponse": null,
+  "facilityID": null,
+  "teeTimeRateID": null,
+  "teeTimes": null,
+  "maxTeeTimeLength": null,
+  "teeTimesCount": null,
+  "TeeTimesResponse": null,
+  "teeTimeID": null
 }
