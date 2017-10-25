@@ -1,7 +1,7 @@
 
 module.exports = clearOptions
 
-function clearOptions() {
+function clearOptions () {
   var options = require('../helpers/course-summary-options.json')
   var keys = Object.keys(options)
   for (var i = 0; i < keys.length; i++) {

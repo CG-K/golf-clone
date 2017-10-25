@@ -4,11 +4,9 @@ module.exports = getTeeTimes
 
 const got = require('got')
 
-// var createAuthToken = require('../create-auth-token.js')
-// var handleCourseSummariesResponse = require('./handle-course-summaries-response.js')
 var createTeeTimesURL = require('./create-tee-times-url.js')
 var handleTeeTimesResponse = require('./handle-tee-times-response.js')
-var options = require('./course-summary-options.json')
+
 // Purpose: To hit Golf Now API for course summaries with a given location
 // param(in): options: course-summary-options.json file containing the options the user has selected
 // param(out): callback: returns the data or error message to who called it
@@ -21,7 +19,6 @@ function getTeeTimes (options, callback) {
       Password: process.env.PASSWORD
     }
   }
-  console.log(urlOptions)
   // send request
   got(url, urlOptions)
     .then(response => {

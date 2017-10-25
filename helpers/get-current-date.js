@@ -3,7 +3,7 @@ module.exports = getCurrentDate
 // Purpose: To create a current date for the URL that needs it
 // param(out): currentDate: today's  date
 // calledBy: createCourseSummariesURL()
-function getCurrentDate() {
+function getCurrentDate () {
   var today = new Date()
   console.log('Today is: ' + today)
   var dd = today.getDate()

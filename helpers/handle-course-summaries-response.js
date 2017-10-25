@@ -4,7 +4,6 @@
 module.exports = handleCourseSummariesResponse
 
 const NO_COURSES = 0
-const TOO_MANY_COURSES = 5
 
 var formatCourseSummaries = require('./format-course-summaries.js')
 
@@ -13,9 +12,8 @@ var formatCourseSummaries = require('./format-course-summaries.js')
 // param(in): doNotRefine: a Boolean to specify if the user does or does not want to refine results
 // param(out): callback: returns the data or error message to getCourseSummaries()
 // calledBy: getCourseSummaries()
+
 function handleCourseSummariesResponse (response, callback) {
-  var maxResponseLength = 0
-  console.log(response)
   if (response.Items.length <= NO_COURSES) {
     // When there are no courses, you need to broaden your search range
     var noCoursesResponse = 'Your Search results did not return any courses. ' +

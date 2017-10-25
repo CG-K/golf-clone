@@ -39,7 +39,7 @@ function formatTeeTimes (response, callback) {
     // var endTimeInfo = dateFormatEndDate.split(' ')
 
     // Reconstruct them
-    var startDate = startTimeInfo[0] + ' ' + startTimeInfo[1] + ' ' + startTimeInfo[2]
+    // var startDate = startTimeInfo[0] + ' ' + startTimeInfo[1] + ' ' + startTimeInfo[2]
     var startTime = startTimeInfo[3] + ' ' + startTimeInfo[4]
     // var endTime = endTimeInfo[3] + ' ' + endTimeInfo[4]
 
@@ -49,12 +49,7 @@ function formatTeeTimes (response, callback) {
     var teeTimeOutput = ' Tee Time option ' + (i + 1) + ' is at '
     teeTimeOutput = teeTimeOutput + startTime + ' for '
     teeTimeOutput = teeTimeOutput + price[0] + ' dollars and ' + price[1] + ' cents.  '
-    // teeTimeOutput = teeTimeOutput + ' with available tee times on ' + startDate
-    // teeTimeOutput = teeTimeOutput + ' from ' + startTime + ' that costs '
-    // courseOutput = courseOutput + response.items[i].minRate.amount + ' to '
 
-    console.log(i)
-    console.log(maxResponseLength)
     options.maxTeeTimeLength = maxResponseLength
     options.teeTimes.push(teeTimeOutput)
   }

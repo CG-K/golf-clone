@@ -7,7 +7,7 @@ const got = require('got')
 // var createAuthToken = require('../create-auth-token.js')
 var handleCourseSummariesResponse = require('./handle-course-summaries-response.js')
 var createCourseSummariesURL = require('./create-course-summaries-url.js')
-var options = require('./course-summary-options.json')
+
 // Purpose: To hit Golf Now API for course summaries with a given location
 // param(in): options: course-summary-options.json file containing the options the user has selected
 // param(out): callback: returns the data or error message to who called it
@@ -20,7 +20,6 @@ function getCourseSummaries (options, callback) {
       Password: process.env.PASSWORD
     }
   }
-  console.log(urlOptions)
   // send request
   got(url, urlOptions)
     .then(response => {
@@ -34,7 +33,7 @@ function getCourseSummaries (options, callback) {
         }
         if (options.maxCoursesLength > 1) {
           output = output + 'Do you want to book a tee time here or would you like to hear the next one?'
-        } else {
+        } else if (options.maxCoursesLength !== null) {
           output = output + 'Those are all your options, which option would you like to book?'
         }
         callback(null, output)

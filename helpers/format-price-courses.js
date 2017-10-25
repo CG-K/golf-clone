@@ -5,21 +5,24 @@ module.exports = formatPriceCourses
 // param(in): maxPrice: maximum price of the tee time Ex (15.34)
 // param(out): splitPrice: array of the dollars and cents
 // calledBy:  formatCourseSummaries
-function formatPriceCourses(minPrice, maxPrice) {
+function formatPriceCourses (minPrice, maxPrice) {
   var price = {
     min: null,
     max: null
   }
-  // console.log(price)
-  if(minPrice === maxPrice) {
-    var minStringPrice = minPrice.toString()
-    var minSplitPrice = minStringPrice.split('.')
+  var minStringPrice
+  var minSplitPrice
+  var maxStringPrice
+  var maxSplitPrice
+  if (minPrice === maxPrice) {
+    minStringPrice = minPrice.toString()
+    minSplitPrice = minStringPrice.split('.')
     price.min = minSplitPrice
   } else {
-    var minStringPrice = minPrice.toString()
-    var maxStringPrice = maxPrice.toString()
-    var minSplitPrice = minStringPrice.split('.')
-    var maxSplitPrice = maxStringPrice.split('.')
+    minStringPrice = minPrice.toString()
+    maxStringPrice = maxPrice.toString()
+    minSplitPrice = minStringPrice.split('.')
+    maxSplitPrice = maxStringPrice.split('.')
     price.min = minSplitPrice
     price.max = maxSplitPrice
   }

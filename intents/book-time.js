@@ -18,7 +18,7 @@ function BookTime () {
   var options = require('../helpers/course-summary-options.json')
   clearOptions()
   if (this.event.request.intent.slots.city.value !== undefined && this.event.request.intent.slots.zipcode.value !== undefined && this.event.request.intent.slots.nearme.value !== undefined) {
-    var nextState = getNextState()
+    var nextState = getNewState()
     console.log(this.event.request.intent.name)
     console.log('date to play is undefined.  the next state is: ' + nextState.state)
     this.handler.state = nextState.state

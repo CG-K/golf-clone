@@ -9,7 +9,6 @@ var getNewState = require('./get-new-state.js')
 var states = require('./states.json')
 var getCourseSummaries = require('./get-course-summaries.js')
 
-
 // Purpose: To get latitude and longitude coordinates from either city or zipcode
 // param(in): location: Either the city or zipcode that was said by the user to book a tee time with
 // param(out): callback: returns the data or error message to GetLocation()
@@ -44,7 +43,7 @@ function getLatLong (location, callback) {
     var response = {
       state: stateResponse.state,
       latLongOutput: stateResponse.response,
-      latLongReprompt: stateResponse.reprompt,
+      latLongReprompt: stateResponse.reprompt
     }
     console.log('state: ' + response.state)
     if (response.state === states.PRICEMODE) {

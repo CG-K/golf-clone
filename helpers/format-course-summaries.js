@@ -54,12 +54,12 @@ function formatCourseSummaries (response, callback) {
     if (price.max === null) {
       courseOutput = courseOutput + price.min[0] + ' dollars '
       if (price.min[1] !== undefined) {
-        courseOutput = courseOutput +  'and ' + price.min[1] + ' cents.  '
+        courseOutput = courseOutput + 'and ' + price.min[1] + ' cents.  '
       }
     } else {
       courseOutput = courseOutput + 'from ' + price.min[0] + ' dollars '
       if (price.min[1] !== undefined) {
-        courseOutput = courseOutput +  'and ' + price.min[1] + ' cents to  '
+        courseOutput = courseOutput + 'and ' + price.min[1] + ' cents to  '
       }
       courseOutput = courseOutput + price.max[0] + ' dollars '
       if (price.max[1] !== undefined) {

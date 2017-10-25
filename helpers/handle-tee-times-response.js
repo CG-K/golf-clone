@@ -4,7 +4,6 @@
 module.exports = handleTeeTimesResponse
 
 const NO_COURSES = 0
-const TOO_MANY_COURSES = 5
 
 var formatTeeTimes = require('./format-tee-times.js')
 
@@ -14,8 +13,6 @@ var formatTeeTimes = require('./format-tee-times.js')
 // param(out): callback: returns the data or error message to getCourseSummaries()
 // calledBy: getTeeTimes()
 function handleTeeTimesResponse (response, callback) {
-  var maxResponseLength = 0
-  console.log(response)
   if (response.TeeTimes.length <= NO_COURSES) {
     // When there are no courses, you need to broaden your search range
     var noTeeTimesResponse = 'Your Search results did not return any tee times. '

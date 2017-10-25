@@ -5,8 +5,9 @@ var CancelIntent = require('./intents/cancel-intent.js')
 var BookTimeIntent = require('./intents/book-time.js')
 var DatesReceivedIntent = require('./intents/dates-received-intent.js')
 var TimeReceivedIntent = require('./intents/time-received-intent.js')
-var NumGolfersReceivedIntent = require('./intents/num-golfers-received-intent.js')
-var PriceReceivedIntent = require('./intents/price-received-intent.js')
+var NumberReceivedIntent = require('./intents/number-received-intent.js')
+// var NumGolfersReceivedIntent = require('./intents/num-golfers-received-intent.js')
+// var PriceReceivedIntent = require('./intents/price-received-intent.js')
 var HearOptionsIntent = require('./intents/hear-options-intent.js')
 var SelectOptionsIntent = require('./intents/select-options-intent.js')
 var UnhandledIntent = require('./intents/unhandled-intent.js')
@@ -63,7 +64,7 @@ var timeHandlers = Alexa.CreateStateHandler(states.TIMEMODE, {
   'AMAZON.HelpIntent': HelpIntent,
   'AMAZON.StopIntent': StopIntent,
   'AMAZON.CancelIntent': CancelIntent,
-  'NumGolfersReceived': NumGolfersReceivedIntent,
+  'NumberReceived': NumberReceivedIntent,
   'Unhandled': UnhandledIntent,
   'SessionEndedRequest': SessionEndedRequest
 })
@@ -73,7 +74,7 @@ var numGolfersHandlers = Alexa.CreateStateHandler(states.NUMGOLFERSMODE, {
   'AMAZON.HelpIntent': HelpIntent,
   'AMAZON.StopIntent': StopIntent,
   'AMAZON.CancelIntent': CancelIntent,
-  'PriceReceived': PriceReceivedIntent,
+  'NumberReceived': NumberReceivedIntent,
   'Unhandled': UnhandledIntent,
   'SessionEndedRequest': SessionEndedRequest
 })

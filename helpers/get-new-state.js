@@ -6,7 +6,7 @@ var states = require('./states.json')
 var responses = require('./responses.json')
 
 // Purpose: saves the date of Golfers given by the user and prompts for more information
-function getNewState() {
+function getNewState () {
   var options = require('./course-summary-options.json')
   var res = {
     state: '',

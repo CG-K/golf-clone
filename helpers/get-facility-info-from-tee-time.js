@@ -6,8 +6,7 @@ module.exports = getFacilityInfoFromTeeTime
 // param(out): nameAndCity: returns the city and name of the Facility for the user
 // param(out): noCityName: returns a statement when no facility was found
 // calledBy: formatCourseSummaries()
-function getFacilityInfoFromTeeTime(facilityId, facilitiesData) {
-  var noCityName
+function getFacilityInfoFromTeeTime (facilityId, facilitiesData) {
   var nameAndCity = {
     name: '',
     city: ''
