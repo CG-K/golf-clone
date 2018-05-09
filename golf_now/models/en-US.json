@@ -1,0 +1,374 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "golf now",
+      "intents": [
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": []
+        },
+        {
+          "name": "BookTime",
+          "slots": [
+            {
+              "name": "city",
+              "type": "AMAZON.US_CITY"
+            },
+            {
+              "name": "zipcode",
+              "type": "AMAZON.NUMBER"
+            },
+            {
+              "name": "nearme",
+              "type": "NEAR_ME"
+            },
+            {
+              "name": "dealType",
+              "type": "DEAL_TYPE"
+            },
+            {
+              "name": "dateToPlay",
+              "type": "AMAZON.DATE"
+            },
+            {
+              "name": "timeToPlay",
+              "type": "AMAZON.TIME"
+            },
+            {
+              "name": "numberOfGolfers",
+              "type": "AMAZON.NUMBER"
+            },
+            {
+              "name": "amountOfDollars",
+              "type": "AMAZON.NUMBER"
+            }
+          ],
+          "samples": [
+            "book a {dealType} near {zipcode}",
+            "book a {dealType} in {city}",
+            "book a {dealType} {nearme}",
+            "book a {dealType} {nearme} on {dateToPlay} at {timeToPlay} with {numberOfGolfers} for {amountOfDollars}",
+            "book a {dealType} in {city} on {dateToPlay} at {timeToPlay} with {numberOfGolfers} for {amountOfDollars}",
+            "book a {dealType} near {zipcode} on {dateToPlay} at {timeToPlay} with {numberOfGolfers} for {amountOfDollars}",
+            "book a {dealType} in {zipcode}",
+            "book a {dealType} near {city}",
+            "book a {dealType} near {city} on {dateToPlay}",
+            "book a {dealType} near {zipcode} on {dateToPlay}",
+            "book a {dealType} {nearme} on {dateToPlay}",
+            "book a {dealType} in {zipcode} on {dateToPlay}",
+            "book a {dealType} in {city} on {dateToPlay}",
+            "book a {dealType} near {city} for {dateToPlay}",
+            "book a {dealType} near {zipcode} for {dateToPlay}",
+            "book a {dealType} {nearme} for {dateToPlay}",
+            "book a {dealType} in {zipcode} for {dateToPlay}",
+            "book a {dealType} in {city} for {dateToPlay}",
+            "book a {dealType} near {city} on {dateToPlay} at {timeToPlay}",
+            "book a {dealType} near {zipcode} on {dateToPlay} at {timeToPlay}",
+            "book a {dealType} {nearme} on {dateToPlay} at {timeToPlay}",
+            "book a {dealType} in {zipcode} on {dateToPlay} at {timeToPlay}",
+            "book a {dealType} in {city} on {dateToPlay} at {timeToPlay}",
+            "book a {dealType} near {city} for {dateToPlay} at {timeToPlay}",
+            "book a {dealType} near {zipcode} for {dateToPlay} at {timeToPlay}",
+            "book a {dealType} {nearme} for {dateToPlay} at {timeToPlay}",
+            "book a {dealType} in {zipcode} for {dateToPlay} at {timeToPlay}",
+            "book a {dealType} in {city} for {dateToPlay} at {timeToPlay}",
+            "book a {dealType} in {city} at {timeToPlay}",
+            "book a {dealType} near {city} at {timeToPlay}",
+            "book a {dealType} near {zipcode} at {timeToPlay}",
+            "book a {dealType} {nearme} at {timeToPlay}",
+            "book a {dealType} in {city} with {numberOfGolfers} golfers",
+            "book a {dealType} near {city} with {numberOfGolfers} golfers",
+            "book a {dealType} near {zipcode} with {numberOfGolfers} golfers",
+            "book a {dealType} {nearme} with {numberOfGolfers} golfers",
+            "book a {dealType} in {zipcode} with {numberOfGolfers} golfers",
+            "book a {dealType} in {zipcode} at {timeToPlay} with {numberOfGolfers} golfers",
+            "book a {dealType} in {city} at {timeToPlay} with {numberOfGolfers} golfers",
+            "book a {dealType} near {city} at {timeToPlay} with {numberOfGolfers} golfers",
+            "book a {dealType} near {zipcode} at {timeToPlay} with {numberOfGolfers} golfers",
+            "book a {dealType} {nearme} at {timeToPlay} with {numberOfGolfers} golfers",
+            "book a {dealType} in {zipcode} on {dateToPlay} with {numberOfGolfers} golfers",
+            "book a {dealType} in {city} on {dateToPlay}  with {numberOfGolfers} golfers",
+            "book a {dealType} near {city} on {dateToPlay} with {numberOfGolfers} golfers",
+            "book a {dealType} near {zipcode} on {dateToPlay} with {numberOfGolfers} golfers",
+            "book a {dealType} {nearme} on {dateToPlay} with {numberOfGolfers} golfers",
+            "book a {dealType} in {zipcode} for {amountOfDollars} dollars\n",
+            "book a {dealType} {nearme} for {amountOfDollars} dollars\n",
+            "book a {dealType} near {zipcode} for {amountOfDollars} dollars\n",
+            "book a {dealType} near {city} for {amountOfDollars} dollars\n",
+            "book a {dealType} in {city} for {amountOfDollars} dollars\n",
+            "book a {dealType} in {zipcode} at {timeToPlay} for {amountOfDollars} dollars",
+            "book a {dealType} {nearme} at {timeToPlay} for {amountOfDollars} dollars",
+            "book a {dealType} near {zipcode} at {timeToPlay} for {amountOfDollars} dollars",
+            "book a {dealType} near {city} at {timeToPlay} for {amountOfDollars} dollars",
+            "book a {dealType} in {city} at {timeToPlay} for {amountOfDollars} dollars",
+            "book a {dealType} in {zipcode} with {numberOfGolfers} golfers for {amountOfDollars} dollars",
+            "book a {dealType} {nearme} with {numberOfGolfers} golfers for {amountOfDollars} dollars",
+            "book a {dealType} near {zipcode} with {numberOfGolfers} golfers for {amountOfDollars} dollars",
+            "book a {dealType} near {city} with {numberOfGolfers}  golfers for {amountOfDollars} dollars",
+            "book a {dealType} in {city} with {numberOfGolfers} golfers for {amountOfDollars} dollars",
+            "book a {dealType} in {zipcode} at {timeToPlay} with {numberOfGolfers} golfers for {amountOfDollars} dollars",
+            "book a {dealType} {nearme} at {timeToPlay} with {numberOfGolfers} golfers for {amountOfDollars} dollars",
+            "book a {dealType} near {zipcode} at {timeToPlay} with {numberOfGolfers} golfers for {amountOfDollars} dollars",
+            "book a {dealType} near {city} at {timeToPlay} with {numberOfGolfers}  golfers for {amountOfDollars} dollars",
+            "book a {dealType} in {city} at {timeToPlay} with {numberOfGolfers} golfers for {amountOfDollars} dollars",
+            "book a {dealType} in {zipcode} on {dateToPlay} at {timeToPlay} with {numberOfGolfers} golfers for {amountOfDollars} dollars",
+            "book a {dealType} {nearme} on {dateToPlay} at {timeToPlay} with {numberOfGolfers} golfers for {amountOfDollars} dollars",
+            "book a {dealType} near {zipcode} on {dateToPlay} at {timeToPlay} with {numberOfGolfers} golfers for {amountOfDollars} dollars",
+            "book a {dealType} near {city} on {dateToPlay} at {timeToPlay} with {numberOfGolfers}  golfers for {amountOfDollars} dollars",
+            "book a {dealType} in {city} on {dateToPlay} at {timeToPlay} with {numberOfGolfers} golfers for {amountOfDollars} dollars",
+            "book a {dealType} in {zipcode} on {dateToPlay} with {numberOfGolfers} golfers for {amountOfDollars} dollars",
+            "book a {dealType} {nearme} on {dateToPlay} with {numberOfGolfers} golfers for {amountOfDollars} dollars",
+            "book a {dealType} near {zipcode} on {dateToPlay} with {numberOfGolfers} golfers for {amountOfDollars} dollars",
+            "book a {dealType} near {city} on {dateToPlay} with {numberOfGolfers}  golfers for {amountOfDollars} dollars",
+            "book a {dealType} in {city} on {dateToPlay} with {numberOfGolfers} golfers for {amountOfDollars} dollars",
+            "book a {dealType} in {zipcode} on {dateToPlay} at {timeToPlay} for {amountOfDollars} dollars",
+            "book a {dealType} {nearme} on {dateToPlay} at {timeToPlay} for {amountOfDollars} dollars",
+            "book a {dealType} near {zipcode} on {dateToPlay} at {timeToPlay} for {amountOfDollars} dollars",
+            "book a {dealType} near {city} on {dateToPlay} at {timeToPlay} for {amountOfDollars} dollars",
+            "book a {dealType} in {city} on {dateToPlay} at {timeToPlay} for {amountOfDollars} dollars",
+            "book a {dealType} in {zipcode} on {dateToPlay} for {amountOfDollars} dollars",
+            "book a {dealType} {nearme} on {dateToPlay} for {amountOfDollars} dollars",
+            "book a {dealType} near {zipcode} on {dateToPlay} for {amountOfDollars} dollars",
+            "book a {dealType} near {city} on {dateToPlay} for {amountOfDollars} dollars",
+            "book a {dealType} in {city} on {dateToPlay} for {amountOfDollars} dollars"
+          ]
+        },
+        {
+          "name": "DatesReceived",
+          "slots": [
+            {
+              "name": "dateToPlay",
+              "type": "AMAZON.DATE"
+            }
+          ],
+          "samples": [
+            "on {dateToPlay}",
+            "let's do {dateToPlay}",
+            "let's play {dateToPlay}",
+            "maybe {dateToPlay}",
+            "try {dateToPlay}",
+            "{dateToPlay}"
+          ]
+        },
+        {
+          "name": "HearCourses",
+          "samples": [
+            "next ",
+            "not this one",
+            "the next one",
+            "another one",
+            "yes next",
+            "next please",
+            "hear another",
+            "another one please",
+            "yes",
+            "give me another one",
+            "next option"
+          ]
+        },
+        {
+          "name": "NumGolfersReceived",
+          "slots": [
+            {
+              "name": "numberOfGolfers",
+              "type": "AMAZON.NUMBER"
+            }
+          ],
+          "samples": [
+            "{numberOfGolfers} player",
+            "{numberOfGolfers} players",
+            "{numberOfGolfers} golfer",
+            "{numberOfGolfers} golfers",
+            "{numberOfGolfers}",
+            "{numberOfGolfers} people"
+          ]
+        },
+        {
+          "name": "PriceReceived",
+          "slots": [
+            {
+              "name": "amountOfDollars",
+              "type": "AMAZON.NUMBER"
+            }
+          ],
+          "samples": [
+            "no more than {amountOfDollars} dollars",
+            "max of {amountOfDollars} dollars",
+            "about {amountOfDollars} dollars",
+            "{amountOfDollars} dollars",
+            "{amountOfDollars} us dollars",
+            "{amountOfDollars} bucks",
+            "{amountOfDollars}"
+          ]
+        },
+        {
+          "name": "SelectCourse",
+          "slots": [
+            {
+              "name": "courseNumber",
+              "type": "AMAZON.NUMBER"
+            }
+          ],
+          "samples": [
+            "option {courseNumber}",
+            "number {courseNumber}",
+            "course {courseNumber}",
+            "{courseNumber}"
+          ]
+        },
+        {
+          "name": "TimeReceived",
+          "slots": [
+            {
+              "name": "timeToPlay",
+              "type": "AMAZON.TIME"
+            }
+          ],
+          "samples": [
+            "at {timeToPlay}",
+            "let s do {timeToPlay}",
+            "maybe at {timeToPlay}",
+            "around {timeToPlay}",
+            "about {timeToPlay}",
+            "{timeToPlay}"
+          ]
+        },
+        {
+          "name": "Unhandled",
+          "samples": []
+        }
+      ],
+      "types": [
+        {
+          "values": [
+            {
+              "id": "",
+              "name": {
+                "value": "I do not care",
+                "synonyms": []
+              }
+            },
+            {
+              "id": "",
+              "name": {
+                "value": "any amount",
+                "synonyms": []
+              }
+            },
+            {
+              "id": "",
+              "name": {
+                "value": "any golfers",
+                "synonyms": []
+              }
+            },
+            {
+              "id": "",
+              "name": {
+                "value": "any",
+                "synonyms": []
+              }
+            },
+            {
+              "id": "",
+              "name": {
+                "value": "it does not matter",
+                "synonyms": []
+              }
+            },
+            {
+              "id": "",
+              "name": {
+                "value": "I dont care",
+                "synonyms": []
+              }
+            },
+            {
+              "id": "",
+              "name": {
+                "value": "It doesnt matter to me",
+                "synonyms": []
+              }
+            }
+          ],
+          "name": "ANY_NUM_GOLFERS"
+        },
+        {
+          "values": [
+            {
+              "id": "",
+              "name": {
+                "value": "hot deal",
+                "synonyms": [
+                  "hot deals",
+                  "hots deals",
+                  "hots deal"
+                ]
+              }
+            },
+            {
+              "id": "",
+              "name": {
+                "value": "tee time",
+                "synonyms": [
+                  "tee times",
+                  "tees times",
+                  "tees time"
+                ]
+              }
+            }
+          ],
+          "name": "DEAL_TYPE"
+        },
+        {
+          "values": [
+            {
+              "id": "",
+              "name": {
+                "value": "near me",
+                "synonyms": []
+              }
+            },
+            {
+              "id": "",
+              "name": {
+                "value": "closeby",
+                "synonyms": []
+              }
+            },
+            {
+              "id": "",
+              "name": {
+                "value": "nearby",
+                "synonyms": []
+              }
+            },
+            {
+              "id": "",
+              "name": {
+                "value": "near my location",
+                "synonyms": []
+              }
+            },
+            {
+              "id": "",
+              "name": {
+                "value": "close to me",
+                "synonyms": []
+              }
+            }
+          ],
+          "name": "NEAR_ME"
+        }
+      ]
+    }
+  }
+}

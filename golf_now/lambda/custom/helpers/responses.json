@@ -4,7 +4,7 @@
     "reprompt": "Try saying: Alexa, ask GolfNow to book a tee time in Orlando"
   },
   "launch": {
-    "output": "Welcome to GolfNow.  You can book tee times or hot deals at your favorite nearby courses.  You can say Alexa, ask GolfNow to book a hot deal near me.  What would you like to do?",
+    "output": "Welcome to GolfNow.  You can book tee times at your favorite nearby courses.  You can say Alexa, ask GolfNow to book a tee time near me.  What would you like to do?",
     "reprompt": "Do you want to book a tee time near you? If you do, say, Alexa ask GolfNow to book a tee time near me"
   },
   "location": {

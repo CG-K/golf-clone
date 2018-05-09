@@ -11,10 +11,13 @@ const NO_GOLFERS = 0
 
 // Purpose: saves the number of Golfers given by the user and prompts for more information
 function NumGolfersReceivedIntent () {
+  console.log("in num golfers received intent")
   var options = require('../helpers/course-summary-options.json')
   var nextState
   if (this.event.request.intent.slots.numberOfGolfers.value === undefined) {
-    nextState = getNewState()
+    var nextState = getNewState()
+      console.log(this.event.request.intent.name)
+      console.log('numberOfGolfers is undefined.  the next state is: ' + nextState.state)
     this.handler.state = nextState.state
     this.emit(':ask', nextState.response, nextState.reprompt)
   } else {
@@ -26,7 +29,7 @@ function NumGolfersReceivedIntent () {
       this.emit(':ask', outOfNumGolferRange, outOfNumGolferRangeReprompt)
     } else {
       options.numGolfers = this.event.request.intent.slots.numberOfGolfers.value
-      nextState = getNewState()
+      var nextState = getNewState()
       this.handler.state = nextState.state
       var emit = this.emit
       var handler = this.handler

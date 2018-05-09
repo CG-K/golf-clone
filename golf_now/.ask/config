@@ -1,0 +1,19 @@
+{
+  "deploy_settings": {
+    "default": {
+      "skill_id": "amzn1.ask.skill.c8656534-73dd-4f93-b886-126eb445448b",
+      "was_cloned": true,
+      "merge": {
+        "manifest": {
+          "apis": {
+            "custom": {
+              "endpoint": {
+                "uri": "arn:aws:lambda:us-east-1:145661811165:function:golf-now-skill"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
