@@ -1,5 +1,5 @@
 var LaunchRequest = require('./intents/launch-request.js')
-// var HelpIntent = require('./intents/help-intent.js')
+var HelpIntent = require('./intents/help-intent.js')
 // var StopIntent = require('./intents/stop-intent.js')
 // var CancelIntent = require('./intents/cancel-intent.js')
 // var BookTimeIntent = require('./intents/book-time.js')
@@ -21,16 +21,6 @@ var Alexa = require('ask-sdk')
 
 
 
-// exports.handler = function (event, context, callback) {
-//   // handle intents for our skill
-//   var alexa = Alexa.handler(event, context, callback)
-//   alexa.appId = APP_ID
-//   // register our event handlers
-//   alexa.registerHandlers(handlers, locationHandlers, dateHandlers, timeHandlers, numGolfersHandlers, priceHandlers, hearCoursesHandlers, selectCourseHandlers, hearTeeTimesHandlers, selectTeeTimeHandlers)
-//   // run the app logic
-//   alexa.execute()
-// }
-
 const LaunchRequestHandler = {
   canHandle(handlerInput) {
     console.log(JSON.stringify(handlerInput))
@@ -39,13 +29,6 @@ const LaunchRequestHandler = {
   handle(handlerInput) {
     console.log('We in launch')
     return LaunchRequest(handlerInput)
-    // const speechText = 'Welcome to the Alexa Skills Kit, you can say hello!';
-    //
-    // return handlerInput.responseBuilder
-    //   .speak(speechText)
-    //   .reprompt(speechText)
-    //   .withSimpleCard('Hello World', speechText)
-    //   .getResponse()
   }
 }
 
@@ -55,12 +38,7 @@ const HelloWorldIntentHandler = {
       && handlerInput.requestEnvelope.request.intent.name === 'HelloWorldIntent'
   },
   handle(handlerInput) {
-    const speechText = 'Hello World!'
-
-    return handlerInput.responseBuilder
-      .speak(speechText)
-      .withSimpleCard('Hello World', speechText)
-      .getResponse()
+    return HelpIntent(handlerInput)
   },
 }
 
@@ -70,13 +48,7 @@ const HelpIntentHandler = {
       && handlerInput.requestEnvelope.request.intent.name === 'AMAZON.HelpIntent'
   },
   handle(handlerInput) {
-    const speechText = 'You can say hello to me!'
-
-    return handlerInput.responseBuilder
-      .speak(speechText)
-      .reprompt(speechText)
-      .withSimpleCard('Hello World', speechText)
-      .getResponse()
+    return HelpIntent(handlerInput)
   },
 }
 
