@@ -33,9 +33,11 @@ var Alexa = require('ask-sdk')
 
 const LaunchRequestHandler = {
   canHandle(handlerInput) {
+    console.log(JSON.stringify(handlerInput))
     return handlerInput.requestEnvelope.request.type === 'LaunchRequest'
   },
   handle(handlerInput) {
+    console.log('We in launch')
     return LaunchRequest(handlerInput)
     // const speechText = 'Welcome to the Alexa Skills Kit, you can say hello!';
     //
