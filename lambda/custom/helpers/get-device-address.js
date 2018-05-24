@@ -10,7 +10,7 @@ var formatDeviceAddressResponse = require('./format-device-address-response.js')
 // param(in): consentToken: token from Amazon that allows permissions
 // param(out): callback: returns the data or error message to who called it
 // calledBy:  GetLocation()
-function getDeviceAddress (url, consentToken, callback) {
+function getDeviceAddress (url, consentToken, sessionAttributes, callback) {
   var urlOptions = {
     headers: {
       Authorization: 'Bearer ' + consentToken
@@ -20,7 +20,7 @@ function getDeviceAddress (url, consentToken, callback) {
   got(url, urlOptions)
     .then(response => {
       var parsedResponse = JSON.parse(response.body)
-      formatDeviceAddressResponse(parsedResponse, function (err, res) {
+      formatDeviceAddressResponse(parsedResponse, sessionAttributes, function (err, res) {
         if (err) {
           callback(err)
         }

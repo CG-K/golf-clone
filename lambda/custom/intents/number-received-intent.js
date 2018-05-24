@@ -11,62 +11,107 @@ const NO_GOLFERS = 0
 
 // Purpose: a function that handles the num golfers or price intent
 function NumberReceivedIntent () {
-  var options = require('../helpers/course-summary-options.json')
+  let sessionAttributes = handlerInput.attributesManager.getSessionAttributes()
   var nextState
-  var emit = this.emit
-  var handler = this.handler
   if (this.handler.state === states.TIMEMODE) {
-    if (this.event.request.intent.slots.golfersPrice.value === undefined) {
+    if (handlerInput.requestEnvelope.request.intent.slots.golfersPrice.value === undefined) {
       nextState = getNewState()
-      this.handler.state = nextState.state
-      this.emit(':ask', nextState.response, nextState.reprompt)
+      sessionAttributes['STATE'] = nextState.state
+      handlerInput.attributesManager.setSessionAttributes(sessionAttributes)
+      return handlerInput.responseBuilder
+        .speak(nextState.response)
+        .reprompt(nextState.reprompt)
+        .withSimpleCard('Booking a Tee Time', nextState.response)
+        .getResponse()
     } else {
-      if (this.event.request.intent.slots.golfersPrice.value > MAX_GOLFERS || this.event.request.intent.slots.golfersPrice.value < NO_GOLFERS) {
-        var outOfNumGolferRange = 'We cannot search for ' + this.event.request.intent.slots.golfersPrice.value + '. You can search for 1, 2, 3, 4, or any number of golfers.'
+      if (handlerInput.requestEnvelope.request.intent.slots.golfersPrice.value > MAX_GOLFERS || handlerInput.requestEnvelope.request.intent.slots.golfersPrice.value < NO_GOLFERS) {
+        var outOfNumGolferRange = 'We cannot search for ' + handlerInput.requestEnvelope.request.intent.slots.golfersPrice.value + '. You can search for 1, 2, 3, 4, or any number of golfers.'
         var outOfNumGolferRangeReprompt = 'You can search for 1, 2, 3, 4, or any number of golfers.'
           // go back in state because information was not gathered properly
-        this.handler.state = states.TIMEMODE
-        this.emit(':ask', outOfNumGolferRange, outOfNumGolferRangeReprompt)
+        sessionAttributes['STATE'] = states.TIMEMODE
+        handlerInput.attributesManager.setSessionAttributes(sessionAttributes)
+        return handlerInput.responseBuilder
+          .speak(outOfNumGolferRange)
+          .reprompt(outOfNumGolferRangeReprompt)
+          .withSimpleCard('Booking a Tee Time', outOfNumGolferRange)
+          .getResponse()
       } else {
-        options.numGolfers = this.event.request.intent.slots.golfersPrice.value
+        sessionAttributes['numGolfers'] = handlerInput.requestEnvelope.request.intent.slots.golfersPrice.value
         nextState = getNewState()
-        this.handler.state = nextState.state
-        if (this.handler.state === states.PRICEMODE) {
-          getCourseSummaries(options, function (err, res) {
+        sessionAttributes['STATE'] = states.TIMEMODE
+        handlerInput.attributesManager.setSessionAttributes(sessionAttributes)
+        if (sessionAttributes['STATE'] === states.PRICEMODE) {
+          getCourseSummaries(sessionAttributes, function (err, res) {
             if (err) {
               console.log(err)
-              emit(':tell', err)
+              handlerInput.attributesManager.setSessionAttributes(sessionAttributes)
+              return handlerInput.responseBuilder
+                .speak(err)
+                .reprompt(err)
+                .withSimpleCard('No courses!', err)
+                .getResponse()
             }
             nextState = getNewState()
-            handler.state = nextState.state
-            emit(':ask', res)
+            sessionAttributes['STATE'] = nextState.state
+            handlerInput.attributesManager.setSessionAttributes(sessionAttributes)
+            return handlerInput.responseBuilder
+              .speak(res)
+              .reprompt(res)
+              .withSimpleCard('Select a Course!', res)
+              .getResponse()
           })
         } else {
-          this.emit(':ask', nextState.response, nextState.reprompt)
+          handlerInput.attributesManager.setSessionAttributes(sessionAttributes)
+          return handlerInput.responseBuilder
+            .speak(nextState.response)
+            .reprompt(nextState.reprompt)
+            .withSimpleCard('Booking a Tee Time', nextState.response)
+            .getResponse()
         }
       }
     }
-  } else if (this.handler.state === states.NUMGOLFERSMODE) {
-    if (this.event.request.intent.slots.golfersPrice.value === undefined) {
+  } else if (sessionAttributes['STATE'] === states.NUMGOLFERSMODE) {
+    if (handlerInput.requestEnvelope.request.intent.slots.golfersPrice.value === undefined) {
       nextState = getNewState()
-      this.handler.state = nextState.state
-      this.emit(':ask', nextState.response, nextState.reprompt)
+      sessionAttributes['STATE'] = nextState.state
+      handlerInput.attributesManager.setSessionAttributes(sessionAttributes)
+      return handlerInput.responseBuilder
+        .speak(nextState.response)
+        .reprompt(nextState.reprompt)
+        .withSimpleCard('Booking a Tee Time', nextState.response)
+        .getResponse()
     } else {
-      options.price = this.event.request.intent.slots.golfersPrice.value
+      sessionAttributes['price'] = handlerInput.requestEnvelope.request.intent.slots.golfersPrice.value
       nextState = getNewState()
-      this.handler.state = nextState.state
-      if (this.handler.state === states.PRICEMODE) {
-        getCourseSummaries(options, function (err, res) {
+      sessionAttributes['STATE'] = nextState.state
+      handlerInput.attributesManager.setSessionAttributes(sessionAttributes)
+      if (sessionAttributes['STATE'] === states.PRICEMODE) {
+        getCourseSummaries(sessionAttributes, function (err, res) {
           if (err) {
             console.log(err)
-            emit(':tell', err)
+            handlerInput.attributesManager.setSessionAttributes(sessionAttributes)
+            return handlerInput.responseBuilder
+              .speak(err)
+              .reprompt(err)
+              .withSimpleCard('No courses!', err)
+              .getResponse()
           }
           nextState = getNewState()
-          handler.state = nextState.state
-          emit(':ask', res)
+          sessionAttributes['STATE'] = nextState.state
+          handlerInput.attributesManager.setSessionAttributes(sessionAttributes)
+          return handlerInput.responseBuilder
+            .speak(res)
+            .reprompt(res)
+            .withSimpleCard('Select a Course!', res)
+            .getResponse()
         })
       } else {
-        this.emit(':ask', nextState.response, nextState.reprompt)
+        handlerInput.attributesManager.setSessionAttributes(sessionAttributes)
+        return handlerInput.responseBuilder
+          .speak(nextState.response)
+          .reprompt(nextState.reprompt)
+          .withSimpleCard('Booking a Tee Time', nextState.response)
+          .getResponse()
       }
     }
   }

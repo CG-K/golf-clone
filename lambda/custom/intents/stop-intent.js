@@ -3,7 +3,10 @@
 module.exports = stopIntent
 
 // Purpose: To stop the skill and close the session
-function stopIntent () {
-  var stopOutput = 'Stopping your Request and Exiting Skill'
-  this.emit(':tell', stopOutput)
+function stopIntent (handlerInput) {
+  var responses = require('../helpers/responses.json')
+  return handlerInput.responseBuilder
+    .speak(responses.stop.output)
+    .withSimpleCard('Goodbye!', responses.stop.output)
+    .getResponse()
 }

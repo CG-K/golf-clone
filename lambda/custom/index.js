@@ -1,8 +1,7 @@
 var LaunchRequest = require('./intents/launch-request.js')
 var HelpIntent = require('./intents/help-intent.js')
-// var StopIntent = require('./intents/stop-intent.js')
-// var CancelIntent = require('./intents/cancel-intent.js')
-// var BookTimeIntent = require('./intents/book-time.js')
+var StopIntent = require('./intents/stop-intent.js')
+var BookTime = require('./intents/book-time.js')
 // var DatesReceivedIntent = require('./intents/dates-received-intent.js')
 // var TimeReceivedIntent = require('./intents/time-received-intent.js')
 // var NumberReceivedIntent = require('./intents/number-received-intent.js')
@@ -11,15 +10,12 @@ var HelpIntent = require('./intents/help-intent.js')
 // var HearOptionsIntent = require('./intents/hear-options-intent.js')
 // var SelectOptionsIntent = require('./intents/select-options-intent.js')
 // var UnhandledIntent = require('./intents/unhandled-intent.js')
-// var SessionEndedRequest = require('./intents/session-ended-request.js')
-// var states = require('./helpers/states.json')
+var states = require('./helpers/states.json')
 
 // require('dotenv').config()
 // const APP_ID = process.env.APP_ID
 
 var Alexa = require('ask-sdk')
-
-
 
 const LaunchRequestHandler = {
   canHandle(handlerInput) {
@@ -32,15 +28,88 @@ const LaunchRequestHandler = {
   }
 }
 
-const HelloWorldIntentHandler = {
+const BoookTimeIntentHandler = {
   canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-      && handlerInput.requestEnvelope.request.intent.name === 'HelloWorldIntent'
+      && handlerInput.requestEnvelope.request.intent.name === 'BookTime'
   },
-  handle(handlerInput) {
-    return HelpIntent(handlerInput)
+  async handle(handlerInput) {
+    return await BookTime(handlerInput)
+    console.log('We are finished with BookTime')
   },
 }
+
+// const DatesReceivedIntentHandler = {
+//   canHandle(handlerInput) {
+//     let sessionAttributes = handlerInput.attributesManager.getSessionAttributes()
+//     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+//       && handlerInput.requestEnvelope.request.intent.name === 'DatesReceived'
+//       && sessionAttributes['STATE'] = states.LOCATIONMODE
+//   },
+//   handle(handlerInput) {
+//     return DatesReceivedIntent(handlerInput)
+//   },
+// }
+
+// const TimeReceivedIntentHandler = {
+//   canHandle(handlerInput) {
+//     let sessionAttributes = handlerInput.attributesManager.getSessionAttributes()
+//     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+//       && handlerInput.requestEnvelope.request.intent.name === 'TimeReceived'
+//       && sessionAttributes['STATE'] = states.DATESMODE
+//   },
+//   handle(handlerInput) {
+//     return TimeReceivedIntent(handlerInput)
+//   },
+// }
+
+// const NumberReceivedIntentHandler = {
+//   canHandle(handlerInput) {
+//     let sessionAttributes = handlerInput.attributesManager.getSessionAttributes()
+//     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+//       && handlerInput.requestEnvelope.request.intent.name === 'NumGolfersReceived'
+//       && sessionAttributes['STATE'] = ( states.TIMEMODE || states.NUMGOLFERSMODE )
+//   },
+//   handle(handlerInput) {
+//     return NumberReceivedIntent(handlerInput)
+//   },
+//
+
+// const NumberGolfersReceivedIntentHandler = {
+//   canHandle(handlerInput) {
+//     let sessionAttributes = handlerInput.attributesManager.getSessionAttributes()
+//     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+//       && handlerInput.requestEnvelope.request.intent.name === 'NumGolfersReceived'
+//       && sessionAttributes['STATE'] = states.TIMEMODE
+//   },
+//   handle(handlerInput) {
+//     return NumberReceivedIntent(handlerInput)
+//   },
+// }
+
+// const PriceReceivedIntentHandler = {
+//   canHandle(handlerInput) {
+//     let sessionAttributes = handlerInput.attributesManager.getSessionAttributes()
+//     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+//       && handlerInput.requestEnvelope.request.intent.name === 'PriceReceived'
+//       && sessionAttributes['STATE'] = states.NUMGOLFERSMODE
+//   },
+//   handle(handlerInput) {
+//     return NumberReceivedIntent(handlerInput)
+//   },
+// }
+
+// const HearOptionsIntentHandler = {
+//   canHandle(handlerInput) {
+//     let sessionAttributes = handlerInput.attributesManager.getSessionAttributes()
+//     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+//       && handlerInput.requestEnvelope.request.intent.name === 'PriceReceived'
+//       && sessionAttributes['STATE'] = (states.HEARCOURSESMODE || states.HEARTEETIMESMODE)
+//   },
+//   handle(handlerInput) {
+//     return HearOptionsIntent(handlerInput)
+//   },
+// }
 
 const HelpIntentHandler = {
   canHandle(handlerInput) {
@@ -59,12 +128,7 @@ const CancelAndStopIntentHandler = {
         || handlerInput.requestEnvelope.request.intent.name === 'AMAZON.StopIntent')
   },
   handle(handlerInput) {
-    const speechText = 'Goodbye!'
-
-    return handlerInput.responseBuilder
-      .speak(speechText)
-      .withSimpleCard('Hello World', speechText)
-      .getResponse()
+    return StopIntent(handlerInput)
   },
 }
 
@@ -95,115 +159,9 @@ const ErrorHandler = {
 
 exports.handler = Alexa.SkillBuilders.custom()
      .addRequestHandlers(LaunchRequestHandler,
-                         HelloWorldIntentHandler,
+                         BoookTimeIntentHandler,
                          HelpIntentHandler,
                          CancelAndStopIntentHandler,
                          SessionEndedRequestHandler)
      .addErrorHandlers(ErrorHandler)
      .lambda()
-//
-// var handlers = {
-//   'LaunchRequest': LaunchRequest,
-//   'AMAZON.HelpIntent': HelpIntent,
-//   'AMAZON.StopIntent': StopIntent,
-//   'AMAZON.CancelIntent': CancelIntent,
-//   'BookTime': BookTimeIntent,
-//   'Unhandled': UnhandledIntent,
-//   'SessionEndedRequest': SessionEndedRequest
-// }
-//
-// var locationHandlers = Alexa.CreateStateHandler(states.LOCATIONMODE, {
-//   'LaunchRequest': LaunchRequest,
-//   'AMAZON.HelpIntent': HelpIntent,
-//   'AMAZON.StopIntent': StopIntent,
-//   'AMAZON.CancelIntent': CancelIntent,
-//   'DatesReceived': DatesReceivedIntent,
-//   'Unhandled': UnhandledIntent,
-//   'SessionEndedRequest': SessionEndedRequest
-// })
-//
-// var dateHandlers = Alexa.CreateStateHandler(states.DATESMODE, {
-//   'LaunchRequest': LaunchRequest,
-//   'AMAZON.HelpIntent': HelpIntent,
-//   'AMAZON.StopIntent': StopIntent,
-//   'AMAZON.CancelIntent': CancelIntent,
-//   'TimeReceived': TimeReceivedIntent,
-//   'Unhandled': UnhandledIntent,
-//   'SessionEndedRequest': SessionEndedRequest
-// })
-//
-// var timeHandlers = Alexa.CreateStateHandler(states.TIMEMODE, {
-//   'LaunchRequest': LaunchRequest,
-//   'AMAZON.HelpIntent': HelpIntent,
-//   'AMAZON.StopIntent': StopIntent,
-//   'AMAZON.CancelIntent': CancelIntent,
-//   'NumberReceived': NumberReceivedIntent,
-//   'Unhandled': UnhandledIntent,
-//   'SessionEndedRequest': SessionEndedRequest
-// })
-//
-// var numGolfersHandlers = Alexa.CreateStateHandler(states.NUMGOLFERSMODE, {
-//   'LaunchRequest': LaunchRequest,
-//   'AMAZON.HelpIntent': HelpIntent,
-//   'AMAZON.StopIntent': StopIntent,
-//   'AMAZON.CancelIntent': CancelIntent,
-//   'NumberReceived': NumberReceivedIntent,
-//   'Unhandled': UnhandledIntent,
-//   'SessionEndedRequest': SessionEndedRequest
-// })
-//
-// var priceHandlers = Alexa.CreateStateHandler(states.PRICEMODE, {
-//   'LaunchRequest': LaunchRequest,
-//   'AMAZON.HelpIntent': HelpIntent,
-//   'AMAZON.StopIntent': StopIntent,
-//   'AMAZON.CancelIntent': CancelIntent,
-//   'HearOptions': HearOptionsIntent,
-//   'BookTime': BookTimeIntent,
-//   'Unhandled': UnhandledIntent,
-//   'SessionEndedRequest': SessionEndedRequest
-// })
-//
-// var hearCoursesHandlers = Alexa.CreateStateHandler(states.HEARCOURSESMODE, {
-//   'LaunchRequest': LaunchRequest,
-//   'AMAZON.HelpIntent': HelpIntent,
-//   'AMAZON.StopIntent': StopIntent,
-//   'AMAZON.CancelIntent': CancelIntent,
-//   'HearOptions': HearOptionsIntent,
-//   'SelectOptions': SelectOptionsIntent,
-//   'BookTime': BookTimeIntent,
-//   'Unhandled': UnhandledIntent,
-//   'SessionEndedRequest': SessionEndedRequest
-// })
-//
-// var selectCourseHandlers = Alexa.CreateStateHandler(states.SELECTCOURSEMODE, {
-//   'LaunchRequest': LaunchRequest,
-//   'AMAZON.HelpIntent': HelpIntent,
-//   'AMAZON.StopIntent': StopIntent,
-//   'AMAZON.CancelIntent': CancelIntent,
-//   'HearOptions': HearOptionsIntent,
-//   'BookTime': BookTimeIntent,
-//   'Unhandled': UnhandledIntent,
-//   'SessionEndedRequest': SessionEndedRequest
-// })
-//
-// var hearTeeTimesHandlers = Alexa.CreateStateHandler(states.HEARTEETIMESMODE, {
-//   'LaunchRequest': LaunchRequest,
-//   'AMAZON.HelpIntent': HelpIntent,
-//   'AMAZON.StopIntent': StopIntent,
-//   'AMAZON.CancelIntent': CancelIntent,
-//   'HearOptions': HearOptionsIntent,
-//   'SelectOptions': SelectOptionsIntent,
-//   'BookTime': BookTimeIntent,
-//   'Unhandled': UnhandledIntent,
-//   'SessionEndedRequest': SessionEndedRequest
-// })
-//
-// var selectTeeTimeHandlers = Alexa.CreateStateHandler(states.SELECTTEETIMEMODE, {
-//   'LaunchRequest': LaunchRequest,
-//   'AMAZON.HelpIntent': HelpIntent,
-//   'AMAZON.StopIntent': StopIntent,
-//   'AMAZON.CancelIntent': CancelIntent,
-//   'BookTime': BookTimeIntent,
-//   'Unhandled': UnhandledIntent,
-//   'SessionEndedRequest': SessionEndedRequest
-// })

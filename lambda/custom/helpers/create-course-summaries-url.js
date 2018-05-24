@@ -7,26 +7,26 @@ module.exports = createCourseSummariesURL
 // param(out): baseURL: returns the formatted URL with all the data for the request
 // calledBy: getCourseSummaries()
 
-function createCourseSummariesURL (options) {
-  var baseURL = 'https://2-1-17-sandbox.api.gnsvc.com/rest/channel/7886/facility-summaries?q=geolocation&latitude=' + options.latitude + '&longitude=' + options.longitude + '&proximity=25'
-  if (options.date !== null && options.date !== undefined) {
-    baseURL = baseURL + '&date-min=' + options.date + 'T00%3a00%3a00'
-    baseURL = baseURL + '&date-max=' + options.date + 'T23%3a59%3a59'
+function createCourseSummariesURL (sessionAttributes) {
+  var baseURL = 'https://2-1-17-sandbox.api.gnsvc.com/rest/channel/7886/facility-summaries?q=geolocation&latitude=' + sessionAttributes['latitude'] + '&longitude=' + sessionAttributes['longitude'] + '&proximity=25'
+  if (sessionAttributes['date'] !== null && sessionAttributes['date'] !== undefined) {
+    baseURL = baseURL + '&date-min=' + sessionAttributes['date'] + 'T00%3a00%3a00'
+    baseURL = baseURL + '&date-max=' + sessionAttributes['date'] + 'T23%3a59%3a59'
   }
 
   baseURL = baseURL + '&expand=Facilities'
   // input default maximum number of records to return = 100
   baseURL = baseURL + '&take=100'
-  if (options.time !== null && options.time !== undefined) {
+  if (sessionAttributes['time'] !== null && sessionAttributes['time'] !== undefined) {
     baseURL = baseURL + '&time-min=' + options.time
   }
-  if (options.numGolfers !== null && options.numGolfers !== undefined) {
+  if (sessionAttributes['numGolfers'] !== null && sessionAttributes['numGolfers'] !== undefined) {
     baseURL = baseURL + '&players=' + options.numGolfers
   }
-  if (options.price !== null && options.price !== undefined) {
+  if (sessionAttributes['price'] !== null && sessionAttributes['price'] !== undefined) {
     baseURL = baseURL + '&price-max=' + options.price
   }
-  if (options.dealType === 'hot deal') {
+  if (sessionAttributes['dealType'] === 'hot deal') {
     baseURL = baseURL + '&trade-only=true'
   } else {
     baseURL = baseURL + '&trade-only=false'

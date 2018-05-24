@@ -30,5 +30,8 @@
   "hearCourses": {
     "output": "Would you like to hear the next option by saying next one, or select an option by saying 'option 1'",
     "reprmopt":  "Please tell me if you would like to hear the next option by saying next one, or select an option by saying 'option 1' for option 1"
+  },
+  "stop": {
+    "output": "Ok, we hope you come back to golf soon!"
   }
 }

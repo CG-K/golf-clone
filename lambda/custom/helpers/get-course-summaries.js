@@ -12,8 +12,8 @@ var createCourseSummariesURL = require('./create-course-summaries-url.js')
 // param(in): options: course-summary-options.json file containing the options the user has selected
 // param(out): callback: returns the data or error message to who called it
 // calledBy:  priceReceivedIntent
-function getCourseSummaries (options, callback) {
-  var url = createCourseSummariesURL(options)
+function getCourseSummaries (sessionAttributes, callback) {
+  var url = createCourseSummariesURL(sessionAttributes)
   var urlOptions = {
     headers: {
       UserName: process.env.USERNAME,

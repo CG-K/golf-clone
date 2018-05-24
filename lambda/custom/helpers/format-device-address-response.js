@@ -8,7 +8,7 @@ var getLatLong = require('./get-lat-long.js')
 // param(in): parsedResponse: the parsed response from the Device Address API
 // param(out): callback: returns the formatted response or error to the previous function
 // calledBy: getCourseSummaries()
-function formatDeviceAddressResponse (parsedResponse, callback) {
+function formatDeviceAddressResponse (parsedResponse, sessionAttributes, callback) {
   var stateOrRegion = parsedResponse.stateOrRegion
   var addressLine = parsedResponse.addressLine1
   var postalCode = parsedResponse.postalCode
@@ -30,7 +30,7 @@ function formatDeviceAddressResponse (parsedResponse, callback) {
       zipcode: postalCode,
       countryCode: codeForCountry
     }
-    getLatLong(location, function (err, res) {
+    getLatLong(location, sessionAttributes, function (err, res) {
       if (err) {
         callback(err)
       }

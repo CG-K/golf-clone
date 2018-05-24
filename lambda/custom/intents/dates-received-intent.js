@@ -7,32 +7,53 @@ var getNewState = require('../helpers/get-new-state.js')
 var getCourseSummaries = require('../helpers/get-course-summaries.js')
 
 // Purpose: saves the date of Golfers given by the user and prompts for more information
-function DatesReceivedIntent () {
-  var options = require('../helpers/course-summary-options.json')
+function DatesReceivedIntent (handlerInput) {
+  let sessionAttributes = handlerInput.attributesManager.getSessionAttributes()
+
   var nextState
-  if (this.event.request.intent.slots.dateToPlay.value === undefined) {
-    nextState = getNewState()
-    this.handler.state = nextState.state
-    this.emit(':ask', nextState.response, nextState.reprompt)
+  if (handlerInput.requestEnvelope.request.intent.slots.dateToPlay.value === undefined) {
+    nextState = getNewState(sessionAttributes)
+    sessionAttributes['STATE'] = nextState.state
+    handlerInput.attributesManager.setSessionAttributes(sessionAttributes)
+    return handlerInput.responseBuilder
+      .speak(nextState.response)
+      .reprompt(nextState.reprompt)
+      .withSimpleCard('Booking a Tee Time', nextState.response)
+      .getResponse()
   } else {
-    options.date = this.event.request.intent.slots.dateToPlay.value
+    sessionAttributes['date'] = handlerInput.requestEnvelope.request.intent.slots.dateToPlay.value
     nextState = getNewState()
-    this.handler.state = nextState.state
-    var emit = this.emit
-    var handler = this.handler
-    if (this.handler.state === states.PRICEMODE) {
-      getCourseSummaries(options, function (err, res) {
+    sessionAttributes['STATE'] = nextState.state
+    handlerInput.attributesManager.setSessionAttributes(sessionAttributes)
+
+    if (sessionAttributes['STATE'] === states.PRICEMODE) {
+      getCourseSummaries(sessionAttributes, function (err, res) {
         if (err) {
           console.log(err)
-          emit(':tell', err)
+          handlerInput.attributesManager.setSessionAttributes(sessionAttributes)
+          return handlerInput.responseBuilder
+            .speak(err)
+            .reprompt(err)
+            .withSimpleCard('No courses!', err)
+            .getResponse()
         }
         console.log(res)
         nextState = getNewState()
-        handler.state = nextState.state
-        emit(':ask', res)
+        sessionAttributes['STATE'] = nextState.state
+        handlerInput.attributesManager.setSessionAttributes(sessionAttributes)
+        return handlerInput.responseBuilder
+          .speak(res)
+          .reprompt(res)
+          .withSimpleCard('Select a Course!', res)
+          .getResponse()
       })
     } else {
-      this.emit(':ask', nextState.response, nextState.reprompt)
+      handlerInput.attributesManager.setSessionAttributes(sessionAttributes)
+      return handlerInput.responseBuilder
+        .speak(nextState.response)
+        .reprompt(nextState.reprompt)
+        .withSimpleCard('Booking a Tee Time', nextState.response)
+        .getResponse()
     }
   }
 }
