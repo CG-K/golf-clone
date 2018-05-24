@@ -63,6 +63,7 @@ async function BookTime (handlerInput) {
       try {
         let result = await getLatLong(city, sessionAttributes)
         console.log('we were given result: ', result)
+        handlerInput.attributesManager.setSessionAttributes(sessionAttributes)
         return handlerInput.responseBuilder
           .speak(result.latLongOutput)
           .reprompt(result.latLongReprompt)
@@ -110,26 +111,22 @@ async function BookTime (handlerInput) {
     } else if (zipCodeSlot.value !== undefined) {
       // we have zipcode convert it to lat and long
       var zipCode = zipCodeSlot.value
-      getLatLong(zipCode, sessionAttributes, function (err, res) {
-        if (err) {
-          return handlerInput.responseBuilder
-            .speak(err)
-            .withSimpleCard('Something Went Wrong', err)
-            .getResponse()
-        }
-        sessionAttributes = res.sessionAttributes
-        sessionAttributes['STATE'] = res.state
-        console.log(res.state)
-        console.log(sessionAttributes)
+      try {
+        let result = await getLatLong(zipCode, sessionAttributes)
+        console.log('we were given result: ', result)
         handlerInput.attributesManager.setSessionAttributes(sessionAttributes)
-        console.log(JSON.stringify(handlerInput))
-        console.log(res)
         return handlerInput.responseBuilder
-          .speak(res.latLongOutput)
-          .reprompt(res.latLongReprompt)
-          .withSimpleCard('Booking a Tee Time', res.latLongOutput)
+          .speak(result.latLongOutput)
+          .reprompt(result.latLongReprompt)
+          .withSimpleCard('Book a Tee Time', result.latLongOutput)
           .getResponse()
-      })
+      } catch (err) {
+        console.log('we were given error: ', err)
+        return handlerInput.responseBuilder
+          .speak(err)
+          .withSimpleCard('Something Went Wrong', err)
+          .getResponse()
+      }
     } else {
       // there was no input slot
       // Reprompt the user for a slot

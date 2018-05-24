@@ -33,8 +33,8 @@ const BoookTimeIntentHandler = {
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
       && handlerInput.requestEnvelope.request.intent.name === 'BookTime'
   },
-  async handle(handlerInput) {
-    return await BookTime(handlerInput)
+  handle(handlerInput) {
+    return BookTime(handlerInput)
     console.log('We are finished with BookTime')
   },
 }
