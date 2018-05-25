@@ -10,26 +10,31 @@ var formatDeviceAddressResponse = require('./format-device-address-response.js')
 // param(in): consentToken: token from Amazon that allows permissions
 // param(out): callback: returns the data or error message to who called it
 // calledBy:  GetLocation()
-function getDeviceAddress (url, consentToken, sessionAttributes, callback) {
+async function getDeviceAddress (url, consentToken, sessionAttributes) {
   var urlOptions = {
     headers: {
       Authorization: 'Bearer ' + consentToken
     }
   }
 
-  got(url, urlOptions)
-    .then(response => {
-      var parsedResponse = JSON.parse(response.body)
-      formatDeviceAddressResponse(parsedResponse, sessionAttributes, function (err, res) {
-        if (err) {
-          callback(err)
-        }
-        callback(null, res)
+  try {
+    let response = await got(url, urlOptions)
+    var parsedResponse = JSON.parse(response.body)
+    try {
+      let res = await formatDeviceAddressResponse(parsedResponse, sessionAttributes)
+      return new Promise ((resolve, reject) => {
+        resolve(res)
       })
+    } catch(err) {
+      return new Promise ((resolve, reject) => {
+        reject(err)
+      })
+    }
+  } catch(error) {
+    console.log(error)
+    var failedToGetDeviceAddress = 'We failed to get your device address, please try again!'
+    return new Promise ((resolve, reject) => {
+      reject(failedToGetDeviceAddress)
     })
-    .catch(error => {
-      console.log(error)
-      var failedToGetDeviceAddress = 'We failed to get your device address, please try again!'
-      callback(failedToGetDeviceAddress)
-    })
+  }
 }

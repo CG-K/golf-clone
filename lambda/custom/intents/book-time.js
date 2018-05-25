@@ -88,13 +88,8 @@ async function BookTime (handlerInput) {
           .getResponse()
       } else {
         var url = formatDeviceAddressRequest(deviceId)
-        getDeviceAddress(url, consentToken, sessionAttributes, function (err, res) {
-          if (err) {
-            return handlerInput.responseBuilder
-              .speak(err)
-              .withSimpleCard('Something Went Wrong', err)
-              .getResponse()
-          }
+        try {
+          let res = await getDeviceAddress(url, consentToken, sessionAttributes)
           sessionAttributes = res.sessionAttributes
           sessionAttributes['STATE'] = res.state
           console.log(res.state)
@@ -106,7 +101,31 @@ async function BookTime (handlerInput) {
             .reprompt(res.latLongReprompt)
             .withSimpleCard('Booking a Tee Time', res.latLongOutput)
             .getResponse()
-        })
+        } catch(err) {
+          return handlerInput.responseBuilder
+            .speak(err)
+            .withSimpleCard('Something Went Wrong', err)
+            .getResponse()
+        }
+        // getDeviceAddress(url, consentToken, sessionAttributes, function (err, res) {
+        //   if (err) {
+        //     return handlerInput.responseBuilder
+        //       .speak(err)
+        //       .withSimpleCard('Something Went Wrong', err)
+        //       .getResponse()
+        //   }
+        //   sessionAttributes = res.sessionAttributes
+        //   sessionAttributes['STATE'] = res.state
+        //   console.log(res.state)
+        //   console.log(sessionAttributes)
+        //   handlerInput.attributesManager.setSessionAttributes(sessionAttributes)
+        //   console.log(JSON.stringify(handlerInput))
+        //   return handlerInput.responseBuilder
+        //     .speak(res.latLongOutput)
+        //     .reprompt(res.latLongReprompt)
+        //     .withSimpleCard('Booking a Tee Time', res.latLongOutput)
+        //     .getResponse()
+        // })
       }
     } else if (zipCodeSlot.value !== undefined) {
       // we have zipcode convert it to lat and long

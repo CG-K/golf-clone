@@ -2,8 +2,8 @@ var LaunchRequest = require('./intents/launch-request.js')
 var HelpIntent = require('./intents/help-intent.js')
 var StopIntent = require('./intents/stop-intent.js')
 var BookTime = require('./intents/book-time.js')
-// var DatesReceivedIntent = require('./intents/dates-received-intent.js')
-// var TimeReceivedIntent = require('./intents/time-received-intent.js')
+var DatesReceivedIntent = require('./intents/dates-received-intent.js')
+var TimeReceivedIntent = require('./intents/time-received-intent.js')
 // var NumberReceivedIntent = require('./intents/number-received-intent.js')
 // // var NumGolfersReceivedIntent = require('./intents/num-golfers-received-intent.js')
 // // var PriceReceivedIntent = require('./intents/price-received-intent.js')
@@ -35,40 +35,39 @@ const BoookTimeIntentHandler = {
   },
   handle(handlerInput) {
     return BookTime(handlerInput)
-    console.log('We are finished with BookTime')
   },
 }
 
-// const DatesReceivedIntentHandler = {
-//   canHandle(handlerInput) {
-//     let sessionAttributes = handlerInput.attributesManager.getSessionAttributes()
-//     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-//       && handlerInput.requestEnvelope.request.intent.name === 'DatesReceived'
-//       && sessionAttributes['STATE'] = states.LOCATIONMODE
-//   },
-//   handle(handlerInput) {
-//     return DatesReceivedIntent(handlerInput)
-//   },
-// }
+const DatesReceivedIntentHandler = {
+  canHandle(handlerInput) {
+    let sessionAttributes = handlerInput.attributesManager.getSessionAttributes()
+    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+      && handlerInput.requestEnvelope.request.intent.name === 'DatesReceived'
+      && sessionAttributes['STATE'] === states.LOCATIONMODE
+  },
+  handle(handlerInput) {
+    return DatesReceivedIntent(handlerInput)
+  },
+}
 
-// const TimeReceivedIntentHandler = {
-//   canHandle(handlerInput) {
-//     let sessionAttributes = handlerInput.attributesManager.getSessionAttributes()
-//     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-//       && handlerInput.requestEnvelope.request.intent.name === 'TimeReceived'
-//       && sessionAttributes['STATE'] = states.DATESMODE
-//   },
-//   handle(handlerInput) {
-//     return TimeReceivedIntent(handlerInput)
-//   },
-// }
+const TimeReceivedIntentHandler = {
+  canHandle(handlerInput) {
+    let sessionAttributes = handlerInput.attributesManager.getSessionAttributes()
+    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+      && handlerInput.requestEnvelope.request.intent.name === 'TimeReceived'
+      && sessionAttributes['STATE'] === states.DATESMODE
+  },
+  handle(handlerInput) {
+    return TimeReceivedIntent(handlerInput)
+  },
+}
 
 // const NumberReceivedIntentHandler = {
 //   canHandle(handlerInput) {
 //     let sessionAttributes = handlerInput.attributesManager.getSessionAttributes()
 //     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
 //       && handlerInput.requestEnvelope.request.intent.name === 'NumGolfersReceived'
-//       && sessionAttributes['STATE'] = ( states.TIMEMODE || states.NUMGOLFERSMODE )
+//       && sessionAttributes['STATE'] === ( states.TIMEMODE || states.NUMGOLFERSMODE )
 //   },
 //   handle(handlerInput) {
 //     return NumberReceivedIntent(handlerInput)
@@ -80,7 +79,7 @@ const BoookTimeIntentHandler = {
 //     let sessionAttributes = handlerInput.attributesManager.getSessionAttributes()
 //     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
 //       && handlerInput.requestEnvelope.request.intent.name === 'NumGolfersReceived'
-//       && sessionAttributes['STATE'] = states.TIMEMODE
+//       && sessionAttributes['STATE'] === states.TIMEMODE
 //   },
 //   handle(handlerInput) {
 //     return NumberReceivedIntent(handlerInput)
@@ -92,7 +91,7 @@ const BoookTimeIntentHandler = {
 //     let sessionAttributes = handlerInput.attributesManager.getSessionAttributes()
 //     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
 //       && handlerInput.requestEnvelope.request.intent.name === 'PriceReceived'
-//       && sessionAttributes['STATE'] = states.NUMGOLFERSMODE
+//       && sessionAttributes['STATE'] === states.NUMGOLFERSMODE
 //   },
 //   handle(handlerInput) {
 //     return NumberReceivedIntent(handlerInput)
@@ -160,6 +159,8 @@ const ErrorHandler = {
 exports.handler = Alexa.SkillBuilders.custom()
      .addRequestHandlers(LaunchRequestHandler,
                          BoookTimeIntentHandler,
+                         DatesReceivedIntentHandler,
+                         TimeReceivedIntentHandler,
                          HelpIntentHandler,
                          CancelAndStopIntentHandler,
                          SessionEndedRequestHandler)

@@ -104,11 +104,26 @@ async function getLatLong (location, sessionAttributes) {
       latLongReprompt: stateResponse.reprompt,
       sessionAttributes: sessionAttributes
     }
-    return new Promise ((resolve, reject) => {
-      console.log('response right before sent back to book-time')
-      console.log(response)
-      resolve(response)
-    })
+    if (response.state === states.PRICEMODE) {
+      try {
+        let output = await getCourseSummaries(sessionAttributes)
+        response.latLongOutput = output
+        return new Promise((resolve, reject) => {
+          resolve(response)
+        })
+      } catch (err) {
+        response.latLongOutput = err
+        return new Promise((resolve, reject) => {
+          reject(response)
+        })
+      }
+    } else {
+      return new Promise ((resolve, reject) => {
+        console.log('response right before sent back to book-time')
+        console.log(response)
+        resolve(response)
+      })
+    }
   } catch(err) {
     var failGeocode = 'We have failed to get the latitude and longitude from ' +
     'the given location, can you try again?'
