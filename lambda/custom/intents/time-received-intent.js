@@ -11,7 +11,7 @@ function TimeReceivedIntent (handlerInput) {
   let sessionAttributes = handlerInput.attributesManager.getSessionAttributes()
   var nextState
   if (handlerInput.requestEnvelope.request.intent.slots.timeToPlay.value === undefined) {
-    nextState = getNewState()
+    nextState = getNewState(sessionAttributes)
     sessionAttributes['STATE'] = nextState.state
     handlerInput.attributesManager.setSessionAttributes(sessionAttributes)
     return handlerInput.responseBuilder
@@ -21,7 +21,7 @@ function TimeReceivedIntent (handlerInput) {
       .getResponse()
   } else {
     sessionAttributes['time'] = handlerInput.requestEnvelope.request.intent.slots.timeToPlay.value
-    nextState = getNewState()
+    nextState = getNewState(sessionAttributes)
     sessionAttributes['STATE'] = nextState.state
     handlerInput.attributesManager.setSessionAttributes(sessionAttributes)
     if (sessionAttributes['STATE'] === states.PRICEMODE) {
@@ -35,7 +35,7 @@ function TimeReceivedIntent (handlerInput) {
             .withSimpleCard('No courses!', err)
             .getResponse()
         }
-        nextState = getNewState()
+        nextState = getNewState(sessionAttributes)
         sessionAttributes['STATE'] = nextState.state
         handlerInput.attributesManager.setSessionAttributes(sessionAttributes)
         return handlerInput.responseBuilder
