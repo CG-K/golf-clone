@@ -8,6 +8,7 @@ module.exports = createCourseSummariesURL
 // calledBy: getCourseSummaries()
 
 function createCourseSummariesURL (sessionAttributes) {
+  console.log('in createCourseSummariesURL')
   var baseURL = 'https://2-1-17-sandbox.api.gnsvc.com/rest/channel/7886/facility-summaries?q=geolocation&latitude=' + sessionAttributes['latitude'] + '&longitude=' + sessionAttributes['longitude'] + '&proximity=25'
   if (sessionAttributes['date'] !== null && sessionAttributes['date'] !== undefined) {
     baseURL = baseURL + '&date-min=' + sessionAttributes['date'] + 'T00%3a00%3a00'
@@ -18,13 +19,13 @@ function createCourseSummariesURL (sessionAttributes) {
   // input default maximum number of records to return = 100
   baseURL = baseURL + '&take=100'
   if (sessionAttributes['time'] !== null && sessionAttributes['time'] !== undefined) {
-    baseURL = baseURL + '&time-min=' + options.time
+    baseURL = baseURL + '&time-min=' + sessionAttributes['time']
   }
   if (sessionAttributes['numGolfers'] !== null && sessionAttributes['numGolfers'] !== undefined) {
-    baseURL = baseURL + '&players=' + options.numGolfers
+    baseURL = baseURL + '&players=' + sessionAttributes['numGolfers']
   }
   if (sessionAttributes['price'] !== null && sessionAttributes['price'] !== undefined) {
-    baseURL = baseURL + '&price-max=' + options.price
+    baseURL = baseURL + '&price-max=' + sessionAttributes['price']
   }
   if (sessionAttributes['dealType'] === 'hot deal') {
     baseURL = baseURL + '&trade-only=true'

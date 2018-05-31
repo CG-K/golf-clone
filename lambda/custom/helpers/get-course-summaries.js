@@ -47,6 +47,7 @@ var createCourseSummariesURL = require('./create-course-summaries-url.js')
 // }
 
 async function getCourseSummaries (sessionAttributes) {
+  console.log('in getCourseSummaries')
   var url = createCourseSummariesURL(sessionAttributes)
   var urlOptions = {
     headers: {
@@ -55,12 +56,14 @@ async function getCourseSummaries (sessionAttributes) {
     }
   }
   // send request
+  console.log(url)
+  console.log(urlOptions)
   try {
     let response = await got(url, urlOptions)
     var parsedCourseResponse = JSON.parse(response.body)
     sessionAttributes['CoursesResponse'] = parsedCourseResponse
     try {
-      let output = await handleCourseSummariesResponse(parsedCourseResponse)
+      let output = await handleCourseSummariesResponse(parsedCourseResponse, sessionAttributes)
       if (sessionAttributes['maxCoursesLength'] > 1) {
         output = output + 'Do you want to book a tee time here or would you like to hear the next one?'
       } else if (sessionAttributes['maxCoursesLength'] !== null) {

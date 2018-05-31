@@ -12,6 +12,7 @@ function getNewState (sessionAttributes) {
     response: '',
     reprompt: ''
   }
+  // when given multiple forms of information we are not setting the state properly
   console.log(sessionAttributes)
   if (sessionAttributes['dealType'] === null || sessionAttributes['latitude'] === null || sessionAttributes['longitude'] === null) {
     res.state = ''

@@ -11,5 +11,10 @@ function initializeSessionAttributes(sessionAttributes) {
   sessionAttributes['courseID'] = null
   sessionAttributes['teeTimes'] = null
   sessionAttributes['teeTimeRateID'] = null
+  sessionAttributes['CoursesResponse'] = null
+  sessionAttributes['maxCoursesLength'] = null
+  sessionAttributes['courses'] = null
+  sessionAttributes['coursesCount'] = 0
+  sessionAttributes['teeTimesCount'] = 0
   return sessionAttributes
 }

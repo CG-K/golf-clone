@@ -14,8 +14,7 @@ var date = require('date-and-time')
 // param(in): response: the string that will prompt the user upon invoking this intent
 // param(out): callback: returns the data or error message to getCourseSummaries()
 // calledBy: handleCourseSummariesResponse()
-function formatTeeTimes (response, callback) {
-  var options = require('./course-summary-options.json')
+function formatTeeTimes (response, sessionAttributes) {
   var maxResponseLength = NO_TEE_TIMES
   if (response.TeeTimes.length >= TOO_MANY_TEE_TIMES) {
     // Only want to return top 5 results if more than 5
@@ -24,7 +23,7 @@ function formatTeeTimes (response, callback) {
     maxResponseLength = response.TeeTimes.length
   }
   // var courseOutput = 'Here are your course options: '
-  options.teeTimes = []
+  sessionAttributes['teeTimes'] = []
   for (var i = 0; i < maxResponseLength; i++) {
     // Convert the dates into date objects
     var startDateAndTime = new Date(response.TeeTimes[i].Time)
@@ -50,8 +49,10 @@ function formatTeeTimes (response, callback) {
     teeTimeOutput = teeTimeOutput + startTime + ' for '
     teeTimeOutput = teeTimeOutput + price[0] + ' dollars and ' + price[1] + ' cents.  '
 
-    options.maxTeeTimeLength = maxResponseLength
-    options.teeTimes.push(teeTimeOutput)
+    sessionAttributes['maxTeeTimeLength'] = maxResponseLength
+    sessionAttributes['teeTimes'].push(teeTimeOutput)
   }
-  callback(null, options.teeTimes[0])
+  return new Promise((resolve, reject) => {
+    resolve(sessionAttributes['teeTimes'][0])
+  })
 }

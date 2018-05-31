@@ -11,8 +11,42 @@ var handleTeeTimesResponse = require('./handle-tee-times-response.js')
 // param(in): options: course-summary-options.json file containing the options the user has selected
 // param(out): callback: returns the data or error message to who called it
 // calledBy:  priceReceivedIntent
-function getTeeTimes (options, callback) {
-  var url = createTeeTimesURL(options)
+// function getTeeTimes (options, callback) {
+//   var url = createTeeTimesURL(options)
+//   var urlOptions = {
+//     headers: {
+//       UserName: process.env.USERNAME,
+//       Password: process.env.PASSWORD
+//     }
+//   }
+//   // send request
+//   got(url, urlOptions)
+//     .then(response => {
+//       var parsedTeeTimeResponse = JSON.parse(response.body)
+//       options.TeeTimesResponse = parsedTeeTimeResponse
+//       console.log(parsedTeeTimeResponse)
+//       // take parsed response and generate a response for the user
+//       handleTeeTimesResponse(parsedTeeTimeResponse, function (err, output) {
+//         if (err) {
+//           callback(err)
+//         }
+//         if (options.maxTeeTimeLength > 1) {
+//           output = output + 'Do you want to book this tee time or would you like to hear the next one?'
+//         } else {
+//           output = output + 'Those are all your options, which option would you like to book?'
+//         }
+//         callback(null, output)
+//       })
+//     })
+//     .catch(error => {
+//       console.log(' we have an error' + error)
+//       var failGetTeeTimes = 'We failed to get tee times for this course'
+//       callback(failGetTeeTimes)
+//     })
+// }
+
+async function getTeeTimes (sessionAttributes) {
+  var url = createTeeTimesURL(sessionAttributes)
   var urlOptions = {
     headers: {
       UserName: process.env.USERNAME,
@@ -20,27 +54,39 @@ function getTeeTimes (options, callback) {
     }
   }
   // send request
-  got(url, urlOptions)
-    .then(response => {
-      var parsedTeeTimeResponse = JSON.parse(response.body)
-      options.TeeTimesResponse = parsedTeeTimeResponse
-      console.log(parsedTeeTimeResponse)
-      // take parsed response and generate a response for the user
-      handleTeeTimesResponse(parsedTeeTimeResponse, function (err, output) {
-        if (err) {
-          callback(err)
-        }
-        if (options.maxTeeTimeLength > 1) {
-          output = output + 'Do you want to book this tee time or would you like to hear the next one?'
-        } else {
-          output = output + 'Those are all your options, which option would you like to book?'
-        }
-        callback(null, output)
+  try {
+    let response = await got(url, urlOptions)
+    var parsedTeeTimeResponse = JSON.parse(response.body)
+    let teeTimes = []
+    // reduce the size of the response
+    for (var i = 0; i < parsedTeeTimeResponse.TeeTimes.length; i++) {
+      let teeTimeObject = {
+        TeeTimeRateID: parsedTeeTimeResponse.TeeTimes[i].DisplayRate.TeeTimeRateID
+      }
+      teeTimes.push(teeTimeObject)
+    }
+    sessionAttributes['TeeTimesResponse'] = teeTimes
+    console.log(parsedTeeTimeResponse)
+    try {
+      let output = await handleTeeTimesResponse(parsedTeeTimeResponse, sessionAttributes)
+      if (sessionAttributes['maxTeeTimeLength'] > 1) {
+        output = output + 'Do you want to book this tee time or would you like to hear the next one?'
+      } else {
+        output = output + 'Those are all your options, which option would you like to book?'
+      }
+      return new Promise((resolve, reject) => {
+        resolve(output)
       })
+    } catch(err) {
+      return new Promise((resolve, reject) => {
+        reject(err)
+      })
+    }
+  } catch(error) {
+    console.log(' we have an error' + error)
+    var failGetTeeTimes = 'We failed to get tee times for this course'
+    return new Promise((resolve, reject) => {
+      reject(error)
     })
-    .catch(error => {
-      console.log(' we have an error' + error)
-      var failGetTeeTimes = 'We failed to get tee times for this course'
-      callback(failGetTeeTimes)
-    })
+  }
 }

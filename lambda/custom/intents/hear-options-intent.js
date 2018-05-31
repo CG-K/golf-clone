@@ -40,6 +40,10 @@ function HearOptionsIntent (handlerInput) {
   var output
   let sessionAttributes = handlerInput.attributesManager.getSessionAttributes()
   if (sessionAttributes['STATE'] === states.HEARCOURSESMODE) {
+    console.log('coursesCount', sessionAttributes['coursesCount'])
+    console.log('maxCoursesLength: ', sessionAttributes['maxCoursesLength'])
+    console.log(sessionAttributes['CoursesResponse'])
+    console.log(sessionAttributes['courses'])
     sessionAttributes['coursesCount'] = sessionAttributes['coursesCount'] + 1
     if (sessionAttributes['coursesCount'] === (sessionAttributes['maxCoursesLength'] - 1)) {
       ending = 'Those are all your options, which option would you like to book?'

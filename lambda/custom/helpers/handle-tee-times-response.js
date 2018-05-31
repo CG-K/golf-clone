@@ -12,18 +12,24 @@ var formatTeeTimes = require('./format-tee-times.js')
 // param(in): doNotRefine: a Boolean to specify if the user does or does not want to refine results
 // param(out): callback: returns the data or error message to getCourseSummaries()
 // calledBy: getTeeTimes()
-function handleTeeTimesResponse (response, callback) {
+async function handleTeeTimesResponse (response, sessionAttributes) {
   if (response.TeeTimes.length <= NO_COURSES) {
     // When there are no courses, you need to broaden your search range
     var noTeeTimesResponse = 'Your Search results did not return any tee times. '
-    callback(null, noTeeTimesResponse)
+    return new Promise((resolve, reject) => {
+      resolve(noTeeTimesResponse)
+    })
   } else {
     // Give the user the tee time options
-    formatTeeTimes(response, function (err, res) {
-      if (err) {
-        callback(err)
-      }
-      callback(null, res)
-    })
+    try {
+      let res = await formatTeeTimes(response, sessionAttributes)
+      return new Promise((resolve, reject) => {
+        resolve(res)
+      })
+    } catch(err) {
+      return new Promise((resolve, reject) => {
+        reject(err)
+      })
+    }
   }
 }
