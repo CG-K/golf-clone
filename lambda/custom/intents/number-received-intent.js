@@ -5,9 +5,8 @@ module.exports = NumberReceivedIntent
 var states = require('../helpers/states.json')
 var getNewState = require('../helpers/get-new-state.js')
 var getCourseSummaries = require('../helpers/get-course-summaries.js')
-
-const MAX_GOLFERS = 3
-const NO_GOLFERS = 0
+var checkValidPrice = require('../helpers/check-valid-price.js')
+var checkValidGolfers = require('../helpers/check-valid-golfers.js')
 
 // Purpose: a function that handles the num golfers or price intent
 async function NumberReceivedIntent (handlerInput) {
@@ -27,7 +26,8 @@ async function NumberReceivedIntent (handlerInput) {
         .withSimpleCard('Booking a Tee Time', nextState.response)
         .getResponse()
     } else {
-      if (numGolfersSlot.value > MAX_GOLFERS || numGolfersSlot.value < NO_GOLFERS) {
+      let isValidGolfers = checkValidGolfers(numGolfersSlot.value)
+      if (!isValidGolfers) {
         var outOfNumGolferRange = 'We cannot search for ' + numGolfersSlot.value + '. You can search for 1, 2, 3 or any number of golfers.'
         var outOfNumGolferRangeReprompt = 'You can search for 1, 2, 3 or any number of golfers.'
           // go back in state because information was not gathered properly
@@ -85,6 +85,19 @@ async function NumberReceivedIntent (handlerInput) {
         .withSimpleCard('Booking a Tee Time', nextState.response)
         .getResponse()
     } else {
+      let isValidPrice = checkValidPrice(golfPriceSlot.value)
+      if (!isValidPrice) {
+        var priceTooLow = 'We cannot search for ' + golfPriceSlot.value + '. You can search for anything above 10 dollars.'
+        var priceTooLowReprompt = 'You can search for anything above 10 dollars.'
+          // go back in state because information was not gathered properly
+        sessionAttributes['STATE'] = states.NUMGOLFERSMODE
+        handlerInput.attributesManager.setSessionAttributes(sessionAttributes)
+        return handlerInput.responseBuilder
+          .speak(priceTooLow)
+          .reprompt(priceTooLowReprompt)
+          .withSimpleCard('Booking a Tee Time', priceTooLow)
+          .getResponse()
+      }
       sessionAttributes['price'] = golfPriceSlot.value
       nextState = getNewState(sessionAttributes)
       sessionAttributes['STATE'] = nextState.state

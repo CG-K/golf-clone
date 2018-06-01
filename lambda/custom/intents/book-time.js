@@ -11,6 +11,10 @@ var states = require('../helpers/states.json')
 var getNewState = require('../helpers/get-new-state.js')
 var clearOptions = require('../helpers/clear-options.js')
 var initializeSessionAttributes = require('../helpers/initialize-session-attributes.js')
+var checkValidPrice = require('../helpers/check-valid-price.js')
+var checkValidGolfers = require('../helpers/check-valid-golfers.js')
+var checkValidTime = require('../helpers/check-valid-time.js')
+
 const ALL_ADDRESS_PERMISSION = 'read::alexa:device:all:address'
 const PERMISSIONS = [ALL_ADDRESS_PERMISSION]
 
@@ -46,15 +50,24 @@ async function BookTime (handlerInput) {
     }
     if (handlerInput.requestEnvelope.request.intent.slots.timeToPlay.value !== undefined) {
       var timeToPlay = handlerInput.requestEnvelope.request.intent.slots.timeToPlay.value
-      sessionAttributes['time'] = timeToPlay
+      let isValidTime = checkValidTime(timeToPlay)
+      if (isValidTime) {
+        sessionAttributes['time'] = timeToPlay
+      }
     }
     if (handlerInput.requestEnvelope.request.intent.slots.value !== undefined) {
       var numberOfGolfers = handlerInput.requestEnvelope.request.intent.slots.value
-      sessionAttributes['numGolfers'] = numberOfGolfers
+      let isValidGolfers = checkValidGolfers(numberOfGolfers)
+      if (isValidGolfers) {
+        sessionAttributes['numGolfers'] = numberOfGolfers
+      }
     }
     if (handlerInput.requestEnvelope.request.intent.slots.amountOfDollars.value !== undefined) {
       var amountOfDollars = handlerInput.requestEnvelope.request.intent.slots.amountOfDollars.value
-      sessionAttributes['price'] = amountOfDollars
+      let isValidPrice = checkValidPrice(amountOfDollars)
+      if (isValidPrice) {
+        sessionAttributes['price'] = amountOfDollars
+      }
     }
     sessionAttributes['dealType'] = dealTypeSlot.value
     if (citySlot.value !== undefined) {
