@@ -98,6 +98,7 @@ async function getLatLong (location, sessionAttributes) {
     sessionAttributes['longitude'] = longitude
     console.log('session attributes right before sent to getNewState', JSON.stringify(sessionAttributes))
     var stateResponse = getNewState(sessionAttributes)
+    sessionAttributes['STATE'] = stateResponse.state
     var response = {
       state: stateResponse.state,
       latLongOutput: stateResponse.response,
