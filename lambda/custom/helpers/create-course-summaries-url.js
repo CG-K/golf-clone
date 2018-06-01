@@ -27,6 +27,10 @@ function createCourseSummariesURL (sessionAttributes) {
   if (sessionAttributes['price'] !== null && sessionAttributes['price'] !== undefined) {
     baseURL = baseURL + '&price-max=' + sessionAttributes['price']
   }
+  // default number of holes
+  baseURL = baseURL + '&holes=18'
+  //sort by distance
+  baseURL = baseURL + '&sort-by=Facilities.Distance'
   if (sessionAttributes['dealType'] === 'hot deal') {
     baseURL = baseURL + '&trade-only=true'
   } else {

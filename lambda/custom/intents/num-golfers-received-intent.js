@@ -6,13 +6,12 @@ var states = require('../helpers/states.json')
 var getNewState = require('../helpers/get-new-state.js')
 var getCourseSummaries = require('../helpers/get-course-summaries.js')
 
-const MAX_GOLFERS = 4
+const MAX_GOLFERS = 3
 const NO_GOLFERS = 0
 
 // Purpose: saves the number of Golfers given by the user and prompts for more information
 function NumGolfersReceivedIntent () {
   console.log("in num golfers received intent")
-  var options = require('../helpers/course-summary-options.json')
   var nextState
   if (this.event.request.intent.slots.numberOfGolfers.value === undefined) {
     var nextState = getNewState()
@@ -22,8 +21,8 @@ function NumGolfersReceivedIntent () {
     this.emit(':ask', nextState.response, nextState.reprompt)
   } else {
     if (this.event.request.intent.slots.numberOfGolfers.value > MAX_GOLFERS || this.event.request.intent.slots.numberOfGolfers.value < NO_GOLFERS) {
-      var outOfNumGolferRange = 'We cannot search for ' + this.event.request.intent.slots.numberOfGolfers.value + '. You can search for 1, 2, 3, 4, or any number of golfers.'
-      var outOfNumGolferRangeReprompt = 'You can search for 1, 2, 3, 4, or any number of golfers.'
+      var outOfNumGolferRange = 'We cannot search for ' + this.event.request.intent.slots.numberOfGolfers.value + '. You can search for 1, 2, 3, or any number of golfers.'
+      var outOfNumGolferRangeReprompt = 'You can search for 1, 2, 3, or any number of golfers.'
         // go back in state because information was not gathered properly
       this.handler.state = states.TIMEMODE
       this.emit(':ask', outOfNumGolferRange, outOfNumGolferRangeReprompt)

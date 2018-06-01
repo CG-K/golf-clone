@@ -13,23 +13,6 @@ var formatCourseSummaries = require('./format-course-summaries.js')
 // param(out): callback: returns the data or error message to getCourseSummaries()
 // calledBy: getCourseSummaries()
 
-// function handleCourseSummariesResponse (response, callback) {
-//   if (response.Items.length <= NO_COURSES) {
-//     // When there are no courses, you need to broaden your search range
-//     var noCoursesResponse = 'Your Search results did not return any courses. ' +
-//     'Perhaps look on a different day, in another location, or at another time!'
-//     callback(null, noCoursesResponse)
-//   } else {
-//     // Give the user the course options
-//     formatCourseSummaries(response, function (err, res) {
-//       if (err) {
-//         callback(err)
-//       }
-//       callback(null, res)
-//     })
-//   }
-// }
-
 async function handleCourseSummariesResponse (response, sessionAttributes) {
   if (response.Items.length <= NO_COURSES) {
     // When there are no courses, you need to broaden your search range
