@@ -25,14 +25,14 @@ async function TimeReceivedIntent (handlerInput) {
     let isValidTime = checkValidTime(time)
     if (!isValidTime) {
       var timeOutOfRange = 'We cannot search for ' + time + '. You can search for anything between 6:00 AM and 6:00 PM.'
-      var priceTooLowReprompt = 'You can search for anything between 6:00 AM and 6:00 PM.'
+      var timeOutOfRangeReprompt = 'You can search for anything between 6:00 AM and 6:00 PM.'
         // go back in state because information was not gathered properly
       sessionAttributes['STATE'] = states.DATESMODE
       handlerInput.attributesManager.setSessionAttributes(sessionAttributes)
       return handlerInput.responseBuilder
-        .speak(priceTooLow)
-        .reprompt(priceTooLowReprompt)
-        .withSimpleCard('Booking a Tee Time', priceTooLow)
+        .speak(timeOutOfRange)
+        .reprompt(timeOutOfRangeReprompt)
+        .withSimpleCard('Booking a Tee Time', timeOutOfRange)
         .getResponse()
     }
     sessionAttributes['time'] = time
