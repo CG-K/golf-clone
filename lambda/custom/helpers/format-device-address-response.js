@@ -8,11 +8,11 @@ var getLatLong = require('./get-lat-long.js')
 // param(in): parsedResponse: the parsed response from the Device Address API
 // param(out): callback: returns the formatted response or error to the previous function
 // calledBy: getCourseSummaries()
-async function formatDeviceAddressResponse (parsedResponse, sessionAttributes, callback) {
-  var stateOrRegion = parsedResponse.stateOrRegion
-  var addressLine = parsedResponse.addressLine1
-  var postalCode = parsedResponse.postalCode
-  var codeForCountry = parsedResponse.countryCode
+async function formatDeviceAddressResponse (addressResponse, sessionAttributes) {
+  var stateOrRegion = addressResponse.stateOrRegion
+  var addressLine = addressResponse.addressLine1
+  var postalCode = addressResponse.postalCode
+  var codeForCountry = addressResponse.countryCode
   if (stateOrRegion === '') {
     var addressNotInUS = 'Your address is not in the United States we cannot' +
       'give tee times for places outside of the US.  Please try searching for' +

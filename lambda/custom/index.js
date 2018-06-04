@@ -68,8 +68,8 @@ const NumberReceivedIntentHandler = {
     console.log(sessionAttributes['STATE'])
     console.log(handlerInput.requestEnvelope.request.intent.name)
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-      // && (handlerInput.requestEnvelope.request.intent.name === 'NumGolfersReceived'
-      // || handlerInput.requestEnvelope.request.intent.name === 'PriceReceived')
+      && (handlerInput.requestEnvelope.request.intent.name === 'NumGolfersReceived'
+      || handlerInput.requestEnvelope.request.intent.name === 'PriceReceived')
       && ((sessionAttributes['STATE'] === states.TIMEMODE)
       || (sessionAttributes['STATE'] === states.NUMGOLFERSMODE))
   },
@@ -100,7 +100,9 @@ const SelectOptionsIntentHandler = {
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
       && handlerInput.requestEnvelope.request.intent.name === 'SelectCourse'
       && ((sessionAttributes['STATE'] === states.HEARCOURSESMODE)
-      || (sessionAttributes['STATE'] === states.HEARTEETIMESMODE))
+      || (sessionAttributes['STATE'] === states.HEARTEETIMESMODE)
+      || (sessionAttributes['STATE'] === states.SELECTCOURSEMODE)
+      || (sessionAttributes['STATE'] === states.SELECTTEETIMEMODE))
   },
   handle(handlerInput) {
     return SelectOptionsIntent(handlerInput)
@@ -165,4 +167,5 @@ exports.handler = Alexa.SkillBuilders.custom()
                          CancelAndStopIntentHandler,
                          SessionEndedRequestHandler)
      .addErrorHandlers(ErrorHandler)
+     .withApiClient(new Alexa.DefaultApiClient())
      .lambda()

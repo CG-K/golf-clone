@@ -14,6 +14,7 @@ var initializeSessionAttributes = require('../helpers/initialize-session-attribu
 var checkValidPrice = require('../helpers/check-valid-price.js')
 var checkValidGolfers = require('../helpers/check-valid-golfers.js')
 var checkValidTime = require('../helpers/check-valid-time.js')
+const formatDeviceAddressResponse = require('../helpers/format-device-address-response.js')
 
 const ALL_ADDRESS_PERMISSION = 'read::alexa:device:all:address'
 const PERMISSIONS = [ALL_ADDRESS_PERMISSION]
@@ -91,42 +92,49 @@ async function BookTime (handlerInput) {
       }
     } else if (nearMeSlot.value !== undefined) {
       // we have to get device location
-      var deviceId = handlerInput.requestEnvelope.context.System.device.deviceId
-      var consentToken = handlerInput.requestEnvelope.context.System.user.permissions.consentToken
-      if (deviceId === undefined || consentToken === undefined) {
+      var { serviceClientFactory } = handlerInput
+      var consentToken = handlerInput.requestEnvelope.context.System.user.permissions
+        && handlerInput.requestEnvelope.context.System.user.permissions.consentToken
+      if (!consentToken) {
         var askForPermissions = 'Please enable Location permissions in the Amazon Alexa app'
         return handlerInput.responseBuilder
           .speak(askForPermissions)
           .withAskForPermissionsConsentCard(PERMISSIONS)
           .getResponse()
       } else {
-        var url = formatDeviceAddressRequest(deviceId)
         try {
-          let res = await getDeviceAddress(url, consentToken, sessionAttributes)
-          sessionAttributes = res.sessionAttributes
-          sessionAttributes['STATE'] = res.state
-          console.log(res.state)
-          console.log(sessionAttributes)
-          handlerInput.attributesManager.setSessionAttributes(sessionAttributes)
-          console.log(JSON.stringify(handlerInput))
-          return handlerInput.responseBuilder
-            .speak(res.latLongOutput)
-            .reprompt(res.latLongReprompt)
-            .withSimpleCard('Booking a Tee Time', res.latLongOutput)
-            .getResponse()
+          var deviceId = handlerInput.requestEnvelope.context.System.device.deviceId
+          const deviceAddressServiceClient = serviceClientFactory.getDeviceAddressServiceClient()
+          const address = await deviceAddressServiceClient.getFullAddress(deviceId)
+          console.log('Address successfully retrieved, now responding to user.', address)
+          try {
+            let res = await formatDeviceAddressResponse(address, sessionAttributes)
+            sessionAttributes = res.sessionAttributes
+            sessionAttributes['STATE'] = res.state
+            handlerInput.attributesManager.setSessionAttributes(sessionAttributes)
+            return handlerInput.responseBuilder
+              .speak(res.latLongOutput)
+              .reprompt(res.latLongReprompt)
+              .withSimpleCard('Book a Tee Time', res.latLongOutput)
+              .getResponse()
+          } catch (error) {
+            console.log(error)
+            return handlerInput.responseBuilder
+              .speak(error)
+              .withSimpleCard('Something Went Wrong', error)
+              .getResponse()
+          }
+          return
         } catch(err) {
+          console.log(err)
           return handlerInput.responseBuilder
             .speak(err)
             .withSimpleCard('Something Went Wrong', err)
             .getResponse()
         }
-        // getDeviceAddress(url, consentToken, sessionAttributes, function (err, res) {
-        //   if (err) {
-        //     return handlerInput.responseBuilder
-        //       .speak(err)
-        //       .withSimpleCard('Something Went Wrong', err)
-        //       .getResponse()
-        //   }
+        // var url = formatDeviceAddressRequest(deviceId)
+        // try {
+        //   let res = await getDeviceAddress(url, consentToken, sessionAttributes)
         //   sessionAttributes = res.sessionAttributes
         //   sessionAttributes['STATE'] = res.state
         //   console.log(res.state)
@@ -138,7 +146,12 @@ async function BookTime (handlerInput) {
         //     .reprompt(res.latLongReprompt)
         //     .withSimpleCard('Booking a Tee Time', res.latLongOutput)
         //     .getResponse()
-        // })
+        // } catch(err) {
+        //   return handlerInput.responseBuilder
+        //     .speak(err)
+        //     .withSimpleCard('Something Went Wrong', err)
+        //     .getResponse()
+        // }
       }
     } else if (zipCodeSlot.value !== undefined) {
       // we have zipcode convert it to lat and long
