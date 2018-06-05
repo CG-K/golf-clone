@@ -5,11 +5,9 @@ var BookTime = require('./intents/book-time.js')
 var DatesReceivedIntent = require('./intents/dates-received-intent.js')
 var TimeReceivedIntent = require('./intents/time-received-intent.js')
 var NumberReceivedIntent = require('./intents/number-received-intent.js')
-// // var NumGolfersReceivedIntent = require('./intents/num-golfers-received-intent.js')
-// // var PriceReceivedIntent = require('./intents/price-received-intent.js')
 var HearOptionsIntent = require('./intents/hear-options-intent.js')
 var SelectOptionsIntent = require('./intents/select-options-intent.js')
-// var UnhandledIntent = require('./intents/unhandled-intent.js')
+var AnyIntent = require('./intents/any-intent.js')
 var states = require('./helpers/states.json')
 
 // require('dotenv').config()
@@ -76,6 +74,21 @@ const NumberReceivedIntentHandler = {
   handle(handlerInput) {
     return NumberReceivedIntent(handlerInput)
   },
+}
+
+const AnyIntentHandler = {
+    canHandle(handlerInput) {
+      let sessionAttributes = handlerInput.attributesManager.getSessionAttributes()
+      return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+        && handlerInput.requestEnvelope.request.intent.name === 'AnyIntent'
+        && ((sessionAttributes['STATE'] === states.LOCATIONMODE)
+        || (sessionAttributes['STATE'] === states.DATESMODE)
+        || (sessionAttributes['STATE'] === states.TIMEMODE)
+        || (sessionAttributes['STATE'] === states.NUMGOLFERSMODE))
+    },
+    handle(handlerInput) {
+      return AnyIntent(handlerInput)
+    }
 }
 
 const HearOptionsIntentHandler = {
@@ -161,6 +174,7 @@ exports.handler = Alexa.SkillBuilders.custom()
                          DatesReceivedIntentHandler,
                          TimeReceivedIntentHandler,
                          NumberReceivedIntentHandler,
+                         AnyIntentHandler,
                          HearOptionsIntentHandler,
                          SelectOptionsIntentHandler,
                          HelpIntentHandler,

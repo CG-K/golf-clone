@@ -18,13 +18,13 @@ function createCourseSummariesURL (sessionAttributes) {
   baseURL = baseURL + '&expand=Facilities'
   // input default maximum number of records to return = 100
   baseURL = baseURL + '&take=100'
-  if (sessionAttributes['time'] !== null && sessionAttributes['time'] !== undefined) {
+  if (sessionAttributes['time'] !== null && sessionAttributes['time'] !== undefined && sessionAttributes['time'] !== 'any') {
     baseURL = baseURL + '&time-min=' + sessionAttributes['time']
   }
-  if (sessionAttributes['numGolfers'] !== null && sessionAttributes['numGolfers'] !== undefined) {
+  if (sessionAttributes['numGolfers'] !== null && sessionAttributes['numGolfers'] !== undefined && sessionAttributes['numGolfers'] !== 'any') {
     baseURL = baseURL + '&players=' + sessionAttributes['numGolfers']
   }
-  if (sessionAttributes['price'] !== null && sessionAttributes['price'] !== undefined) {
+  if (sessionAttributes['price'] !== null && sessionAttributes['price'] !== undefined && sessionAttributes['price'] !== 'any') {
     baseURL = baseURL + '&price-max=' + sessionAttributes['price']
   }
   // default number of holes

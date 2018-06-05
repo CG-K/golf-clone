@@ -21,7 +21,7 @@
   },
   "numGolfers": {
     "output": "How many golfers would you like to golf with?",
-    "reprompt": "How many golfers would you like to golf with? You can say 1, 2, 3, or 4 golfers.  Or If you do not care say any or do not care."
+    "reprompt": "How many golfers would you like to golf with? You can say 1, 2, or 3 golfers.  Or If you do not care say any."
   },
   "price": {
     "output": "What is the most you would like to spend per golfer?",
