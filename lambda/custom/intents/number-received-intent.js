@@ -64,6 +64,7 @@ async function NumberReceivedIntent (handlerInput) {
               .getResponse()
           }
         } else {
+          nextState.response = 'Ok, with ' + numGolfersSlot.value + ' golfers. ' + nextState.response
           handlerInput.attributesManager.setSessionAttributes(sessionAttributes)
           return handlerInput.responseBuilder
             .speak(nextState.response)
@@ -125,6 +126,7 @@ async function NumberReceivedIntent (handlerInput) {
             .getResponse()
         }
       } else {
+        nextState.response = 'Ok, for ' + golfPriceSlot.value + ' dollars. ' + nextState.response
         handlerInput.attributesManager.setSessionAttributes(sessionAttributes)
         return handlerInput.responseBuilder
           .speak(nextState.response)

@@ -6,6 +6,7 @@ var states = require('../helpers/states.json')
 var getNewState = require('../helpers/get-new-state.js')
 var getCourseSummaries = require('../helpers/get-course-summaries.js')
 const checkValidTime = require('../helpers/check-valid-time.js')
+const convert24to12HourTime = require('../helpers/convert-24-to-12-hour-time.js')
 
 // Purpose: saves the time given by the user and reprompts for more info
 async function TimeReceivedIntent (handlerInput) {
@@ -60,6 +61,8 @@ async function TimeReceivedIntent (handlerInput) {
           .getResponse()
       }
     } else {
+      let twelveHourTime = convert24to12HourTime(time)
+      nextState.response = 'Ok, ' + twelveHourTime + nextState.response
       handlerInput.attributesManager.setSessionAttributes(sessionAttributes)
       return handlerInput.responseBuilder
         .speak(nextState.response)

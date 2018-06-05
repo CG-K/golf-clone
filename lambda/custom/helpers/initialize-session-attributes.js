@@ -16,5 +16,7 @@ function initializeSessionAttributes(sessionAttributes) {
   sessionAttributes['courses'] = null
   sessionAttributes['coursesCount'] = 0
   sessionAttributes['teeTimesCount'] = 0
+  sessionAttributes['previousInfo'] = []
+  sessionAttributes['previousInfoIndex'] = 0
   return sessionAttributes
 }

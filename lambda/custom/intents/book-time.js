@@ -15,6 +15,8 @@ var checkValidPrice = require('../helpers/check-valid-price.js')
 var checkValidGolfers = require('../helpers/check-valid-golfers.js')
 var checkValidTime = require('../helpers/check-valid-time.js')
 const formatDeviceAddressResponse = require('../helpers/format-device-address-response.js')
+var addPreviousInfo = require('../helpers/add-previous-info.js')
+const convert24to12HourTime = require('../helpers/convert-24-to-12-hour-time.js')
 
 const ALL_ADDRESS_PERMISSION = 'read::alexa:device:all:address'
 const PERMISSIONS = [ALL_ADDRESS_PERMISSION]
@@ -48,12 +50,17 @@ async function BookTime (handlerInput) {
     if (handlerInput.requestEnvelope.request.intent.slots.dateToPlay.value !== undefined) {
       var dateToPlay = handlerInput.requestEnvelope.request.intent.slots.dateToPlay.value
       sessionAttributes['date'] = dateToPlay
+      sessionAttributes['previousInfoIndex'] = sessionAttributes['previousInfoIndex'] + 1
+      sessionAttributes['previousInfo'][sessionAttributes['previousInfoIndex'] - 1] = 'on ' + dateToPlay
     }
     if (handlerInput.requestEnvelope.request.intent.slots.timeToPlay.value !== undefined) {
       var timeToPlay = handlerInput.requestEnvelope.request.intent.slots.timeToPlay.value
       let isValidTime = checkValidTime(timeToPlay)
       if (isValidTime) {
         sessionAttributes['time'] = timeToPlay
+        sessionAttributes['previousInfoIndex'] = sessionAttributes['previousInfoIndex'] + 1
+        let twelveHourTime = convert24to12HourTime(timeToPlay)
+        sessionAttributes['previousInfo'][sessionAttributes['previousInfoIndex'] - 1] = twelveHourTime
       }
     }
     if (handlerInput.requestEnvelope.request.intent.slots.value !== undefined) {
@@ -61,6 +68,8 @@ async function BookTime (handlerInput) {
       let isValidGolfers = checkValidGolfers(numberOfGolfers)
       if (isValidGolfers) {
         sessionAttributes['numGolfers'] = numberOfGolfers
+        sessionAttributes['previousInfoIndex'] = sessionAttributes['previousInfoIndex'] + 1
+        sessionAttributes['previousInfo'][sessionAttributes['previousInfoIndex'] - 1] = numberOfGolfers
       }
     }
     if (handlerInput.requestEnvelope.request.intent.slots.amountOfDollars.value !== undefined) {
@@ -68,8 +77,11 @@ async function BookTime (handlerInput) {
       let isValidPrice = checkValidPrice(amountOfDollars)
       if (isValidPrice) {
         sessionAttributes['price'] = amountOfDollars
+        sessionAttributes['previousInfoIndex'] = sessionAttributes['previousInfoIndex'] + 1
+        sessionAttributes['previousInfo'][sessionAttributes['previousInfoIndex'] - 1] = amountOfDollars
       }
     }
+
     sessionAttributes['dealType'] = dealTypeSlot.value
     if (citySlot.value !== undefined) {
       // we have a city convert it to lat and long
@@ -77,7 +89,11 @@ async function BookTime (handlerInput) {
       try {
         let result = await getLatLong(city, sessionAttributes)
         console.log('we were given result: ', result)
+        sessionAttributes['previousInfoIndex'] = sessionAttributes['previousInfoIndex'] + 1
+        sessionAttributes['previousInfo'][sessionAttributes['previousInfoIndex'] - 1] = 'in ' + city
         handlerInput.attributesManager.setSessionAttributes(sessionAttributes)
+        let beginOutput = addPreviousInfo(sessionAttributes)
+        result.latLongOutput = beginOutput + result.latLongOutput
         return handlerInput.responseBuilder
           .speak(result.latLongOutput)
           .reprompt(result.latLongReprompt)
@@ -111,6 +127,10 @@ async function BookTime (handlerInput) {
             let res = await formatDeviceAddressResponse(address, sessionAttributes)
             sessionAttributes = res.sessionAttributes
             sessionAttributes['STATE'] = res.state
+            sessionAttributes['previousInfoIndex'] = sessionAttributes['previousInfoIndex'] + 1
+            sessionAttributes['previousInfo'][sessionAttributes['previousInfoIndex'] - 1] = 'near you'
+            let beginOutput = addPreviousInfo(sessionAttributes)
+            res.latLongOutput = beginOutput + res.latLongOutput
             handlerInput.attributesManager.setSessionAttributes(sessionAttributes)
             return handlerInput.responseBuilder
               .speak(res.latLongOutput)
@@ -132,26 +152,6 @@ async function BookTime (handlerInput) {
             .withSimpleCard('Something Went Wrong', err)
             .getResponse()
         }
-        // var url = formatDeviceAddressRequest(deviceId)
-        // try {
-        //   let res = await getDeviceAddress(url, consentToken, sessionAttributes)
-        //   sessionAttributes = res.sessionAttributes
-        //   sessionAttributes['STATE'] = res.state
-        //   console.log(res.state)
-        //   console.log(sessionAttributes)
-        //   handlerInput.attributesManager.setSessionAttributes(sessionAttributes)
-        //   console.log(JSON.stringify(handlerInput))
-        //   return handlerInput.responseBuilder
-        //     .speak(res.latLongOutput)
-        //     .reprompt(res.latLongReprompt)
-        //     .withSimpleCard('Booking a Tee Time', res.latLongOutput)
-        //     .getResponse()
-        // } catch(err) {
-        //   return handlerInput.responseBuilder
-        //     .speak(err)
-        //     .withSimpleCard('Something Went Wrong', err)
-        //     .getResponse()
-        // }
       }
     } else if (zipCodeSlot.value !== undefined) {
       // we have zipcode convert it to lat and long
@@ -159,6 +159,10 @@ async function BookTime (handlerInput) {
       try {
         let result = await getLatLong(zipCode, sessionAttributes)
         console.log('we were given result: ', result)
+        sessionAttributes['previousInfoIndex'] = sessionAttributes['previousInfoIndex'] + 1
+        sessionAttributes['previousInfo'][sessionAttributes['previousInfoIndex'] - 1] = 'in ' + zipCode
+        let beginOutput = addPreviousInfo(sessionAttributes)
+        result.latLongOutput = beginOutput + result.latLongOutput
         handlerInput.attributesManager.setSessionAttributes(sessionAttributes)
         return handlerInput.responseBuilder
           .speak(result.latLongOutput)
