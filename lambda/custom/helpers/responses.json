@@ -1,0 +1,40 @@
+{
+  "help": {
+    "output": "Welcome to the GolfNow tee time booking Skill. You can book tee tmes or hot deals at your favorite nearby courses. You can say Alexa, ask GolfNow to book a hot deal near me. You can also search by locaton, date, time, number of golfers and price. What would you like to do?",
+    "reprompt": "Try saying: Alexa, ask GolfNow to book a tee time in Orlando"
+  },
+  "launch": {
+    "output": "Welcome back to GolfNow. If you’d like to book a tee time say book a tee time near me. What would you like to do?",
+    "reprompt": "Do you want to book a tee time near you? If you do, say, Alexa ask GolfNow to book a tee time near me."
+  },
+  "location": {
+    "output": "You can say something along the lines of Alexa, ask Golf Now to book a tee time near me.",
+    "reprompt": "You could also ask to book a tee time or hot deal in a City or at a zipcode"
+  },
+  "dates": {
+    "output": "What day would you like to golf?",
+    "reprompt": "What day would you like to golf?  You can say something like maybe today, maybe tomorrow, let's do next monday, or  on Decemeber 12"
+  },
+  "time": {
+    "output": "What time would you like to golf?",
+    "reprompt": "What time would you like to play golf?  You can say something like: at 4 pm, or at 12 30."
+  },
+  "numGolfers": {
+    "output": "How many golfers would you like to golf with?",
+    "reprompt": "How many golfers would you like to golf with? You can say 1, 2, or 3 golfers.  Or If you do not care say any."
+  },
+  "price": {
+    "output": "What is the most you would like to spend per golfer?",
+    "reprompt": "How much money are you willing to spend per golfer?  You can say things like 10 dollars or 100 bucks"
+  },
+  "hearCourses": {
+    "output": "Would you like to hear the next option by saying next one, or select an option by saying 'option 1'",
+    "reprmopt":  "Please tell me if you would like to hear the next option by saying next one, or select an option by saying 'option 1' for option 1"
+  },
+  "stop": {
+    "output": "Ok, we hope you come back to golf soon!"
+  },
+  "accountLinking" : {
+    "output": "To use this skill, you'll need to link your account first.  I have sent a card to your Alexa app to help you."
+  }
+}
