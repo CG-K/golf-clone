@@ -47,8 +47,10 @@ function formatCourseSummaries (response, sessionAttributes) {
     // Output to User
     var courseOutput = ' Course option ' + (i + 1) + ' ' + response.Items[i].Name
     courseOutput = courseOutput + ' in ' + response.Items[i].Address.City
-    courseOutput = courseOutput + ' with available tee times on ' + startDate
-    courseOutput = courseOutput + ' from ' + startTime + ' that costs '
+    // courseOutput = courseOutput + ' with available tee times on ' + startDate
+    // courseOutput = courseOutput + ' from ' + startTime + ' that costs '
+    courseOutput = courseOutput + ' with available tee times from ' + startTime
+    courseOutput = courseOutput + ' that costs '
     // courseOutput = courseOutput + response.items[i].minRate.amount + ' to '
     if (price.max === null) {
       courseOutput = courseOutput + price.min[0] + ' dollars '
@@ -65,9 +67,6 @@ function formatCourseSummaries (response, sessionAttributes) {
         courseOutput = courseOutput + 'and ' + price.max[1] + ' cents.'
       }
     }
-
-    console.log(i)
-    console.log(maxResponseLength)
     sessionAttributes['maxCoursesLength'] = maxResponseLength
     // if this doesnt work, store the array and then set it equal to it
     sessionAttributes['courses'].push(courseOutput)

@@ -5,7 +5,6 @@
 module.exports = BookTime
 
 var getLatLong = require('../helpers/get-lat-long.js')
-var formatDeviceAddressRequest = require('../helpers/format-device-address-request.js')
 var getDeviceAddress = require('../helpers/get-device-address.js')
 var states = require('../helpers/states.json')
 var getNewState = require('../helpers/get-new-state.js')

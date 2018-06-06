@@ -1,11 +1,11 @@
 {
   "help": {
-    "output": "Welcome to Golf Now.  The purpose of this skill is to book a tee time at a Golf Course so you can start playing! To start using the skill, say Alexa, ask GolfNow to book a tee time near me. You can also search for tee times at a specific city or zip code. For city, you can say Alexa, ask GolfNow to book a tee time in Orlando. For a specific zipcode, you can say Alexa ask GolfNow to book a tee time near 32819. What would you like to do?",
+    "output": "Welcome to the GolfNow tee time booking Skill. You can book tee tmes or hot deals at your favorite nearby courses. You can say Alexa, ask GolfNow to book a hot deal near me. You can also search by locaton, date, time, number of golfers and price. What would you like to do?",
     "reprompt": "Try saying: Alexa, ask GolfNow to book a tee time in Orlando"
   },
   "launch": {
-    "output": "Welcome to GolfNow.  You can book tee times at your favorite nearby courses.  You can say Alexa, ask GolfNow to book a tee time near me.  What would you like to do?",
-    "reprompt": "Do you want to book a tee time near you? If you do, say, Alexa ask GolfNow to book a tee time near me"
+    "output": "Welcome back to GolfNow. If you’d like to book a tee time say book a tee time near me. What would you like to do?",
+    "reprompt": "Do you want to book a tee time near you? If you do, say, Alexa ask GolfNow to book a tee time near me."
   },
   "location": {
     "output": "You can say something along the lines of Alexa, ask Golf Now to book a tee time near me.",
@@ -33,5 +33,8 @@
   },
   "stop": {
     "output": "Ok, we hope you come back to golf soon!"
+  },
+  "accountLinking" : {
+    "output": "To use this skill, you'll need to link your account first.  I have sent a card to your Alexa app to help you."
   }
 }

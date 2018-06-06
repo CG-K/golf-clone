@@ -8,7 +8,7 @@ function addPreviousInfo (sessionAttributes) {
     for (var i = 0; i < sessionAttributes['previousInfo'].length; i++) {
       response = response + ' ' + sessionAttributes['previousInfo'][i]
     }
-    response = response + ' . '
+    response = response + '. '
   }
   return response
 }

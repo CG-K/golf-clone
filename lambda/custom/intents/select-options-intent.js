@@ -61,17 +61,34 @@ async function SelectOptionsIntent (handlerInput) {
         .withSimpleCard('Options', nextState.response)
         .getResponse()
     } else {
-      sessionAttributes['teeTimeID'] = handlerInput.requestEnvelope.request.intent.slots.courseNumber.value - 1
-      nextState = getNewState(sessionAttributes)
-      sessionAttributes['STATE'] = nextState.state
-      output = 'You have selected: ' + sessionAttributes['teeTimes'][sessionAttributes['teeTimeID']]
-      sessionAttributes['teeTimeRateID'] = sessionAttributes['TeeTimesResponse'][sessionAttributes['teeTimeID']].TeeTimeRateID
-      handlerInput.attributesManager.setSessionAttributes(sessionAttributes)
+      // we need to check to see if the user is authenticated with an access token from OAuth
+      let accessToken = handlerInput.requestEnvelope.context.System.user.accessToken
+      if (accessToken === undefined) {
+        var noAccessToken = "You must have a Golf Now account to book a tee time or hot deal. " +
+            "Please use the Alexa app to link your Amazon account " +
+            "with your Golf Now Account."
       return handlerInput.responseBuilder
-        .speak(output)
-        .reprompt(output)
-        .withSimpleCard('Tee Time Rate ID', output)
-        .getResponse()
+          .speak(noAccessToken)
+          .withLinkAccountCard()
+          .getResponse();
+      } else {
+        // get the users profile to use the email for requests
+
+        sessionAttributes['teeTimeID'] = handlerInput.requestEnvelope.request.intent.slots.courseNumber.value - 1
+        // call the Get Tee Time Invoice for Customers
+        sessionAttributes['teeTimeID'] = handlerInput.requestEnvelope.request.intent.slots.courseNumber.value - 1
+        nextState = getNewState(sessionAttributes)
+        sessionAttributes['STATE'] = nextState.state
+        output = 'You have selected: ' + sessionAttributes['teeTimes'][sessionAttributes['teeTimeID']]
+        sessionAttributes['teeTimeRateID'] = sessionAttributes['TeeTimesResponse'][sessionAttributes['teeTimeID']].TeeTimeRateID
+        handlerInput.attributesManager.setSessionAttributes(sessionAttributes)
+        return handlerInput.responseBuilder
+          .speak(output)
+          .reprompt(output)
+          .withSimpleCard('Tee Time Rate ID', output)
+          .getResponse()
+      }
+
     }
   }
 }

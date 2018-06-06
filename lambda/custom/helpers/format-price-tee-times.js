@@ -5,9 +5,7 @@ module.exports = formatPriceTeeTimes
 // param(out): splitPrice: array of the dollars and cents
 // calledBy:  formatTeeTimes
 function formatPriceTeeTimes (price) {
-  console.log(price)
   var stringPrice = price.toString()
   var splitPrice = stringPrice.split('.')
-  console.log(splitPrice)
   return splitPrice
 }
