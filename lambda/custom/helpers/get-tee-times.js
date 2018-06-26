@@ -24,6 +24,7 @@ async function getTeeTimes (sessionAttributes) {
   try {
     let response = await got(url, urlOptions)
     var parsedTeeTimeResponse = JSON.parse(response.body)
+    console.log(parsedTeeTimeResponse)
     let teeTimes = []
     // reduce the size of the response
     for (var i = 0; i < parsedTeeTimeResponse.TeeTimes.length; i++) {

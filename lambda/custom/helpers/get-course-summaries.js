@@ -28,11 +28,13 @@ async function getCourseSummaries (sessionAttributes) {
   try {
     let response = await got(url, urlOptions)
     var parsedCourseResponse = JSON.parse(response.body)
+    console.log(parsedCourseResponse)
     let courses = []
     // reduce the size of the response
     for (var i = 0; i < parsedCourseResponse.Items.length; i++) {
       let coursesObject = {
-        facilityID: parsedCourseResponse.Items[i].ID
+        facilityID: parsedCourseResponse.Items[i].ID,
+        name: parsedCourseResponse.Items[i].Name
       }
       courses.push(coursesObject)
     }
