@@ -80,14 +80,17 @@ async function SelectOptionsIntent (handlerInput) {
         sessionAttributes['teeTimeRateID'] = sessionAttributes['TeeTimesResponse'][sessionAttributes['teeTimeID']].TeeTimeRateID
         try {
           let email = await getUserProfile(accessToken)
+          sessionAttributes['email'] = email
           console.log(email)
           try {
             let res =  await getTeeTimeInvoice(accessToken, email, sessionAttributes)
+            sessionAttributes['STATE'] = states.BOOKTEETIMEMODE
+            sessionAttributes['teeTimeInvoice'] = res.invoice
             handlerInput.attributesManager.setSessionAttributes(sessionAttributes)
             return handlerInput.responseBuilder
-            .speak(res)
-            .reprompt(res)
-            .withSimpleCard('Tee Time Invoice', res)
+            .speak(res.invoiceResponse)
+            .reprompt(res.invoiceResponse)
+            .withSimpleCard('Tee Time Invoice', res.invoiceResponse)
             .getResponse()
           } catch (err) {
             handlerInput.attributesManager.setSessionAttributes(sessionAttributes)

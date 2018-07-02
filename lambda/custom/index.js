@@ -7,6 +7,7 @@ var TimeReceivedIntent = require('./intents/time-received-intent.js')
 var NumberReceivedIntent = require('./intents/number-received-intent.js')
 var HearOptionsIntent = require('./intents/hear-options-intent.js')
 var SelectOptionsIntent = require('./intents/select-options-intent.js')
+var ReserveTeeTimeIntent = require('./intents/reserve-tee-time-intent.js')
 var AnyIntent = require('./intents/any-intent.js')
 var states = require('./helpers/states.json')
 
@@ -122,6 +123,30 @@ const SelectOptionsIntentHandler = {
   },
 }
 
+const YesIntentHandler = {
+  canHandle(handlerInput) {
+    let sessionAttributes = handlerInput.attributesManager.getSessionAttributes()
+    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+      && handlerInput.requestEnvelope.request.intent.name === 'AMAZON.YesIntent'
+      && sessionAttributes['STATE'] === states.BOOKTEETIMEMODE
+  },
+  handle(handlerInput) {
+    return ReserveTeeTimeIntent(handlerInput)
+  }
+}
+
+const NoIntentHandler = {
+  canHandle(handlerInput) {
+    let sessionAttributes = handlerInput.attributesManager.getSessionAttributes()
+    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+      && handlerInput.requestEnvelope.request.intent.name === 'AMAZON.NoIntent'
+      && sessionAttributes['STATE'] === states.BOOKTEETIMEMODE
+  },
+  handle(handlerInput) {
+    return StopIntent(handlerInput)
+  }
+}
+
 const HelpIntentHandler = {
   canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
@@ -177,6 +202,8 @@ exports.handler = Alexa.SkillBuilders.custom()
                          AnyIntentHandler,
                          HearOptionsIntentHandler,
                          SelectOptionsIntentHandler,
+                         YesIntentHandler,
+                         NoIntentHandler,
                          HelpIntentHandler,
                          CancelAndStopIntentHandler,
                          SessionEndedRequestHandler)

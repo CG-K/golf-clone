@@ -7,5 +7,6 @@
   "HEARCOURSESMODE": "hearcourses",
   "SELECTCOURSEMODE": "selectcourse",
   "HEARTEETIMESMODE": "hearteetimes",
-  "SELECTTEETIMEMODE": "selectteetime"
+  "SELECTTEETIMEMODE": "selectteetime",
+  "BOOKTEETIMEMODE": "bookteetime"
 }

@@ -18,10 +18,15 @@ async function getTeeTimeInvoice (accessToken, email, sessionAttributes) {
   try {
     let teeTimeInvoiceResponse = await got(url, urlOptions)
     let teeTimeInvoice = JSON.parse(teeTimeInvoiceResponse.body)
+    sessionAttributes['teeTimeInvoice'] = teeTimeInvoice
     console.log(teeTimeInvoice)
     let invoiceResponse = formatTeeTimeInvoiceResponse(teeTimeInvoice, sessionAttributes)
+    let response = {
+      invoice: teeTimeInvoice,
+      invoiceResponse: invoiceResponse
+    }
     return new Promise((resolve, reject) => {
-      resolve(invoiceResponse)
+      resolve(response)
     })
   } catch (error) {
     console.log(error)

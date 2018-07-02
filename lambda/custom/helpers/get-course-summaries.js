@@ -34,7 +34,9 @@ async function getCourseSummaries (sessionAttributes) {
     for (var i = 0; i < parsedCourseResponse.Items.length; i++) {
       let coursesObject = {
         facilityID: parsedCourseResponse.Items[i].ID,
-        name: parsedCourseResponse.Items[i].Name
+        name: parsedCourseResponse.Items[i].Name,
+        image: parsedCourseResponse.Items[i].FullSizeImagePath
+        // template: bodyTemplate
       }
       courses.push(coursesObject)
     }
