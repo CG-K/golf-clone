@@ -9,6 +9,7 @@ async function getUserProfile(accessToken) {
     }
   }
   let url = 'https://stage-api.golfid.io/api/v1/sso/oauth/profile'
+  console.log('hi')
   try {
     let response = await got(url, urlOptions)
     let userInfo = JSON.parse(response.body)

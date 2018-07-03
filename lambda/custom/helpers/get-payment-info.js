@@ -17,6 +17,7 @@ async function getPaymentInfo (sessionAttributes, accessToken) {
   try {
     let res = await got(url, urlOptions)
     let wallet = JSON.parse(res.body)
+    console.log(wallet)
     if (wallet.CreditCards[0] !== undefined) {
       let paymentInformation = setPaymentInfo(wallet.CreditCards[0])
       console.log(paymentInformation)

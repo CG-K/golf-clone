@@ -23,7 +23,7 @@ function formatTeeTimeInvoiceResponse (teeTimeInvoiceResponse, sessionAttributes
   let dueAtCourseParts = formatPriceTeeTimes(dueAtCourse)
   let totalPriceParts = formatPriceTeeTimes(totalPrice)
 
-  invoiceResponse = `Ok, you have selected ${sessionAttributes['courseName']} on ${sessionAttributes['date']} at ${startTime}
+  invoiceResponse = `Ok, you have selected ${sessionAttributes['courseName']} on ${sessionAttributes['date']} at ${startTime.time}
     with ${sessionAttributes['numGolfers']} golfers.  Your total is ${totalPriceParts[0]} dollars and ${totalPriceParts[1]} cents.
     You will be charged now for ${dueOnlineParts[0]} dollars and ${dueOnlineParts[1]} cents and
     will be charged ${dueAtCourseParts[0]} dollars and ${dueAtCourseParts[1]} cents at the course.

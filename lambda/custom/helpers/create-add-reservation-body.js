@@ -3,31 +3,31 @@ module.exports = createAddReservationBody
 // function createAddReservationBody (sessionAttributes, paymentInformation) {
 function createAddReservationBody (sessionAttributes) {
   let reservation = {
-  //   "PaymentInformation": [paymentInfomation],
-      "PaymentInformation" : [
-        {
-          "__type" :  "CreditCardPayment:#GolfNow.API.Contracts.DataContracts",
-          "Amount" : {
-            "CurrencyCode" :  "USD",
-            "Value" :  4.98
-          },
-          "BillingAddress" : {
-            "City" :  "Orlando",
-            "Country" :  "US",
-            "Line1" :  "123 Any St.",
-            "Line2" :  null,
-            "PostalCode" :  32819,
-            "StateProvinceCode" :  "FL"
-          },
-          "BillingName" :  "GolfNowTest GolfNowTest",
-          "BillingPhoneNumber" :  "555-555-5555",
-          "CVVCode" :  321,
-          "CreditCardNumber" :  4012888888881881,
-          "ExpirationMonth" :  06,
-          "ExpirationYear" :  2019,
-          "SaveCreditCard" :  false
-        }
-      ],
+  "PaymentInformation": [paymentInfomation],
+      // "PaymentInformation" : [
+      //   {
+      //     "__type" :  "CreditCardPayment:#GolfNow.API.Contracts.DataContracts",
+      //     "Amount" : {
+      //       "CurrencyCode" :  "USD",
+      //       "Value" :  4.98
+      //     },
+      //     "BillingAddress" : {
+      //       "City" :  "Orlando",
+      //       "Country" :  "US",
+      //       "Line1" :  "123 Any St.",
+      //       "Line2" :  null,
+      //       "PostalCode" :  32819,
+      //       "StateProvinceCode" :  "FL"
+      //     },
+      //     "BillingName" :  "GolfNowTest GolfNowTest",
+      //     "BillingPhoneNumber" :  "555-555-5555",
+      //     "CVVCode" :  321,
+      //     "CreditCardNumber" :  4012888888881881,
+      //     "ExpirationMonth" :  06,
+      //     "ExpirationYear" :  2019,
+      //     "SaveCreditCard" :  false
+      //   }
+      // ],
       "InventoryChannelID": 7886,
       "TeeTimeRateID": sessionAttributes['teeTimeRateID'],
       "Invoice": {

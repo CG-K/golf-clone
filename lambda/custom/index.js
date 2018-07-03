@@ -8,6 +8,7 @@ var NumberReceivedIntent = require('./intents/number-received-intent.js')
 var HearOptionsIntent = require('./intents/hear-options-intent.js')
 var SelectOptionsIntent = require('./intents/select-options-intent.js')
 var ReserveTeeTimeIntent = require('./intents/reserve-tee-time-intent.js')
+var ReservationsIntent = require('./intents/reservations-intent.js')
 var AnyIntent = require('./intents/any-intent.js')
 var states = require('./helpers/states.json')
 
@@ -147,6 +148,16 @@ const NoIntentHandler = {
   }
 }
 
+const ReservationsIntentHandler = {
+  canHandle(handlerInput) {
+    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+      && handlerInput.requestEnvelope.request.intent.name === 'ReservationsIntent'
+  },
+  handle(handlerInput) {
+    return ReservationsIntent(handlerInput)
+  }
+}
+
 const HelpIntentHandler = {
   canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
@@ -204,6 +215,7 @@ exports.handler = Alexa.SkillBuilders.custom()
                          SelectOptionsIntentHandler,
                          YesIntentHandler,
                          NoIntentHandler,
+                         ReservationsIntentHandler,
                          HelpIntentHandler,
                          CancelAndStopIntentHandler,
                          SessionEndedRequestHandler)

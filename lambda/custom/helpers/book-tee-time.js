@@ -4,8 +4,8 @@ const createAddReservationUrl = require('./create-add-reservation-url.js')
 const createAddReservationBody = require('./create-add-reservation-body.js')
 const got = require('got')
 
-// async function bookTeeTime (sessionAttributes, accessToken, paymentInformation) {
-async function bookTeeTime (sessionAttributes, accessToken) {
+async function bookTeeTime (sessionAttributes, accessToken, paymentInformation) {
+// async function bookTeeTime (sessionAttributes, accessToken) {
   let urlOptions = {
     headers: {
       AuthorizationToken: accessToken,
@@ -16,8 +16,8 @@ async function bookTeeTime (sessionAttributes, accessToken) {
     body: {}
   }
   let url = createAddReservationUrl(sessionAttributes)
-  // urlOptions.body = createAddReservationBody(sessionAttributes, paymentInfomation)
-  urlOptions.body = createAddReservationBody(sessionAttributes)
+  urlOptions.body = createAddReservationBody(sessionAttributes, paymentInfomation)
+  // urlOptions.body = createAddReservationBody(sessionAttributes)
   // try this in postman to see if it works as form-data
   console.log(urlOptions)
   urlOptions.body = JSON.stringify(urlOptions.body)

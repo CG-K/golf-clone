@@ -7,11 +7,11 @@ const getPaymentInfo = require('../helpers/get-payment-info.js')
 async function ReserveTeeTimeIntent (handlerInput) {
   let sessionAttributes = handlerInput.attributesManager.getSessionAttributes()
   let accessToken = handlerInput.requestEnvelope.context.System.user.accessToken
-  // try {
-    // let paymentInformation = await getPaymentInfo(sessionAttributes, accessToken)
+  try {
+    let paymentInformation = await getPaymentInfo(sessionAttributes, accessToken)
     try {
-      // let res = await bookTeeTime(sessionAttributes, accessToken, paymentInfomation)
-      let res = await bookTeeTime(sessionAttributes, accessToken)
+      let res = await bookTeeTime(sessionAttributes, accessToken, paymentInfomation)
+      // let res = await bookTeeTime(sessionAttributes, accessToken)
       handlerInput.attributesManager.setSessionAttributes(sessionAttributes)
       return handlerInput.responseBuilder
       .speak(res)
@@ -25,12 +25,11 @@ async function ReserveTeeTimeIntent (handlerInput) {
       .withSimpleCard('Booking Failed', error)
       .getResponse()
     }
-
-  // }  catch (err) {
-  //   handlerInput.attributesManager.setSessionAttributes(sessionAttributes)
-  //   return handlerInput.responseBuilder
-  //   .speak(err)
-  //   .withSimpleCard('Booking Failed', err)
-  //   .getResponse()
-  // }
+  } catch (err) {
+    handlerInput.attributesManager.setSessionAttributes(sessionAttributes)
+    return handlerInput.responseBuilder
+    .speak(err)
+    .withSimpleCard('Booking Failed', err)
+    .getResponse()
+  }
 }
